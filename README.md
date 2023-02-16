@@ -31,7 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Instalaciones necesarias
 
-🟦 npm i bycryptjs cors dotenv express express-validator jsonwebtoken nodemon oracledb
+🟦 npm i primeng@14.2.3 primeicons primeflex
 
 🟦 npm i
 
