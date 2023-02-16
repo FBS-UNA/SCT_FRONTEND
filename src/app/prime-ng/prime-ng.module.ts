@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import {ButtonModule} from 'primeng/button';
 import {CarouselModule} from 'primeng/carousel';
 import {ImageModule} from 'primeng/image';
+import {MenubarModule} from 'primeng/menubar';
 import {RippleModule } from 'primeng/ripple';
 
 
@@ -16,6 +17,7 @@ import {RippleModule } from 'primeng/ripple';
     ButtonModule,
     CarouselModule,
     ImageModule,
+    MenubarModule,
     RippleModule
   ]
 })
