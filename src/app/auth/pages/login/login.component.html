@@ -1,1 +1,65 @@
-<p>login works!</p>
+
+
+<div class="row h-100">
+    <p-toast></p-toast>
+    <div class="col-7 mx-auto">
+
+
+        <p-card header="Iniciar Sesión">
+            <form class="p-fluid" [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+
+                <div class="field mb-4">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input
+                            [ngClass]="{'ng-invalid ng-dirty': isInvalid('CEDULA')}"
+                            type="text" 
+                            pInputText 
+                            placeholder="Cédula" 
+                            formControlName="CEDULA">
+                    </div>
+                    <small class="p-error block" *ngIf="isInvalid('CEDULA')">
+                        <i class="pi pi-exclamation-circle"></i>
+                        Ingrese una cédula
+                    </small>
+
+                </div>
+
+                <div class="field mb-2">
+
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                        <input 
+                        [ngClass]="{'ng-invalid ng-dirty': isInvalid('CONTRASENA')}"
+                            type="password" 
+                            pInputText 
+                            placeholder="Contraseña" 
+                            formControlName="CONTRASENA">
+                    </div>
+                    <small class="p-error block" *ngIf="isInvalid('CONTRASENA')">
+                        <i class="pi pi-exclamation-circle"></i>
+                        Ingrese una contraseña
+                    </small>
+
+                </div>
+
+
+                <div class="text-end mb-5">
+                    <small> <a href="https://www.google.com/?hl=es">¿Olvidó su contraseña?</a> </small>
+                </div>
+
+                <p-button class="w-100" type="submit" label="Ingresar"></p-button>
+
+                <div class="text-center mt-5">
+                    <small> ¿No tiene una cuenta? <a href="https://sucursalvirtual.fobeso.com/solicitud-registro">Click Aquí</a> </small>
+                </div>
+
+
+
+            </form>
+
+        </p-card>
+
+    </div>
+
+</div>

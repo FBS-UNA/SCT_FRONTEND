@@ -4,7 +4,47 @@
     padding: 0;
 }
 
+
+
 html,
 body {
-    background-color: #efefef;
+    width: 100%;
+    height: 100%;
 }
+
+.bg-fbs-orange {
+    background-color: #FC9500;
+    color: white;
+}
+
+.bg-fbs-dark-blue {
+    background-color: #00416B;
+    color: white;
+}
+
+.bg-fbs-black {
+    background-color: black;
+    color: white;
+}
+
+.bg-fbs-light-blue {
+    background-color: #00AEEF;
+}
+
+.bg-fbs-red {
+    background-color: #DB4252;
+}
+
+.bg-fbs-light-green {
+    background-color: #A1CE57;
+}
+
+.bg-fbs-yellow {
+    background-color: #FEBE10;
+}
+
+.bg-fbs-white {
+    background-color: white;
+    color: #00416B;
+}
+

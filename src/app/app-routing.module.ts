@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ValidarTokenGuard } from './guards/validar-token.guard';
 
 const routes: Routes = [
   {
@@ -9,11 +10,12 @@ const routes: Routes = [
   {
     path: 'sct',
     loadChildren: ()=> import('./SCT/sct.module').then(m => m.SCTModule),
-    // TODO GUARDS - CanActivate/CanLoad
+    canActivate:[ ValidarTokenGuard ],
+    canLoad: [ ValidarTokenGuard ]
   },
   {
     path: '**',
-    redirectTo: 'auth'
+    redirectTo: 'sct'
   }
 ];
 

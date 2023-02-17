@@ -1,1 +1,17 @@
-<p>navbar works!</p>
+<p-menubar >
+    <ng-template pTemplate="start">
+        <h4>{{usuario.NOMBRE_COMPLETO}}</h4>
+    </ng-template>
+    <ng-template pTemplate="end">
+        <p-menubar [model]="items"></p-menubar>
+        <!-- <button 
+            pButton 
+            pRipple 
+            class="p-button-danger p-button-outlined" 
+            label="Salir" 
+            icon="pi pi-sign-out"
+            (click)="cerrarSesion()"
+            ></button> -->
+    </ng-template>
+
+</p-menubar>

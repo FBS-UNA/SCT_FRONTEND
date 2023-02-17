@@ -8,6 +8,7 @@ import { MantenimientoAreasComponent } from './pages/mantenimiento-areas/manteni
 import { MantenimientoTramitesComponent } from './pages/mantenimiento-tramites/mantenimiento-tramites.component';
 import { MainComponent } from './pages/main/main.component';
 import { SharedModule } from '../shared/shared.module';
+import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     SCTRoutingModule,
+    PrimeNgModule,
     SharedModule
   ]
 })

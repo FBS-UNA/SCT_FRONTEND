@@ -31,6 +31,7 @@ interface MenuItem{
       background-color: #00416B;
       color:white;
       border: none;
+      border-radius: 7px;
       cursor: pointer;
       margin-left: 10px;
       margin-right: 10px;
@@ -43,19 +44,19 @@ export class SidebarComponent implements OnInit {
 
   menuItems: MenuItem[] = [
     {
-      ruta: '/inicio',
+      ruta: './inicio',
       nombre: 'Inicio'
     },
     {
-      ruta: '/vigilante',
+      ruta: './registroentrada',
       nombre: 'Registro de entrada'
     },
     {
-      ruta: '/admin/mantenimientoDeAreas',
+      ruta: './mantenimientoareas',
       nombre: 'Mantenimiento de áreas'
     },
     {
-      ruta: '/admin/mantenimientoDeTramites',
+      ruta: './mantenimientotramites',
       nombre: 'Mantenimiento de trámites'
     },
   ];

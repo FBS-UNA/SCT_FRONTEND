@@ -1,8 +1,12 @@
 
 
-<app-sidebar></app-sidebar>
-
 <div class="main">
-    <router-outlet></router-outlet>
+    <app-sidebar></app-sidebar>
+    <app-navbar></app-navbar>
+
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+        <p-scrollTop [threshold]="100" styleClass="rounded-circle"></p-scrollTop>
+    </div>
 </div>
 
