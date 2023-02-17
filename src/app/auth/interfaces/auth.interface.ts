@@ -18,8 +18,10 @@ export interface AuthResponse {
 }
 
 export interface Usuario {
-    CEDULA    : string;
-    NOMBRE    : string;
-    APELLIDO_1: string;
-    APELLIDO_2: string;
+    CEDULA          : string;
+    NOMBRE          : string;
+    APELLIDO_1      : string;
+    APELLIDO_2      : string;
+    NOMBRE_COMPLETO : string;
+    ROL             : string;
 }

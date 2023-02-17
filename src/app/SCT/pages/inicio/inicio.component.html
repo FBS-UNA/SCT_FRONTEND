@@ -1,1 +1,76 @@
-<p>inicio works!</p>
+
+<div class="row my-3">
+    <div class="col text-center">
+        <h1 class="animate__animated animate__fadeInDown">Sistema Control de Trámites</h1>
+    </div>
+</div>
+
+<div class="row col-10 mx-auto">
+
+        <p-galleria 
+            [value]="images" 
+            [responsiveOptions]="responsiveOptions" 
+            [containerStyle]="" 
+            [autoPlay]="true" 
+            [transitionInterval]="5000" 
+            [showThumbnails]="false" 
+            [showIndicators]="true"
+            [circular]="true"
+            [showIndicatorsOnItem]="true"> 
+            <ng-template pTemplate="item" let-item>
+                <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+                <div class="grid grid-nogutter justify-content-center">
+                    <img [src]="item.thumbnailImageSrc" style="display: block;" />
+                </div>
+            </ng-template>
+        </p-galleria>
+        
+</div>
+
+
+<div class="row justify-content-between text-center py-5">
+    <div class="col-11 mx-auto">
+        <div class="row ">
+
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Sucursal Virtual</h5>
+                        <p class="card-text">Visita la sucursal virtual de FOBESO.</p>
+                        <a href="https://sucursalvirtual.fobeso.com/iniciar-sesion" class="btn btn-primary">Click
+                            aquí</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">FOBESO</h5>
+                        <p class="card-text">Desea visitar la pagina web de FOBESO.</p>
+                        <a href="https://fobeso.com/" class="btn btn-primary">Click aquí</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Afiliación al FBS</h5>
+                        <p class="card-text">Te gustaría afiliarte con nosotros.</p>
+                        <a href="https://fobeso.com/formularios/main.php?ACTION=mod_formulario&OPERACION=show&numero=14"
+                            class="btn btn-primary">Afiliate aquí</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+

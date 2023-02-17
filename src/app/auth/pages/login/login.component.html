@@ -1,6 +1,8 @@
-<div class="row h-100">
-    <div class="col-7 mx-auto my-auto">
 
+
+<div class="row h-100">
+    <p-toast></p-toast>
+    <div class="col-7 mx-auto">
 
 
         <p-card header="Iniciar Sesión">
@@ -29,7 +31,7 @@
                         <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
                         <input 
                         [ngClass]="{'ng-invalid ng-dirty': isInvalid('CONTRASENA')}"
-                            type="text" 
+                            type="password" 
                             pInputText 
                             placeholder="Contraseña" 
                             formControlName="CONTRASENA">
@@ -49,7 +51,7 @@
                 <p-button class="w-100" type="submit" label="Ingresar"></p-button>
 
                 <div class="text-center mt-5">
-                    <small> ¿No tiene una cuenta? <a href="https://www.google.com/?hl=es">Click Aquí</a> </small>
+                    <small> ¿No tiene una cuenta? <a href="https://sucursalvirtual.fobeso.com/solicitud-registro">Click Aquí</a> </small>
                 </div>
 
 
@@ -59,7 +61,5 @@
         </p-card>
 
     </div>
-    <pre>
-        {{loginForm.value | json}}
-    </pre>
+
 </div>
