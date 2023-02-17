@@ -7,8 +7,11 @@ import {CardModule} from 'primeng/card';
 import {CarouselModule} from 'primeng/carousel';
 import {DividerModule} from 'primeng/divider';
 import {ImageModule} from 'primeng/image';
+import {InputTextModule} from 'primeng/inputtext';
 import {MenubarModule} from 'primeng/menubar';
+import {PasswordModule} from 'primeng/password';
 import {RippleModule } from 'primeng/ripple';
+
 
 
 
@@ -21,7 +24,9 @@ import {RippleModule } from 'primeng/ripple';
     CarouselModule,
     DividerModule,
     ImageModule,
+    InputTextModule,
     MenubarModule,
+    PasswordModule,
     RippleModule
   ]
 })

@@ -1,14 +1,49 @@
 <div class="row h-100">
-    <div class="col-8 mx-auto my-auto">
+    <div class="col-7 mx-auto my-auto">
 
 
 
         <p-card header="Iniciar Sesión">
-            <form>
-                
+            <form class="p-fluid" [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+
+                <div class="p-inputgroup mb-4">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input
+                        [ngClass]="{'ng-invalid ng-dirty': isInvalid('CEDULA')}"
+                        type="text" 
+                        pInputText 
+                        placeholder="Cédula" 
+                        formControlName="CEDULA">
+                </div>
+
+                <div class="p-inputgroup mb-2">
+                    <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                    <input 
+                    [ngClass]="{'ng-invalid ng-dirty': isInvalid('CONTRASENA')}"
+                        type="text" 
+                        pInputText 
+                        placeholder="Contraseña" 
+                        formControlName="CONTRASENA">
+                </div>
+
+                <div class="text-end mb-5">
+                    <small> <a href="https://www.google.com/?hl=es">¿Olvidó su contraseña?</a> </small>
+                </div>
+
+                <p-button class="w-100" type="submit" label="Ingresar" [disabled]="loginForm.invalid"></p-button>
+
+                <div class="text-center mt-5">
+                    <small> ¿No tiene una cuenta? <a href="https://www.google.com/?hl=es">Click Aquí</a> </small>
+                </div>
+
+
+
             </form>
-            
+
         </p-card>
-        
+
     </div>
+    <pre>
+        {{loginForm.value | json}}
+    </pre>
 </div>
