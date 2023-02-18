@@ -52,6 +52,7 @@ export class LoginComponent {
       Object.values(this.loginForm.controls).forEach(control => {
         control.markAllAsTouched();
       });
+      this.mensajeCredencialesInvalidas();
       return;
     }
 
