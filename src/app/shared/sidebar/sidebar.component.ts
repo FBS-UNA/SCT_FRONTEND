@@ -14,7 +14,7 @@ interface MenuItem{
     height: 100%;
     width: 240px;
     position: fixed;
-    z-index: 1;
+    z-index: 100;
     top: 0;
     left: 0;
     background-color: #00416B;

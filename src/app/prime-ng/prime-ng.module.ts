@@ -13,6 +13,7 @@ import {MenubarModule} from 'primeng/menubar';
 import {PasswordModule} from 'primeng/password';
 import {RippleModule } from 'primeng/ripple';
 import {ScrollTopModule} from 'primeng/scrolltop';
+import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 
 
@@ -36,6 +37,7 @@ import { MessageService } from 'primeng/api';
     PasswordModule,
     RippleModule,
     ScrollTopModule,
+    TableModule,
     ToastModule
   ]
 })

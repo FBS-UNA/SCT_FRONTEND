@@ -5,28 +5,22 @@
     </div>
 </div>
 
-<div class="row col-10 mx-auto">
 
-        <p-galleria 
-            [value]="images" 
-            [responsiveOptions]="responsiveOptions" 
-            [containerStyle]="" 
-            [autoPlay]="true" 
-            [transitionInterval]="5000" 
-            [showThumbnails]="false" 
-            [showIndicators]="true"
-            [circular]="true"
-            [showIndicatorsOnItem]="true"> 
-            <ng-template pTemplate="item" let-item>
-                <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
-            </ng-template>
-            <ng-template pTemplate="thumbnail" let-item>
-                <div class="grid grid-nogutter justify-content-center">
-                    <img [src]="item.thumbnailImageSrc" style="display: block;" />
-                </div>
-            </ng-template>
-        </p-galleria>
-        
+
+<div class="row col mx-auto">
+
+    <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="" [autoPlay]="true"
+        [transitionInterval]="5000" [showThumbnails]="false" [showIndicators]="true" [circular]="true"
+        [showIndicatorsOnItem]="true">
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="grid grid-nogutter justify-content-center">
+                <img [src]="item.thumbnailImageSrc" style="display: block;" />
+            </div>
+        </ng-template>
+    </p-galleria>
 </div>
 
 
@@ -68,9 +62,5 @@
 
         </div>
     </div>
-
 </div>
-
-
-
 

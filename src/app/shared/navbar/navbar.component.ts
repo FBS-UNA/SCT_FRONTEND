@@ -7,17 +7,45 @@ import { MenuItem } from 'primeng/api';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styles: [
-  ]
+
+    `
+    :host ::ng-deep .p-menubar {
+      background-color: white;
+      border-radius: 0px 0px 10px 10px;
+      z-index: 100;
+    }
+
+    /* :host ::ng-deep .p-menubar-start {
+      width: 30%;
+    }
+
+    :host ::ng-deep p-menubarsub{
+      width: 100%;
+    } */
+    
+    `
+]
 })
 export class NavbarComponent implements OnInit {
 
 
   items: MenuItem[] = [
     {
-      label:'Salir',
-      icon: 'pi pi-sign-out',
-      command: ()=>{this.cerrarSesion()}
-    }
+      label: 'Opcion 1',
+      icon: 'pi pi-info-circle'
+    },
+    {
+      label: 'Opcion 2',
+      icon: 'pi pi-info-circle'
+    },
+    {
+      label: 'Opcion 3',
+      icon: 'pi pi-info-circle'
+    },
+    {
+      label: 'Opcion 4',
+      icon: 'pi pi-info-circle'
+    },
   ];
 
 
@@ -26,11 +54,11 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) { }
 
-  get usuario(){
+  get usuario() {
     return this.authService.usuario;
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     this.authService.cerrarSesion();
     this.router.navigateByUrl('/auth');
   }

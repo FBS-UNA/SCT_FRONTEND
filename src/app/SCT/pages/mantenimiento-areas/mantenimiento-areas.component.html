@@ -1,1 +1,39 @@
-<p>mantenimiento-areas works!</p>
+<div class="row my-3">
+    <p-card header="Mantenimiento de Areas">
+        <div class="col-12 mb-2">
+            <p-button styleClass="p-button-warning" label="Agregar" icon="pi pi-plus"></p-button>
+        </div>
+        <div class="col">
+            <p-table 
+                [value]="areas" 
+                [tableStyle]="{'min-width': '50rem'}"
+                [rows]="15"
+                [rowHover]="true"
+                [paginator]="true"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="{first} a {last} de {totalRecords} registros"
+                >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="ID_AREA" style="width:10%">ID <p-sortIcon field="ID_AREA"></p-sortIcon> </th>
+                        <th pSortableColumn="NOMBRE_AREA" style="width:20%">Nombre <p-sortIcon field="NOMBRE_AREA"></p-sortIcon></th>
+                        <th pSortableColumn="DESCRIPCION_AREA" style="width:20%">Descripción <p-sortIcon field="DESCRIPCION_AREA"></p-sortIcon></th>
+                        <th pSortableColumn="FECHA" style="width:20%">Fecha <p-sortIcon field="FECHA"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-area>
+                    <tr>
+                        <td>{{area.ID_AREA }}</td>
+                        <td>{{area.NOMBRE_AREA}}</td>
+                        <td>{{area.DESCRIPCION_AREA}}</td>
+                        <td>{{area.FECHA | date : 'dd/MM/YYYY'}}</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
+        
+    </p-card>
+</div>
+
+<div class="row"></div>

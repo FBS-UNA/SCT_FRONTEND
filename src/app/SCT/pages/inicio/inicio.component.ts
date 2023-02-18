@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styles: [
     `
     img{
-      height: 500px
+      height: 400px;
+      border-radius: 7px;
+    }
+
+    :host ::ng-deep .p-galleria-indicators {
+      border-radius: 0px 0px 7px 7px;
     }
     `
   ]
