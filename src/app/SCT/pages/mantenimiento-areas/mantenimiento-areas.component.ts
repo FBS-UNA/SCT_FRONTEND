@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Area } from '../../interfaces/area.interface';
+import { AreasService } from '../../services/areas.service';
 
 @Component({
   selector: 'app-mantenimiento-areas',
@@ -14,9 +16,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MantenimientoAreasComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+    private areasService: AreasService
+  ) { }
 
   ngOnInit(): void {
+    this.areasService.getAreas();
+  }
+
+  get areas(){
+    return this.areasService.areas;
   }
 
 }
