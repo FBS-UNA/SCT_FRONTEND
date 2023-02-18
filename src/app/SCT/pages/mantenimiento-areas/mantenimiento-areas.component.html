@@ -4,7 +4,14 @@
             <p-button styleClass="p-button-warning" label="Agregar" icon="pi pi-plus"></p-button>
         </div>
         <div class="col">
-            <p-table [value]="areas" [tableStyle]="{'min-width': '50rem'}">
+            <p-table 
+                [value]="areas" 
+                [tableStyle]="{'min-width': '50rem'}"
+                [rows]="10"
+                [rowHover]="true"
+                [paginator]="true"
+                [showCurrentPageReport]="true"
+                >
                 <ng-template pTemplate="header">
                     <tr>
                         <th>ID</th>
@@ -18,9 +25,10 @@
                         <td>{{area.ID_AREA }}</td>
                         <td>{{area.NOMBRE_AREA}}</td>
                         <td>{{area.DESCRIPCION_AREA}}</td>
-                        <td>{{area.FECHA | date}}</td>
+                        <td>{{area.FECHA | date : 'dd/MM/YYYY'}}</td>
                     </tr>
                 </ng-template>
+
             </p-table>
         </div>
         
