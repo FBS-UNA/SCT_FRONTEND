@@ -17,9 +17,9 @@ import { MenuItem } from 'primeng/api';
 
     /* :host ::ng-deep .p-menubar-start {
       width: 30%;
-    }
+    } */
 
-    :host ::ng-deep p-menubarsub{
+    /* :host ::ng-deep p-menubarsub{
       width: 100%;
     } */
     

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { Area, AreaResponse } from '../interfaces/area.interface';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, delay, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -33,9 +33,11 @@ export class AreasService {
           this._areas = res.AREAS!;
         }
       }),
+      // Quitar este Delay, solo sirve para probar o ver la animacion de carga
+      delay(1000),
       map(res => res.OK),
       catchError(err => of(err.error.msg))
-    ).subscribe();
+    );
 
   }
 
