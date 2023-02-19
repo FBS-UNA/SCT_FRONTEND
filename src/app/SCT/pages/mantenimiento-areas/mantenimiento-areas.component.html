@@ -1,18 +1,16 @@
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
 <div class="my-3">
     <p-card header="Mantenimiento de Areas">
 
-        <div class="d-flex wrap gap-2 mb-2">
-
-
-
-        </div>
 
         <div class="p-fluid row mb-2 gap-1">
             <div class="field col-lg-2 col-md-12">
-                <p-button styleClass="p-button-warning" label="Agregar" icon="pi pi-plus"></p-button>
+                <p-button styleClass="p-button-primary" label="Agregar" icon="pi pi-plus"></p-button>
             </div>
             <div class="field col-lg-2 col-md-12">
-                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                <button pButton label="Clear" class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
                     (click)="clear(dt)"></button>
             </div>
             <div class="field col-lg-3 col-md-12 ms-auto">
@@ -26,23 +24,19 @@
 
         </div>
 
-        <p-table #dt dataKey="id" [value]="areas" [loading]="loading" [tableStyle]="{'min-width': '50rem'}"
-            [rowsPerPageOptions]="[10,25,50]" [rows]="15" [rowHover]="true" [paginator]="true"
-            [showCurrentPageReport]="true" currentPageReportTemplate="{first} a {last} de {totalRecords} registros"
+        <p-table #dt dataKey="id" [columns]="cols" [value]="areas" [loading]="loading"
+            [tableStyle]="{'min-width': '50rem'}" [rowsPerPageOptions]="[10,25,50]" [rows]="15" [rowHover]="true"
+            [paginator]="true" [showCurrentPageReport]="true"
+            currentPageReportTemplate="{first} a {last} de {totalRecords} registros"
             [globalFilterFields]="['ID_AREA','NOMBRE_AREA','DESCRIPCION_AREA','FECHA']">
 
 
-            <ng-template pTemplate="header">
+            <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th pSortableColumn="ID_AREA" style="width:5%">
-                        ID
-                        <p-sortIcon field="ID_AREA"></p-sortIcon>
+                    <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
+                        {{col.header | titlecase}}
+                        <p-sortIcon *ngIf="col.field" [field]="col.field"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="NOMBRE_AREA" style="width:15%">Nombre <p-sortIcon
-                            field="NOMBRE_AREA"></p-sortIcon></th>
-                    <th pSortableColumn="DESCRIPCION_AREA" style="width:45%">Descripción <p-sortIcon
-                            field="DESCRIPCION_AREA"></p-sortIcon></th>
-                    <th pSortableColumn="FECHA" style="width:15%">Fecha <p-sortIcon field="FECHA"></p-sortIcon></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-area>
@@ -51,12 +45,55 @@
                     <td>{{area.NOMBRE_AREA}}</td>
                     <td>{{area.DESCRIPCION_AREA}}</td>
                     <td>{{area.FECHA | date : 'dd/MM/YYYY'}}</td>
+                    <td>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary me-2"
+                            (click)="editarArea(area)"></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                            (click)="eliminarArea(area)"></button>
+                    </td>
                 </tr>
             </ng-template>
 
         </p-table>
-
     </p-card>
 </div>
 
-<div class="row"></div>
+
+
+
+
+<p-dialog [(visible)]="areaDialog" [style]="{width: '600px'}" header="Detalles del Área" [draggable]="false"
+    [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="name">Nombre</label>
+            <input type="text" pInputText id="name" [(ngModel)]="areaEditada.NOMBRE_AREA" required autofocus />
+            <small class="p-error" *ngIf="submitted && !areaEditada.NOMBRE_AREA">El nombre es obligatorio</small>
+        </div>
+        <div class="field">
+            <label for="description">Descripcion</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="areaEditada.DESCRIPCION_AREA" rows="3"
+                cols="20"></textarea>
+        </div>
+
+        <div class="formgrid row">
+            <div class="field col">
+                <label for="fecha">Fecha de Creación</label>
+                <input type="text" pInputText id="fecha" placeholder="{{areaEditada.FECHA | date:'dd/MM/YYYY'}}"
+                    disabled="true" />
+            </div>
+            <div class="field col">
+                <label for="codigo">Código</label>
+                <input id="disabled-input" type="number" pInputText [disabled]="true"
+                    [(ngModel)]="areaEditada.ID_AREA" />
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text p-button-danger"
+            (click)="cerrarDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
+            (click)="guardarCambios()"></button>
+    </ng-template>
+</p-dialog>

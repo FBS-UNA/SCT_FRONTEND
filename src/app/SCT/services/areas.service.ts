@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
@@ -29,16 +29,33 @@ export class AreasService {
     return this.http.get<AreaResponse>(url).pipe(    
       tap(res=>{
         if(res.OK){
-          console.log(res);
           this._areas = res.AREAS!;
         }
       }),
       // Quitar este Delay, solo sirve para probar o ver la animacion de carga
-      delay(1000),
+      delay(500),
       map(res => res.OK),
       catchError(err => of(err.error.msg))
     );
 
+  }
+
+  updateArea(area: Area){
+    const url = `${this.baseUrl}/areas/actualizar`;
+    const body = area;
+
+    return this.http.put<AreaResponse>(url,body).pipe(
+      catchError(err => of(err.error.msg))
+    );
+  }
+
+  deleteArea(idArea: number){
+    const url = `${this.baseUrl}/areas/eliminar`;
+    const headers = new HttpHeaders().set('id-area', idArea.toString());
+
+    return this.http.delete<AreaResponse>(url, {headers}).pipe(
+      catchError(err => of(err.error.msg))
+    );
   }
 
 }
