@@ -67,5 +67,4 @@ export class AreasService {
       catchError(err => of(err.error.msg))
     );
   }
-
 }

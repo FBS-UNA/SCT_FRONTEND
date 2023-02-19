@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Area } from '../../interfaces/area.interface';
+import { AreasService } from '../../services/areas.service';
 
 import { Area } from '../../interfaces/area.interface';
 import { AreasService } from '../../services/areas.service';
