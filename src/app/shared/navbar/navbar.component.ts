@@ -13,13 +13,15 @@ import { MenuItem } from 'primeng/api';
       background-color: white;
       border-radius: 0px 0px 10px 10px;
       z-index: 100;
+      margin-left: 15%;
+      height: 10%;
     }
 
     /* :host ::ng-deep .p-menubar-start {
       width: 30%;
-    }
+    } */
 
-    :host ::ng-deep p-menubarsub{
+    /* :host ::ng-deep p-menubarsub{
       width: 100%;
     } */
     

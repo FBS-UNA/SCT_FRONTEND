@@ -9,6 +9,7 @@ import { MantenimientoTramitesComponent } from './pages/mantenimiento-tramites/m
 import { MainComponent } from './pages/main/main.component';
 import { SharedModule } from '../shared/shared.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
     CommonModule,
     SCTRoutingModule,
     PrimeNgModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class SCTModule { }

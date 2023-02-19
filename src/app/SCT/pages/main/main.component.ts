@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styles: [
     `
     .main{
-      margin-left: 240px;
+      margin-left: 15%;
+      max-width: 85%;
+      width: 100%;
+      height: 90%;
     }
     `
   ]

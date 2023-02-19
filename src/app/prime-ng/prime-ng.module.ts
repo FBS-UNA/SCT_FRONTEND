@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 // PrimeNG
 // A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 import {ButtonModule} from 'primeng/button';
+import {CalendarModule} from 'primeng/calendar';
 import {CardModule} from 'primeng/card';
 import {CarouselModule} from 'primeng/carousel';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DialogModule} from 'primeng/dialog';
 import {DividerModule} from 'primeng/divider';
 import {GalleriaModule} from 'primeng/galleria';
 import {ImageModule} from 'primeng/image';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
 import {MenubarModule} from 'primeng/menubar';
 import {PasswordModule} from 'primeng/password';
@@ -18,20 +22,26 @@ import {ToastModule} from 'primeng/toast';
 
 
 import { MessageService } from 'primeng/api';
+import {ConfirmationService} from 'primeng/api';
 
 
 
 @NgModule({
   providers:[
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
   exports:[
     ButtonModule,
+    CalendarModule,
     CardModule,
     CarouselModule,
+    ConfirmDialogModule,
+    DialogModule,
     DividerModule,
     GalleriaModule,
     ImageModule,
+    InputTextareaModule,
     InputTextModule,
     MenubarModule,
     PasswordModule,

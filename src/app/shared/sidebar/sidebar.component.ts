@@ -12,7 +12,8 @@ interface MenuItem{
     `
     #sidebar {
     height: 100%;
-    width: 240px;
+    width: 100%;
+    max-width: 15%;
     position: fixed;
     z-index: 100;
     top: 0;
