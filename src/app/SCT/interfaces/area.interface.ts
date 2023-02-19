@@ -6,8 +6,8 @@ export interface AreaResponse{
 }
 
 export interface Area {
-    ID_AREA          : number;
-    NOMBRE_AREA      : string;
-    DESCRIPCION_AREA?: string;
-    FECHA           ?: Date;
+    ID_AREA         ?: -1;
+    NOMBRE_AREA     ?: '';
+    DESCRIPCION_AREA?: '';
+    FECHA           ?: Date | string;
 }

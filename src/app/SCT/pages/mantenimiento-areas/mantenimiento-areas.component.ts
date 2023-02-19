@@ -6,6 +6,7 @@ import { AreasService } from '../../services/areas.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { TimestampService } from '../../services/timestamp.service';
 
 interface TableCols {
   field: string;
@@ -16,18 +17,16 @@ interface TableCols {
 @Component({
   selector: 'app-mantenimiento-areas',
   templateUrl: './mantenimiento-areas.component.html',
-  styles: [
-    `
-    `
-  ]
+  styles: []
 })
 export class MantenimientoAreasComponent implements OnInit {
 
-  loading: boolean = true;
+  loading!: boolean;
   areas: Area[] = [];
   areaDialog: boolean = false;
-  areaEditada !: Area;
+  area !: Area;
   submitted !: boolean;
+  editando: boolean = false;
 
   cols: TableCols[] = [
     { field: 'ID_AREA', header: 'Código', style: 'width: 10%' },
@@ -40,14 +39,16 @@ export class MantenimientoAreasComponent implements OnInit {
   constructor(
     private areasService: AreasService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private timestampService: TimestampService
   ) { }
 
   ngOnInit(): void {
-    this.cargarAreas();
+    this.cargarData();
   }
 
-  cargarAreas() {
+  cargarData() {
+    this.loading= true;
     this.areasService.getAreas().subscribe(OK => {
       if (OK) {
         this.loading = false;
@@ -56,16 +57,22 @@ export class MantenimientoAreasComponent implements OnInit {
     });
   }
 
+  areaNueva(){
+    this.area = {FECHA: this.timestampService.fechaActual}
+    this.editando = false;
+    this.submitted = false;
+    this.areaDialog = true;
+  }
+
   eliminarArea(area: Area) {
     this.confirmationService.confirm({
       message: '¿Está seguro(a) de que desea eliminar el área de ' + area.NOMBRE_AREA + '?',
       header: '¡Cuidado!',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.areasService.deleteArea(area.ID_AREA).subscribe(res => {
+        this.areasService.deleteArea(area.ID_AREA!).subscribe(res => {
           if (res.OK) {
-            const indexAreaEliminada = this.areas.findIndex(val => val.ID_AREA == area.ID_AREA);
-            this.areas.splice(indexAreaEliminada, 1);
+            this.cargarData()
             this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El área de ${area.NOMBRE_AREA} se ha eliminado correctamente` });
           } else {
             this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo eliminar el área de ${area.NOMBRE_AREA}` });
@@ -79,17 +86,29 @@ export class MantenimientoAreasComponent implements OnInit {
   guardarCambios() {
     this.submitted = true;
 
-    this.areasService.updateArea(this.areaEditada).subscribe(res => {
-      if (res.OK) {
-        const indexAreaActualizada = this.areas.findIndex(val => val.ID_AREA == this.areaEditada.ID_AREA);
-        this.areas[indexAreaActualizada] = this.areaEditada;
-        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El área de ${this.areaEditada.NOMBRE_AREA} se ha actualizado correctamente` });
-      } else {
-        this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo actualizar el área de ${this.areaEditada.NOMBRE_AREA}` });
-      }
-    });
+    this.editando ? this.actualizarArea() : this.agregarArea();
 
     this.areaDialog = false;
+  }
+
+  actualizarArea(){
+    this.areasService.updateArea(this.area).subscribe(res => {
+      if (res.OK) {
+        this.cargarData()
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El área de ${this.area.NOMBRE_AREA} se ha actualizado correctamente` });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo actualizar el área de ${this.area.NOMBRE_AREA}` });
+      }
+    });
+  }
+
+  agregarArea(){
+    this.areasService.addArea(this.area).subscribe(res=>{
+      if(res.OK){
+        this.cargarData();
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El área de ${this.area.NOMBRE_AREA} se ha agregado correctamente` });
+      }
+    });
 
   }
 
@@ -98,7 +117,8 @@ export class MantenimientoAreasComponent implements OnInit {
   }
 
   editarArea(area: Area) {
-    this.areaEditada = { ...area };
+    this.area = { ...area };
+    this.editando = true;
     this.areaDialog = true;
   }
 

@@ -7,7 +7,7 @@
 
         <div class="p-fluid row mb-2 gap-1">
             <div class="field col-lg-2 col-md-12">
-                <p-button styleClass="p-button-primary" label="Agregar" icon="pi pi-plus"></p-button>
+                <p-button styleClass="p-button-primary" label="Agregar" icon="pi pi-plus" (click)="areaNueva()"></p-button>
             </div>
             <div class="field col-lg-2 col-md-12">
                 <button pButton label="Clear" class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
@@ -67,25 +67,25 @@
     <ng-template pTemplate="content">
         <div class="field">
             <label for="name">Nombre</label>
-            <input type="text" pInputText id="name" [(ngModel)]="areaEditada.NOMBRE_AREA" required autofocus />
-            <small class="p-error" *ngIf="submitted && !areaEditada.NOMBRE_AREA">El nombre es obligatorio</small>
+            <input type="text" pInputText id="name" [(ngModel)]="area.NOMBRE_AREA" required autofocus />
+            <small class="p-error" *ngIf="submitted && !area.NOMBRE_AREA">El nombre es obligatorio</small>
         </div>
         <div class="field">
             <label for="description">Descripcion</label>
-            <textarea id="description" pInputTextarea [(ngModel)]="areaEditada.DESCRIPCION_AREA" rows="3"
+            <textarea id="description" pInputTextarea [(ngModel)]="area.DESCRIPCION_AREA" rows="3"
                 cols="20"></textarea>
         </div>
 
-        <div class="formgrid row">
+        <div *ngIf="editando" class="formgrid row">
             <div class="field col">
                 <label for="fecha">Fecha de Creación</label>
-                <input type="text" pInputText id="fecha" placeholder="{{areaEditada.FECHA | date:'dd/MM/YYYY'}}"
+                <input type="text" pInputText id="fecha" placeholder="{{area.FECHA | date:'dd/MM/YYYY'}}"
                     disabled="true" />
             </div>
             <div class="field col">
                 <label for="codigo">Código</label>
                 <input id="disabled-input" type="number" pInputText [disabled]="true"
-                    [(ngModel)]="areaEditada.ID_AREA" />
+                    [(ngModel)]="area.ID_AREA" />
             </div>
         </div>
     </ng-template>
