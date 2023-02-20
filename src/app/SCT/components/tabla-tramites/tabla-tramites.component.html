@@ -1,0 +1,98 @@
+
+<div class="p-fluid row mb-2 gap-1">
+    <div class="field col-lg-2 col-md-12">
+        <p-button styleClass="p-button-primary" label="Agregar" icon="pi pi-plus" (click)="agregarTramiteDialog()"></p-button>
+    </div>
+    <div class="field col-lg-2 col-md-12">
+        <button pButton label="Limpiar" class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
+            (click)="clear(dt)"></button>
+    </div>
+    <div class="field col-lg-3 col-md-12 ms-auto">
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText #inputFilter type="text" (input)="dt.filterGlobal(inputFilter.value, 'contains')" [(ngModel)]="inputFiltro"
+                placeholder="Filtro Global" />
+        </span>
+    </div>
+
+
+</div>
+
+<p-table #dt dataKey="id" [columns]="cols" [value]="tramites" [loading]="loading"
+    [tableStyle]="{'min-width': '50rem'}" [rowsPerPageOptions]="[10,25,50]" [rows]="15" [rowHover]="true"
+    [paginator]="true" [showCurrentPageReport]="true"
+    currentPageReportTemplate="{first} a {last} de {totalRecords} registros"
+    [globalFilterFields]="['ID_TRAMITE','NOMBRE_TRAMITE','DESCRIPCION_TRAMITE','FECHA']">
+
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
+                {{col.header | titlecase}}
+                <p-sortIcon *ngIf="col.field" [field]="col.field"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tramite let-i="rowIndex">
+        <tr>
+            <td>{{tramite.ID_TRAMITE }}</td>
+            <td>{{tramite.NOMBRE_TRAMITE}}</td>
+            <td>{{tramite.DESCRIPCION_TRAMITE}}</td>
+            <td>{{tramite.FECHA | date : 'dd/MM/YYYY'}}</td>
+            <td>
+                <p-inputSwitch (click)="actualizarEstadoTramite(tramite)" [(ngModel)]="tramite.ESTADO"></p-inputSwitch>
+            </td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary me-2"
+                    (click)="editarTramiteDialog(tramite)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                    (click)="eliminarTramiteDialog(tramite)"></button>
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>
+
+<!-- Componentes necesarios -->
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<p-dialog [(visible)]="tramiteDialog" [style]="{width: '600px'}" header="Detalles del Área" [draggable]="false"
+    [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="name">Nombre</label>
+            <input type="text" pInputText id="name" [(ngModel)]="tramite.NOMBRE_TRAMITE" required autofocus />
+            <small class="p-error" *ngIf="submitted && !tramite.NOMBRE_TRAMITE">El nombre es obligatorio</small>
+        </div>
+        <div class="field">
+            <label for="description">Descripcion</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="tramite.DESCRIPCION_TRAMITE" rows="3"
+                cols="20"></textarea>
+        </div>
+
+        <div *ngIf="editando" class="formgrid row">
+            <div class="field col">
+                <label for="fecha">Fecha de Creación</label>
+                <input type="text" pInputText id="fecha" placeholder="{{tramite.FECHA | date:'dd/MM/YYYY'}}"
+                    disabled="true" />
+            </div>
+            <div class="field col">
+                <label for="codigo">Código</label>
+                <input id="disabled-input" type="number" pInputText [disabled]="true"
+                    [(ngModel)]="tramite.ID_TRAMITE" />
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text p-button-danger"
+            (click)="cerrarDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
+            (click)="guardarCambios()"></button>
+    </ng-template>
+</p-dialog>
+
+
+

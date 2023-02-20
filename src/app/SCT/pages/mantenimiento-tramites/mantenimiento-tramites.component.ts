@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MantenimientoTramitesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    
+  ) { }
 
   ngOnInit(): void {
   }
