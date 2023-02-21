@@ -43,7 +43,6 @@ export class AreasService {
   addArea(area: Area){
     const url = `${this.baseUrl}/areas/agregar`;
     const body = area;
-    console.log(body)
   
     return this.http.post<AreaResponse>(url,body).pipe(
       catchError(err => of(err.error.msg))

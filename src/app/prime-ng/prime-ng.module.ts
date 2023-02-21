@@ -7,10 +7,12 @@ import {CalendarModule} from 'primeng/calendar';
 import {CardModule} from 'primeng/card';
 import {CarouselModule} from 'primeng/carousel';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {DialogModule} from 'primeng/dialog';
 import {DividerModule} from 'primeng/divider';
 import {GalleriaModule} from 'primeng/galleria';
 import {ImageModule} from 'primeng/image';
+import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
 import {MenubarModule} from 'primeng/menubar';
@@ -19,7 +21,7 @@ import {RippleModule } from 'primeng/ripple';
 import {ScrollTopModule} from 'primeng/scrolltop';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
-
+import {ToolbarModule} from 'primeng/toolbar';
 
 import { MessageService } from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
@@ -37,10 +39,12 @@ import {ConfirmationService} from 'primeng/api';
     CardModule,
     CarouselModule,
     ConfirmDialogModule,
+    ConfirmPopupModule,
     DialogModule,
     DividerModule,
     GalleriaModule,
     ImageModule,
+    InputSwitchModule,
     InputTextareaModule,
     InputTextModule,
     MenubarModule,
@@ -48,7 +52,8 @@ import {ConfirmationService} from 'primeng/api';
     RippleModule,
     ScrollTopModule,
     TableModule,
-    ToastModule
+    ToastModule,
+    ToolbarModule
   ]
 })
 export class PrimeNgModule { }

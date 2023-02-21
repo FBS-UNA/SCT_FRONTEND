@@ -11,6 +11,10 @@ import { SharedModule } from '../shared/shared.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { FormsModule } from '@angular/forms';
 
+import { TablaAreasComponent } from './components/tabla-areas/tabla-areas.component';
+import { TablaTramitesComponent } from './components/tabla-tramites/tabla-tramites.component';
+
+
 
 @NgModule({
   declarations: [
@@ -18,7 +22,9 @@ import { FormsModule } from '@angular/forms';
     InicioComponent,
     MantenimientoAreasComponent,
     MantenimientoTramitesComponent,
-    MainComponent
+    MainComponent,
+    TablaAreasComponent,
+    TablaTramitesComponent
   ],
   imports: [
     CommonModule,

@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
     .main{
       margin-left: 15%;
       max-width: 85%;
+      max-height: 87%;
       width: 100%;
-      height: 90%;
+      height: 100%;
     }
     `
   ]
