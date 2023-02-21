@@ -69,7 +69,9 @@ export class TramitesService {
 
   deleteTramite(idTramite: number){
     const url = `${this.baseUrl}/tramites/eliminar`;
-    const headers = new HttpHeaders().set('id-area', idTramite.toString());
+    const headers = new HttpHeaders().set('id-tramite', idTramite.toString());
+
+    console.log(idTramite)
 
     return this.http.delete<TramiteResponse>(url, {headers}).pipe(
       catchError(err => of(err.error.msg))

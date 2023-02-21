@@ -76,7 +76,7 @@ export class TablaTramitesComponent implements OnInit {
       accept: () => {
         this.tramitesService.deleteTramite(tramite.ID_TRAMITE!).subscribe(res => {
           if (res.OK) {
-            this.cargarTramites()
+            this.cargarTramites();
             this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El trámite llamado "${tramite.NOMBRE_TRAMITE}" se ha eliminado correctamente` });
           } else {
             this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo eliminar el trámite llamado "${tramite.NOMBRE_TRAMITE}"` });

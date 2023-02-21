@@ -17,6 +17,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
 import {MenubarModule} from 'primeng/menubar';
 import {PasswordModule} from 'primeng/password';
+import {PickListModule} from 'primeng/picklist';
 import {RippleModule } from 'primeng/ripple';
 import {ScrollTopModule} from 'primeng/scrolltop';
 import {TableModule} from 'primeng/table';
@@ -49,6 +50,7 @@ import {ConfirmationService} from 'primeng/api';
     InputTextModule,
     MenubarModule,
     PasswordModule,
+    PickListModule,
     RippleModule,
     ScrollTopModule,
     TableModule,

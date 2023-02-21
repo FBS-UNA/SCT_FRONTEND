@@ -15,6 +15,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroEntradaComponent implements OnInit {
 
+  list1: any[] = [
+    {
+      brand: 'Huawei',
+      year: 2023,
+      color: 'red'
+    }
+  ];
+
+  list2: any[] = [];
+
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,4 +1,15 @@
-<div class="row h-100 justify-content-center align-items-center">
+<!-- <div class="row h-100 justify-content-center align-items-center">
     <p-card header="Registro de Entrada">
     </p-card>
-</div>
+</div> -->
+
+
+
+<!-- Test  -->
+<p-pickList [source]="list1" [target]="list2">
+    <ng-template let-car pTemplate="item">
+        <div>
+            <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{car.brand}} - {{car.year}} - {{car.color}}</div>
+        </div>
+    </ng-template>
+</p-pickList>
