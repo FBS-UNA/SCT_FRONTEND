@@ -2,27 +2,21 @@
     <div class="field col-lg-2 col-md-12">
         <p-button styleClass="p-button-primary" label="Agregar" icon="pi pi-plus" (click)="agregarAreaDialog()"></p-button>
     </div>
-    <div class="field col-lg-2 col-md-12">
-        <button pButton label="Limpiar" class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
-            (click)="clear(dt)"></button>
-    </div>
     <div class="field col-lg-3 col-md-12 ms-auto">
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
             <input pInputText #inputFilter type="text" (input)="dt.filterGlobal(inputFilter.value, 'contains')" [(ngModel)]="inputFiltro"
-                placeholder="Filtro Global" />
-        </span>
+            placeholder="Filtro Global" />
+            <button pButton class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
+            (click)="clear(dt)"></button>   
+        </div>
     </div>
-
-
 </div>
 
 <p-table #dt dataKey="id" [columns]="cols" [value]="areas" [loading]="loading" [tableStyle]="{'min-width': '50rem'}"
     [rowsPerPageOptions]="[10,25,50]" [rows]="15" [rowHover]="true" [paginator]="true" [showCurrentPageReport]="true"
     currentPageReportTemplate="{first} a {last} de {totalRecords} registros"
     [globalFilterFields]="['ID_AREA','NOMBRE_AREA','DESCRIPCION_AREA','FECHA']">
-
-
 
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -39,6 +33,8 @@
             <td>{{area.DESCRIPCION_AREA}}</td>
             <td>{{area.FECHA | date : 'dd/MM/YYYY'}}</td>
             <td>
+                <button pButton pRipple icon="pi pi-sitemap" class="p-button-rounded p-button-help me-2"
+                    (click)="asociarTramites(area)"></button>
                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary me-2"
                     (click)="editarAreaDialog(area)"></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
@@ -51,39 +47,8 @@
 
 <!-- Componentes necesarios -->
 
-<p-toast></p-toast>
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
-<p-dialog [(visible)]="areaDialog" [style]="{width: '600px'}" header="Detalles del Área" [draggable]="false"
-    [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <div class="field">
-            <label for="name">Nombre</label>
-            <input type="text" pInputText id="name" [(ngModel)]="area.NOMBRE_AREA" required autofocus />
-            <small class="p-error" *ngIf="submitted && !area.NOMBRE_AREA">El nombre es obligatorio</small>
-        </div>
-        <div class="field">
-            <label for="description">Descripcion</label>
-            <textarea id="description" pInputTextarea [(ngModel)]="area.DESCRIPCION_AREA" rows="3" cols="20"></textarea>
-        </div>
+<app-asociar-tramites-dialog></app-asociar-tramites-dialog>
 
-        <div *ngIf="editando" class="formgrid row">
-            <div class="field col">
-                <label for="fecha">Fecha de Creación</label>
-                <input type="text" pInputText id="fecha" placeholder="{{area.FECHA | date:'dd/MM/YYYY'}}"
-                    disabled="true" />
-            </div>
-            <div class="field col">
-                <label for="codigo">Código</label>
-                <input id="disabled-input" type="number" pInputText [disabled]="true" [(ngModel)]="area.ID_AREA" />
-            </div>
-        </div>
-    </ng-template>
+<app-aed-area (refreshData)="cargarAreas()"></app-aed-area>
 
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text p-button-danger"
-            (click)="cerrarDialog()"></button>
-        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
-            (click)="guardarCambios()"></button>
-    </ng-template>
-</p-dialog>

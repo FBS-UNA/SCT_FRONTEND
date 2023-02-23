@@ -1,0 +1,25 @@
+
+<p-dialog [(visible)]="asociarDialog" [style]="{'width': '800px'}"
+    header="Asociar Trámites" [draggable]="false" [modal]="true">
+    <ng-template pTemplate="content">
+
+        <p-pickList [responsive]="true" sourceHeader="Disponibles"
+            targetHeader="Seleccionados" [source]="tramitesHabilitados" [target]="list2">
+            <ng-template  let-tramite pTemplate="item">
+                <div>
+                    <div>{{tramite.ID_TRAMITE }} -
+                        {{tramite.NOMBRE_TRAMITE }}</div>
+                </div>
+            </ng-template>
+        </p-pickList>
+
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text p-button-danger"
+            (click)="cerrarDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
+            (click)="guardarCambios()"></button>
+    </ng-template>
+</p-dialog>

@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { Area } from '../../interfaces/area.interface';
 import { AreasService } from '../../services/areas.service';
-import { TimestampService } from '../../services/timestamp.service';
+import { AsociarTramitesDialogComponent } from '../asociar-tramites-dialog/asociar-tramites-dialog.component';
 import { TableCols } from '../../interfaces/table.interface';
+
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-
+import { AEDAreaComponent } from '../aed-area/aed-area.component';
 @Component({
   selector: 'app-tabla-areas',
   templateUrl: './tabla-areas.component.html',
@@ -15,29 +17,28 @@ import { Table } from 'primeng/table';
 })
 export class TablaAreasComponent implements OnInit {
 
+
+  @ViewChild(AsociarTramitesDialogComponent) asociarTramitesDialog !: AsociarTramitesDialogComponent;
+
+  @ViewChild(AEDAreaComponent) AEDAreaDialog !: AEDAreaComponent;
+
   loading!: boolean;
-  submitted !: boolean;
-  areaDialog: boolean = false;
-  editando: boolean = false;
+
   inputFiltro: string = '';
 
   areas: Area[] = [];
-  area !: Area;
 
   cols: TableCols[] = [
     { field: 'ID_AREA', header: 'Código', style: 'width: 10%' },
     { field: 'NOMBRE_AREA', header: 'Nombre', style: 'width: 15%' },
-    { field: 'DESCRIPCION_AREA', header: 'Descripción', style: 'width: 45%' },
+    { field: 'DESCRIPCION_AREA', header: 'Descripción', style: 'width: 40%' },
     { field: 'FECHA', header: 'Fecha de creacion', style: 'width: 20%' },
-    { field: '', header: '', style: 'width: 10%' },
+    { field: '', header: '', style: 'width: 15%' },
   ]
   
 
   constructor(
     private areasService: AreasService,
-    private messageService: MessageService,
-    private confirmationService: ConfirmationService,
-    private timestampService: TimestampService
   ) { }
 
   ngOnInit(): void {
@@ -54,69 +55,24 @@ export class TablaAreasComponent implements OnInit {
     });
   }
 
+
+  asociarTramites(area: Area){
+    this.asociarTramitesDialog.area = area;
+    this.asociarTramitesDialog.abrirDialog();
+  }
+
+
   agregarAreaDialog(){
-    this.area = {FECHA: this.timestampService.fechaActual};
-    this.editando = false;
-    this.submitted = false;
-    this.areaDialog = true;
+    this.AEDAreaDialog.agregarAreaDialog();
   }
 
   editarAreaDialog(area: Area) {
-    this.area = { ...area };
-    this.editando = true;
-    this.areaDialog = true;
+    this.AEDAreaDialog.editarAreaDialog(area);
   }
 
   eliminarAreaDialog(area: Area) {
-    this.confirmationService.confirm({
-      message: `¿Está seguro(a) de que desea eliminar el área llamada ${area.NOMBRE_AREA}?`,
-      header: '¡Cuidado!',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.areasService.deleteArea(area.ID_AREA!).subscribe(res => {
-          if (res.OK) {
-            this.cargarAreas()
-            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El área llamada "${area.NOMBRE_AREA}" se ha eliminado correctamente` });
-          } else {
-            this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo eliminar el área llamada "${area.NOMBRE_AREA}"` });
-
-          }
-        });
-      }
-    });
+    this.AEDAreaDialog.eliminarAreaDialog(area);
   }
-
-  cerrarDialog() {
-    this.areaDialog = false;
-    this.submitted = false;
-  }
-
-  agregarArea(){
-    this.areasService.addArea(this.area).subscribe(res=>{
-      if(res.OK){
-        this.cargarAreas();
-        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El área llamada "${this.area.NOMBRE_AREA}" se ha agregado correctamente` });
-      }
-    });
-  }
-
-  actualizarArea(){
-    this.areasService.updateArea(this.area).subscribe(res => {
-      if (res.OK) {
-        this.cargarAreas()
-        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El área llamada "${this.area.NOMBRE_AREA}" se ha actualizado correctamente` });
-      } else {
-        this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo actualizar el área llamada "${this.area.NOMBRE_AREA}"` });
-      }
-    });
-  }
-
-  guardarCambios() {
-    this.submitted = true;
-    this.editando ? this.actualizarArea() : this.agregarArea();
-    this.areaDialog = false;
-  }
-
 
 
   clear(table: Table) {

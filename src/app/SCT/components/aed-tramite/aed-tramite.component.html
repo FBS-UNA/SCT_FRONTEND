@@ -1,0 +1,40 @@
+
+<p-toast ></p-toast>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<p-dialog [(visible)]="tramiteDialog" [style]="{width: '600px'}" header="Detalles del Área" [draggable]="false"
+    [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="name">Nombre</label>
+            <input type="text" pInputText id="name" [(ngModel)]="tramite.NOMBRE_TRAMITE" required autofocus />
+            <small class="p-error" *ngIf="submitted && !tramite.NOMBRE_TRAMITE">El nombre es obligatorio</small>
+        </div>
+        <div class="field">
+            <label for="description">Descripcion</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="tramite.DESCRIPCION_TRAMITE" rows="3"
+                cols="20"></textarea>
+        </div>
+
+        <div *ngIf="editando" class="formgrid row">
+            <div class="field col">
+                <label for="fecha">Fecha de Creación</label>
+                <input type="text" pInputText id="fecha" placeholder="{{tramite.FECHA | date:'dd/MM/YYYY'}}"
+                    disabled="true" />
+            </div>
+            <div class="field col">
+                <label for="codigo">Código</label>
+                <input id="disabled-input" type="number" pInputText [disabled]="true"
+                    [(ngModel)]="tramite.ID_TRAMITE" />
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text p-button-danger"
+            (click)="cerrarDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
+            (click)="guardarCambios()"></button>
+    </ng-template>
+</p-dialog>

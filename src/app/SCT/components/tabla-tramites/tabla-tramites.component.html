@@ -1,21 +1,16 @@
-
 <div class="p-fluid row mb-2 gap-1">
     <div class="field col-lg-2 col-md-12">
         <p-button styleClass="p-button-primary" label="Agregar" icon="pi pi-plus" (click)="agregarTramiteDialog()"></p-button>
     </div>
-    <div class="field col-lg-2 col-md-12">
-        <button pButton label="Limpiar" class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
-            (click)="clear(dt)"></button>
-    </div>
     <div class="field col-lg-3 col-md-12 ms-auto">
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
             <input pInputText #inputFilter type="text" (input)="dt.filterGlobal(inputFilter.value, 'contains')" [(ngModel)]="inputFiltro"
                 placeholder="Filtro Global" />
-        </span>
+            <button pButton label="Limpiar" class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
+                (click)="clear(dt)"></button>
+        </div>
     </div>
-
-
 </div>
 
 <p-table #dt dataKey="id" [columns]="cols" [value]="tramites" [loading]="loading"
@@ -23,7 +18,6 @@
     [paginator]="true" [showCurrentPageReport]="true"
     currentPageReportTemplate="{first} a {last} de {totalRecords} registros"
     [globalFilterFields]="['ID_TRAMITE','NOMBRE_TRAMITE','DESCRIPCION_TRAMITE','FECHA']">
-
 
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -55,44 +49,7 @@
 
 <!-- Componentes necesarios -->
 
-<p-toast></p-toast>
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-
-<p-dialog [(visible)]="tramiteDialog" [style]="{width: '600px'}" header="Detalles del Área" [draggable]="false"
-    [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <div class="field">
-            <label for="name">Nombre</label>
-            <input type="text" pInputText id="name" [(ngModel)]="tramite.NOMBRE_TRAMITE" required autofocus />
-            <small class="p-error" *ngIf="submitted && !tramite.NOMBRE_TRAMITE">El nombre es obligatorio</small>
-        </div>
-        <div class="field">
-            <label for="description">Descripcion</label>
-            <textarea id="description" pInputTextarea [(ngModel)]="tramite.DESCRIPCION_TRAMITE" rows="3"
-                cols="20"></textarea>
-        </div>
-
-        <div *ngIf="editando" class="formgrid row">
-            <div class="field col">
-                <label for="fecha">Fecha de Creación</label>
-                <input type="text" pInputText id="fecha" placeholder="{{tramite.FECHA | date:'dd/MM/YYYY'}}"
-                    disabled="true" />
-            </div>
-            <div class="field col">
-                <label for="codigo">Código</label>
-                <input id="disabled-input" type="number" pInputText [disabled]="true"
-                    [(ngModel)]="tramite.ID_TRAMITE" />
-            </div>
-        </div>
-    </ng-template>
-
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text p-button-danger"
-            (click)="cerrarDialog()"></button>
-        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
-            (click)="guardarCambios()"></button>
-    </ng-template>
-</p-dialog>
+<app-aed-tramite (refreshData)="cargarTramites()"></app-aed-tramite>
 
 
 

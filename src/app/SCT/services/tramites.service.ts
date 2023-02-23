@@ -12,6 +12,7 @@ export class TramitesService {
 
   private baseUrl: string = environment.baseUrl;
   private _tramites: Tramite[] = [];
+  
 
   constructor(
     private http: HttpClient
@@ -20,6 +21,7 @@ export class TramitesService {
   get tramites(){
     return [...this._tramites];
   }
+
 
   getTramites() {
     const url = `${this.baseUrl}/tramites`;
@@ -33,6 +35,16 @@ export class TramitesService {
       // Quitar este Delay, solo sirve para probar o ver la animacion de carga
       delay(500),
       map(res => res.OK),
+      catchError(err => of(err.error.msg))
+    );
+  }
+
+  getTramitesHabilitados(){
+    const url = `${this.baseUrl}/tramites/habilitados`;
+
+    return this.http.get<TramiteResponse>(url).pipe(
+      // Quitar este Delay, solo sirve para probar o ver la animacion de carga
+      delay(500),
       catchError(err => of(err.error.msg))
     );
   }
