@@ -4,7 +4,7 @@
     <ng-template pTemplate="content">
 
         <p-pickList [responsive]="true" sourceHeader="Disponibles"
-            targetHeader="Seleccionados" [source]="tramitesHabilitados" [target]="list2">
+            targetHeader="Seleccionados" [source]="tramitesNoAsociados" [target]="tramitesAsociados">
             <ng-template  let-tramite pTemplate="item">
                 <div>
                     <div>{{tramite.ID_TRAMITE }} -

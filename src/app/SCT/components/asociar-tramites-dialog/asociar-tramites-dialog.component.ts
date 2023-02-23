@@ -13,9 +13,9 @@ export class AsociarTramitesDialogComponent implements OnInit {
   asociarDialog: boolean = false;
   area: Area = {};
 
-  tramitesHabilitados: Tramite[] = [];
-
-  list2: Tramite[] = [];
+  tramitesNoAsociados: Tramite[] = [];
+  tramitesAsociados: Tramite[] = [];
+  
 
 
   constructor(
@@ -23,19 +23,17 @@ export class AsociarTramitesDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cargarTramitesHabilitados();
     this.cargarTramitesAsociados();
   }
-  cargarTramitesHabilitados() {
-    this.tramitesService.getTramitesHabilitados().subscribe(res => {
+
+  cargarTramitesAsociados() {
+    this.tramitesService.getTramitesAsociados(this.area.ID_AREA!).subscribe(res => {
       if (res.OK === true) {
-        this.tramitesHabilitados = res.TRAMITES;
+        this.tramitesAsociados = res.TRAMITES;
       }
     });
   }
-  cargarTramitesAsociados() {
 
-  }
 
   abrirDialog() {
     this.asociarDialog = true;
