@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, delay, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Tramite, TramiteResponse } from '../interfaces/tramite.interface';
+import { Tramite, TramiteResponse, TramitesAsociados } from '../interfaces/tramite.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,15 @@ export class TramitesService {
   private baseUrl: string = environment.baseUrl;
   private _tramites: Tramite[] = [];
 
+
   constructor(
     private http: HttpClient
   ) { }
 
-  get tramites(){
+  get tramites() {
     return [...this._tramites];
   }
+
 
   getTramites() {
     const url = `${this.baseUrl}/tramites`;
@@ -37,43 +39,74 @@ export class TramitesService {
     );
   }
 
-  addTramite(tramite: Tramite){
-    const url = `${this.baseUrl}/tramites/agregar`;
-    const body = tramite;
-  
-    return this.http.post<TramiteResponse>(url,body).pipe(
+  getTramitesHabilitados() {
+    const url = `${this.baseUrl}/tramites/habilitados`;
+
+    return this.http.get<TramiteResponse>(url).pipe(
+      // Quitar este Delay, solo sirve para probar o ver la animacion de carga
+      delay(500),
       catchError(err => of(err.error.msg))
     );
   }
 
-  updateTramite(tramite: Tramite){
+  getTramitesAsociados(idArea: number) {
+    const url = `${this.baseUrl}/tramites-areas/estan`;
+    const headers = new HttpHeaders().set('id-area', idArea.toString());
+
+    return this.http.get<TramitesAsociados>(url, { headers }).pipe(
+      catchError(err => of(err.error.msg))
+    );
+
+  }
+
+  getTramitesNoAsociados(idArea: number) {
+    const url = `${this.baseUrl}/tramites-areas/no-estan`;
+    const headers = new HttpHeaders().set('id-area', idArea.toString());
+
+    return this.http.get<TramitesAsociados>(url, { headers }).pipe(
+      catchError(err => of(err.error.msg))
+    );
+  }
+
+  addTramite(tramite: Tramite) {
+    const url = `${this.baseUrl}/tramites/agregar`;
+    const body = tramite;
+
+    return this.http.post<TramiteResponse>(url, body).pipe(
+      catchError(err => of(err.error.msg))
+    );
+  }
+
+  updateTramite(tramite: Tramite) {
     const url = `${this.baseUrl}/tramites/actualizar`;
     const body = tramite;
 
-    return this.http.put<TramiteResponse>(url,body).pipe(
+    return this.http.put<TramiteResponse>(url, body).pipe(
       catchError(err => of(err.error.msg))
     );
   }
 
-  updateEstadoTramite(tramite: Tramite){
+  updateEstadoTramite(tramite: Tramite) {
     const url = `${this.baseUrl}/tramites/actualizarestado`;
-    const body = { 
-      ID_TRAMITE : tramite.ID_TRAMITE,
-      ESTADO : tramite.ESTADO ? 1 : 0
+    const body = {
+      ID_TRAMITE: tramite.ID_TRAMITE,
+      ESTADO: tramite.ESTADO ? 1 : 0
     };
 
     return this.http.put<TramiteResponse>(url, body).pipe(
-      catchError(err=> of(err.error.msg))
-    );
-  }
-
-  deleteTramite(idTramite: number){
-    const url = `${this.baseUrl}/tramites/eliminar`;
-    const headers = new HttpHeaders().set('id-area', idTramite.toString());
-
-    return this.http.delete<TramiteResponse>(url, {headers}).pipe(
       catchError(err => of(err.error.msg))
     );
   }
-  
+
+  deleteTramite(idTramite: number) {
+    const url = `${this.baseUrl}/tramites/eliminar`;
+    const headers = new HttpHeaders().set('id-tramite', idTramite.toString());
+
+    console.log(idTramite)
+
+    return this.http.delete<TramiteResponse>(url, { headers }).pipe(
+      catchError(err => of(err.error.msg))
+    );
+  }
+
 }

@@ -37,7 +37,6 @@ export class AreasService {
       map(res => res.OK),
       catchError(err => of(err.error.msg))
     );
-
   }
 
   addArea(area: Area){

@@ -5,6 +5,13 @@ export interface TramiteResponse{
     MSG            ?: string
 }
 
+export interface TramitesAsociados{
+    OK                       : boolean;
+    LISTA_TRAMITES_ASOCIADOS : Tramite[];
+    MSG                     ?: string
+
+}
+
 
 export interface Tramite{
     ID_TRAMITE         ?: -1;
