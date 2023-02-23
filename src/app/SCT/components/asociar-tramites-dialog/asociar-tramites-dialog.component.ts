@@ -11,7 +11,6 @@ import { TramitesService } from '../../services/tramites.service';
 })
 export class AsociarTramitesDialogComponent implements OnInit {
   asociarDialog: boolean = false;
-
   idArea!: number;
 
   tramitesAsociados: Tramite[] = [];
@@ -51,7 +50,6 @@ export class AsociarTramitesDialogComponent implements OnInit {
 
   cerrarDialog() {
     this.asociarDialog = false;
-
     this.tramitesAsociados= [];
     this.tramitesNoAsociados = [];
   }
