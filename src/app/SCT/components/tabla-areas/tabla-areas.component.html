@@ -8,7 +8,7 @@
             <input pInputText #inputFilter type="text" (input)="dt.filterGlobal(inputFilter.value, 'contains')" [(ngModel)]="inputFiltro"
             placeholder="Filtro Global" />
             <button pButton class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
-            (click)="clear(dt)"></button>   
+            (click)="clear(dt)"></button>
         </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-area>
         <tr>
-            <td>{{area.ID_AREA }}</td>
+            <td>{{area.ID_AREA}}</td>
             <td>{{area.NOMBRE_AREA | titlecase}}</td>
             <td>{{area.DESCRIPCION_AREA}}</td>
             <td>{{area.FECHA | date : 'dd/MM/YYYY'}}</td>
