@@ -11,10 +11,11 @@ import { TramitesService } from '../../services/tramites.service';
 })
 export class AsociarTramitesDialogComponent implements OnInit {
   asociarDialog: boolean = false;
-  area: Area = {};
 
-  tramitesNoAsociados: Tramite[] = [];
+  idArea!: number;
+
   tramitesAsociados: Tramite[] = [];
+  tramitesNoAsociados: Tramite[] = [];
   
 
 
@@ -23,13 +24,20 @@ export class AsociarTramitesDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cargarTramitesAsociados();
   }
 
   cargarTramitesAsociados() {
-    this.tramitesService.getTramitesAsociados(this.area.ID_AREA!).subscribe(res => {
+    this.tramitesService.getTramitesAsociados(this.idArea).subscribe(res => {
       if (res.OK === true) {
-        this.tramitesAsociados = res.TRAMITES;
+        this.tramitesAsociados = res.LISTA_TRAMITES_ASOCIADOS;
+      }
+    });
+  }
+
+  cargarTramitesNoAsociado(){
+    this.tramitesService.getTramitesNoAsociados(this.idArea).subscribe(res => {
+      if (res.OK === true) {
+        this.tramitesNoAsociados = res.LISTA_TRAMITES_NO_ASOCIADOS;
       }
     });
   }
@@ -37,11 +45,15 @@ export class AsociarTramitesDialogComponent implements OnInit {
 
   abrirDialog() {
     this.asociarDialog = true;
-    console.log(this.area);
+    this.cargarTramitesAsociados();
+    this.cargarTramitesNoAsociado();
   }
 
   cerrarDialog() {
     this.asociarDialog = false;
+
+    this.tramitesAsociados= [];
+    this.tramitesNoAsociados = [];
   }
 
   guardarCambios() {

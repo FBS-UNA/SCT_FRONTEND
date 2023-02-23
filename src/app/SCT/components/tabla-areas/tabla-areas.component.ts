@@ -6,7 +6,6 @@ import { AsociarTramitesDialogComponent } from '../asociar-tramites-dialog/asoci
 import { TableCols } from '../../interfaces/table.interface';
 
 
-import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { AEDAreaComponent } from '../aed-area/aed-area.component';
 @Component({
@@ -57,7 +56,7 @@ export class TablaAreasComponent implements OnInit {
 
 
   asociarTramites(area: Area){
-    this.asociarTramitesDialog.area = area;
+    this.asociarTramitesDialog.idArea = area.ID_AREA!;
     this.asociarTramitesDialog.abrirDialog();
   }
 
