@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { SCTRoutingModule } from './sct-routing.module';
@@ -37,6 +38,7 @@ import { AEDAreaComponent } from './components/aed-area/aed-area.component';
     CommonModule,
     SCTRoutingModule,
     PrimeNgModule,
+    ReactiveFormsModule,
     SharedModule,
     FormsModule
   ]
