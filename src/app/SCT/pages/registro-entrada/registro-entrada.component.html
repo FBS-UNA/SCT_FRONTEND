@@ -3,7 +3,7 @@
     <p-toast position="bottom-center"></p-toast>
     <div class="col-9 mx-auto my-auto">
         <p-card header="Registro Entrada">
-            <form (ngSubmit)="registrar()"  class="p-fluid" [formGroup]="registroEntradaForm" autocomplete="off">
+            <form  class="p-fluid" [formGroup]="registroEntradaForm" autocomplete="off">
 
                 <div class="row mb-2">
                     <div class="col-6">
@@ -87,7 +87,7 @@
                                 <p-button label="Borrar" styleClass="p-button-danger" icon="pi pi-trash" (click)="borrar()"></p-button>
                             </div>
                             <div class="col">
-                                <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check" type="submit"></p-button>
+                                <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check" (click)="registrar()"></p-button>
                                 
                             </div>
                         </div>
@@ -103,33 +103,4 @@
     </p-card>
 </div> -->
 
-
-
-<div class="row">
-    <div class="col">
-        <span>
-            Valid
-        </span>
-        <pre>{{registroEntradaForm.valid}}</pre>
-        <span>
-            Pristine
-        </span>
-        <pre>{{registroEntradaForm.pristine}}</pre>
-        <span>
-            Touched
-        </span>
-        <pre>{{registroEntradaForm.touched}}</pre>
-    </div>
-    <div class="col">
-        <span>
-            Value del formulario
-        </span>
-        <pre>{{registroEntradaForm.value | json}}</pre>
-      
-        <span>
-            Value del cliente
-        </span>
-        <pre>{{cliente | json}}</pre>
-    </div>
-</div>
 

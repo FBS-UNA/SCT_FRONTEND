@@ -5,6 +5,8 @@ import { Cliente } from '../../interfaces/cliente.interface';
 import { MessageService } from 'primeng/api';
 import { RegistroEntradaService } from '../../services/registro-entrada.service';
 import { RegistroEntradaModel } from '../../interfaces/regsitro-entrada.interface';
+import { TimestampService } from '../../services/timestamp.service';
+import { Area } from '../../interfaces/area.interface';
 
 
 @Component({
@@ -19,6 +21,7 @@ export class RegistroEntradaComponent implements OnInit {
 
   cliente!: Cliente;
   registro!: RegistroEntradaModel;
+
 
   cargarData(CEDULA:string = '',TIPO_CLIENTE: string = '',NOMBRE:string = '',APELLIDO_1:string = '',APELLIDO_2:string= '',AREA:string='',MOTIVO:string='' ){
     this.registroEntradaForm = this.fb.group({
@@ -36,11 +39,13 @@ export class RegistroEntradaComponent implements OnInit {
     private fb: FormBuilder,
     private clienteService: ClientesService,
     private messageService: MessageService,
-    private registroEntradaService: RegistroEntradaService
+    private registroEntradaService: RegistroEntradaService,
+    private timestampService: TimestampService,
   ) { }
 
   ngOnInit() {
     this.cargarData();
+
   }
 
   get controls(): any {
@@ -62,39 +67,31 @@ export class RegistroEntradaComponent implements OnInit {
 
   agregarInvitado(){
     this.clienteService.addCliente(this.cliente).subscribe(({OK})=>{
-      console.log(OK);
       if(OK==true){
-        this.mensajeExito();
         this.registroEntradaForm.reset();
       }
     });
   }
 
   agregarRegistro(){
-    // this.registroEntradaService.addRegistro(this.registro).subscribe(OK=>{
-    //   if(OK ==true){
-    //     this.mensajeExito();
-    //     this.registroEntradaForm.reset();
-    //   }
-    // })
+    this.registro = {
+      CEDULA_CLIENTE : this.controls['CEDULA'].value,
+      AREA_DESTINO : this.controls['AREA'].value,
+      MOTIVO_VISITA :this.controls['MOTIVO'].value,
+      FECHA: this.timestampService.fechaActual,
+      HORA: this.timestampService.horaCompleta
+    };
+    this.registroEntradaService.addRegistro(this.registro).subscribe(OK=>{
+        if(OK){
+          this.mensajeExito();
+          this.registroEntradaForm.reset();
+        }
+    })
   }
 
-  mensajeExito() {
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Registro éxitoso' });
-  }
-
-  mensajeDeErrorCedula() {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: 'No se encontro ningun cliente' });
-  }
-
-
-  esInvalido(campo: string): boolean | null {
-    return this.controls[campo].errors && this.controls[campo].touched;
-  }
 
   buscar() {
     this.clienteService.getCliente(this.controls['CEDULA'].value).subscribe(OK => {
-      console.log(OK)
       if (OK ==true) {
         this.cliente = this.clienteService.cliente;
         const {CEDULA, TIPO_CLIENTE, NOMBRE, APELLIDO_1, APELLIDO_2} = this.cliente;
@@ -108,6 +105,19 @@ export class RegistroEntradaComponent implements OnInit {
 
   borrar() {
     this.registroEntradaForm.reset();
+  }
+
+  mensajeExito() {
+    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Registro éxitoso' });
+  }
+
+  mensajeDeErrorCedula() {
+    this.messageService.add({severity: 'error', summary: 'Error', detail: 'No se encontro ningun cliente' });
+  }
+
+
+  esInvalido(campo: string): boolean | null {
+    return this.controls[campo].errors && this.controls[campo].touched;
   }
 
 }

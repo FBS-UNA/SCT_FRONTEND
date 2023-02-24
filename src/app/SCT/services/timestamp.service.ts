@@ -12,7 +12,7 @@ export class TimestampService {
   }
 
   get horaCompleta(){
-    return new Date(Date.now()).toLocaleTimeString();
+    return new Date(Date.now()).toLocaleTimeString('en-GB');
     // return new Date(Date.now()).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
   }
 
