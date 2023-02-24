@@ -26,10 +26,10 @@ import { AEDAreaComponent } from './components/aed-area/aed-area.component';
     MantenimientoAreasComponent,
     MantenimientoTramitesComponent,
     MainComponent,
+
     TablaAreasComponent,
     TablaTramitesComponent,
     AsociarTramitesDialogComponent,
-
     AEDTramiteComponent,
     AEDAreaComponent
   ],

@@ -3,12 +3,18 @@
     header="Asociar Trámites" [draggable]="false" [modal]="true">
     <ng-template pTemplate="content">
 
-        <p-pickList [responsive]="true" sourceHeader="Disponibles"
-            targetHeader="Seleccionados" [source]="tramitesNoAsociados" [target]="tramitesAsociados">
+        <p-pickList 
+            [responsive]="true"
+            sourceHeader="Disponibles"
+            targetHeader="Seleccionados" 
+            [source]="tramitesNoAsociados"
+            [showSourceControls] = "false"
+            [showTargetControls] = "false"
+            [target]="tramitesAsociados">
+            
             <ng-template  let-tramite pTemplate="item">
                 <div>
-                    <div>{{tramite.ID_TRAMITE }} -
-                        {{tramite.NOMBRE_TRAMITE }}</div>
+                    {{tramite.ID_TRAMITE }} - {{tramite.NOMBRE_TRAMITE }}
                 </div>
             </ng-template>
         </p-pickList>
