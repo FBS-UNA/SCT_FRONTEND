@@ -15,6 +15,8 @@ export class AsociarTramitesDialogComponent implements OnInit {
 
   tramitesAsociados: Tramite[] = [];
   tramitesNoAsociados: Tramite[] = [];
+
+  tramitesTemp !: Tramite[];
   
 
 
@@ -28,7 +30,8 @@ export class AsociarTramitesDialogComponent implements OnInit {
   cargarTramitesAsociados() {
     this.tramitesService.getTramitesAsociados(this.idArea).subscribe(res => {
       if (res.OK === true) {
-        this.tramitesAsociados = res.LISTA_TRAMITES_ASOCIADOS;
+        this.tramitesAsociados = [...res.LISTA_TRAMITES_ASOCIADOS];
+        this.tramitesTemp = [...res.LISTA_TRAMITES_ASOCIADOS];
       }
     });
   }
@@ -36,11 +39,10 @@ export class AsociarTramitesDialogComponent implements OnInit {
   cargarTramitesNoAsociado(){
     this.tramitesService.getTramitesNoAsociados(this.idArea).subscribe(res => {
       if (res.OK === true) {
-        this.tramitesNoAsociados = res.LISTA_TRAMITES_NO_ASOCIADOS;
+        this.tramitesNoAsociados = [...res.LISTA_TRAMITES_NO_ASOCIADOS];
       }
     });
   }
-
 
   abrirDialog() {
     this.asociarDialog = true;
@@ -50,12 +52,34 @@ export class AsociarTramitesDialogComponent implements OnInit {
 
   cerrarDialog() {
     this.asociarDialog = false;
-    this.tramitesAsociados= [];
+    this.tramitesAsociados = [];
     this.tramitesNoAsociados = [];
+    this.tramitesTemp = [];
   }
 
   guardarCambios() {
+    let listaEliminar: Tramite[] = this.tramitesTemp.filter((elem) => !this.tramitesAsociados.some((t) => t.ID_TRAMITE === elem.ID_TRAMITE));
 
+    let listAgregar: Tramite[] = this.tramitesAsociados.filter((elem) => !this.tramitesTemp.some((t) => t.ID_TRAMITE === elem.ID_TRAMITE));
+
+
+    this.realizarActualizacion(listAgregar, listaEliminar);
+    
+    this.cerrarDialog();
+  }
+
+  realizarActualizacion(listaAgregar: Tramite[], listaEliminar: Tramite[]): void{
+
+    listaAgregar.forEach(tramite=>{
+      this.tramitesService.asociarTramite(this.idArea, tramite.ID_TRAMITE!).subscribe();
+    })
+
+    listaEliminar.forEach(tramite=>{
+      this.tramitesService.desasociarTramite(this.idArea, tramite.ID_TRAMITE!).subscribe();
+    })
+    
+
+    
   }
 
 }

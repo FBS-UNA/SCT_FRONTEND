@@ -21,7 +21,7 @@
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
-                {{col.header | titlecase}}
+                <span class="fbs-roboto-500">{{col.header | titlecase}}</span>
                 <p-sortIcon *ngIf="col.field" [field]="col.field"></p-sortIcon>
             </th>
         </tr>

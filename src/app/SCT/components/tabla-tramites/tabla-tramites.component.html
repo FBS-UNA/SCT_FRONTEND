@@ -7,14 +7,14 @@
             <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
             <input pInputText #inputFilter type="text" (input)="dt.filterGlobal(inputFilter.value, 'contains')" [(ngModel)]="inputFiltro"
                 placeholder="Filtro Global" />
-            <button pButton label="Limpiar" class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
+            <button pButton class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
                 (click)="clear(dt)"></button>
         </div>
     </div>
 </div>
 
 <p-table #dt dataKey="id" [columns]="cols" [value]="tramites" [loading]="loading"
-    [tableStyle]="{'min-width': '50rem'}" [rowsPerPageOptions]="[10,25,50]" [rows]="15" [rowHover]="true"
+    [tableStyle]="{'min-width': '50rem'}" [rowsPerPageOptions]="[10,25,50]" [rows]="50" [rowHover]="true"
     [paginator]="true" [showCurrentPageReport]="true"
     currentPageReportTemplate="{first} a {last} de {totalRecords} registros"
     [globalFilterFields]="['ID_TRAMITE','NOMBRE_TRAMITE','DESCRIPCION_TRAMITE','FECHA']">
@@ -22,7 +22,7 @@
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
-                {{col.header | titlecase}}
+                <span class="fbs-roboto-500">{{col.header | titlecase}}</span>
                 <p-sortIcon *ngIf="col.field" [field]="col.field"></p-sortIcon>
             </th>
         </tr>
