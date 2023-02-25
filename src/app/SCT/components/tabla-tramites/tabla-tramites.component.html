@@ -1,20 +1,20 @@
 <div class="p-fluid row mb-2 gap-1">
     <div class="field col-lg-2 col-md-12">
-        <p-button styleClass="p-button-primary" label="Agregar" icon="pi pi-plus" (click)="agregarTramiteDialog()"></p-button>
+        <p-button styleClass="p-button-warning" label="Agregar" icon="pi pi-plus" (click)="agregarTramiteDialog()"></p-button>
     </div>
     <div class="field col-lg-3 col-md-12 ms-auto">
         <div class="p-inputgroup">
-            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+            <span (click)="inputFilter.focus()" class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
             <input pInputText #inputFilter type="text" (input)="dt.filterGlobal(inputFilter.value, 'contains')" [(ngModel)]="inputFiltro"
                 placeholder="Filtro Global" />
-            <button pButton class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
+            <button pButton class="p-button-outlined p-button-primary" icon="pi pi-filter-slash"
                 (click)="clear(dt)"></button>
         </div>
     </div>
 </div>
 
 <p-table #dt dataKey="id" [columns]="cols" [value]="tramites" [loading]="loading"
-    [tableStyle]="{'min-width': '50rem'}" [rowsPerPageOptions]="[10,25,50]" [rows]="50" [rowHover]="true"
+    [tableStyle]="{'min-width': '80rem'}" [rowsPerPageOptions]="[10,25,50]" [rows]="50" [rowHover]="true"
     [paginator]="true" [showCurrentPageReport]="true"
     currentPageReportTemplate="{first} a {last} de {totalRecords} registros"
     [globalFilterFields]="['ID_TRAMITE','NOMBRE_TRAMITE','DESCRIPCION_TRAMITE','FECHA']">
@@ -37,7 +37,7 @@
                 <p-inputSwitch (click)="actualizarEstadoTramite(tramite)" [(ngModel)]="tramite.ESTADO"></p-inputSwitch>
             </td>
             <td>
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary me-2"
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning me-2"
                     (click)="editarTramiteDialog(tramite)"></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
                     (click)="eliminarTramiteDialog(tramite)"></button>
