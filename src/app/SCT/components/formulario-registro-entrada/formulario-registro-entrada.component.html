@@ -59,18 +59,24 @@
     <div class="row mb-4">
         <div class="col-lg-6 col-md-12">
             <label for="float-input">Área</label>
-            <input id="float-input" type="text" pInputText
-                formControlName="AREA">
-            <!-- <p-dropdown formControlName="selectedCity"
-            formControlName="AREA"></p-dropdown> -->
+            <p-dropdown [options]="nombreAreas" 
+                formControlName="AREA"
+                optionLabel="nombre" 
+                optionValue="nombre"
+                placeholder="Seleccione un área"
+                [showClear]="true">
+
+            </p-dropdown>
         </div>
         <div class="col-lg-6 col-md-12">
             <label for="float-input">Motivo de la visita</label>
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText
-                formControlName="MOTIVO"
-                >
-            </span>
+            <p-dropdown 
+                formControlName="AREA"
+                
+                placeholder="Seleccione un área"
+                [showClear]="true">
+
+            </p-dropdown>
         </div>
     </div>
 
@@ -90,3 +96,11 @@
     </div>
 
 </form>
+
+
+<span>
+    Value
+</span>
+<pre>
+    {{registroEntradaForm.value | json}}
+</pre>

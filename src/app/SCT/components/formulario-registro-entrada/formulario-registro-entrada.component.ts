@@ -6,6 +6,13 @@ import { RegistroEntradaModel } from '../../interfaces/regsitro-entrada.interfac
 import { ClientesService } from '../../services/clientes.service';
 import { RegistroEntradaService } from '../../services/registro-entrada.service';
 import { TimestampService } from '../../services/timestamp.service';
+import { Area, AreaRegistro } from '../../interfaces/area.interface';
+import { AreasService } from '../../services/areas.service';
+import { Tramite, TramiteRegistro } from '../../interfaces/tramite.interface';
+import { switchMap, tap } from 'rxjs/operators';
+import { TramitesService } from '../../services/tramites.service';
+
+
 
 @Component({
   selector: 'app-formulario-registro-entrada',
@@ -19,6 +26,13 @@ export class FormularioRegistroEntradaComponent implements OnInit {
 
   cliente!: Cliente;
   registro!: RegistroEntradaModel;
+
+  loading!: boolean;
+
+  areas:Area[]=[];
+  nombreAreas: AreaRegistro[] = [];
+  tramitesAsociados: Tramite[] = [];
+  nombreTramites: TramiteRegistro[] = [];
 
 
   cargarData(CEDULA:string = '',TIPO_CLIENTE: string = '',NOMBRE:string = '',APELLIDO_1:string = '',APELLIDO_2:string= '',AREA:string='',MOTIVO:string='' ){
@@ -39,10 +53,41 @@ export class FormularioRegistroEntradaComponent implements OnInit {
     private messageService: MessageService,
     private registroEntradaService: RegistroEntradaService,
     private timestampService: TimestampService,
+    private areasService: AreasService,
+    private tramitesService: TramitesService
   ) { }
 
   ngOnInit(){
     this.cargarData();
+    this.cargarAreas();
+    this.cargarTramitesAsociados()
+  }
+
+  cargarAreas(){
+    this.loading= true;
+    this.areasService.getAreas().subscribe(OK => {
+      if (OK) {
+        this.loading = false;
+        this.areas = this.areasService.areas;
+        this.nombreAreas = this.areas.map(area=>{
+          return {
+            nombre: area.NOMBRE_AREA!,
+            id: area.ID_AREA!
+          };
+        })
+      }
+    });
+  }
+
+  cargarTramitesAsociados(){
+    this.registroEntradaForm.get('AREA')?.valueChanges.pipe(
+      tap( ( _ ) =>{
+        this.registroEntradaForm.get('MOTIVO')?.reset('');
+      }), switchMap( area => this.tramitesService.getTramitesAsociados(area))
+      ).subscribe(paises =>{
+        this.nombreTramites = paises;
+        console.log(paises);
+      })
   }
 
   

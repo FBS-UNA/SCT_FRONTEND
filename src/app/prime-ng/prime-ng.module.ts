@@ -10,6 +10,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {DialogModule} from 'primeng/dialog';
 import {DividerModule} from 'primeng/divider';
+import {DropdownModule} from 'primeng/dropdown';
 import {GalleriaModule} from 'primeng/galleria';
 import {ImageModule} from 'primeng/image';
 import {InputSwitchModule} from 'primeng/inputswitch';
@@ -45,6 +46,7 @@ import {ConfirmationService} from 'primeng/api';
     ConfirmPopupModule,
     DialogModule,
     DividerModule,
+    DropdownModule,
     GalleriaModule,
     ImageModule,
     InputSwitchModule,
