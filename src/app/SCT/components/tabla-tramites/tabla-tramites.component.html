@@ -1,8 +1,8 @@
 <div class="p-fluid row mb-2 gap-1">
-    <div class="field col-lg-2 col-md-12">
+    <div class="field col-lg-2 col-md">
         <p-button styleClass="p-button-warning" label="Agregar" icon="pi pi-plus" (click)="agregarTramiteDialog()"></p-button>
     </div>
-    <div class="field col-lg-3 col-md-12 ms-auto">
+    <div class="field col-lg-3 col-md ms-auto">
         <div class="p-inputgroup">
             <span (click)="inputFilter.focus()" class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
             <input pInputText #inputFilter type="text" (input)="dt.filterGlobal(inputFilter.value, 'contains')" [(ngModel)]="inputFiltro"
