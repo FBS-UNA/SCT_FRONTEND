@@ -35,7 +35,6 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   nombreAreas: Area[] = [];
   tramitesAsociados: Tramite[] = [];
   nombreTramites: TramiteRegistro[] = [];
-  nombreAreaSeleccionada: string = '';
 
   constructor(
     private fb: FormBuilder,

@@ -16,50 +16,10 @@ import { MenuItem } from 'primeng/api';
       margin-left: 15%;
       height: 10%;
     }
-    
     `
-]
+  ]
 })
 export class NavbarComponent implements OnInit {
-
-
-  items = [
-    {
-
-      label: 'Mi actividad',
-      icon: 'pi pi-bookmark',
-      id:1,
-      styleClass: 'p-button-text',
-      
-    },
-    {
-
-      label: 'Mi Peril',
-      icon: 'pi pi-id-card',
-      id:2,
-      styleClass: 'p-button-text'
-    },
-    {
-
-      label: 'Salir',
-      icon: 'pi pi-sign-out',
-      styleClass: 'p-button-text p-button-danger ms-3',
-      id:3,
-      event : this.cerrarSesion
-    },
-
-  ];
-
-  foo(id: number){
-
-    this.items.forEach(item=>{
-      if(id === item.id){
-        item.event?.call
-      }
-    })
-
-  }
-
 
   constructor(
     public authService: AuthService,
