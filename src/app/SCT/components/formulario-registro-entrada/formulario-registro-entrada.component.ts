@@ -22,7 +22,20 @@ import { TramitesService } from '../../services/tramites.service';
 })
 export class FormularioRegistroEntradaComponent implements OnInit {
 
-  registroEntradaForm!: FormGroup;
+
+  // IMPORTANTE
+  // 
+  // VOLVER A PONER LOS VALIDADORES A AREA, MOTIVO, LOS QUITÉ PARA UNAS PRUEBAS NADA MAS
+
+  registroEntradaForm : FormGroup = this.fb.group({
+    CEDULA: ['', [Validators.required, Validators.minLength(9)]],
+    TIPO_CLIENTE: [{ value: '', disabled: true }],
+    NOMBRE: ['', Validators.required],
+    APELLIDO_1: ['', Validators.required],
+    APELLIDO_2: ['', Validators.required],
+    AREA: ['', ],
+    MOTIVO: ['',],
+  });
 
   cliente!: Cliente;
   registro!: RegistroEntradaModel;
@@ -33,18 +46,6 @@ export class FormularioRegistroEntradaComponent implements OnInit {
 
   loading!: boolean;
   idArea!: number;
-
-  cargarData(CEDULA:string = '',TIPO_CLIENTE: string = '',NOMBRE:string = '',APELLIDO_1:string = '',APELLIDO_2:string= '',AREA:string='',MOTIVO:string='' ){
-    this.registroEntradaForm = this.fb.group({
-      CEDULA: [CEDULA, [Validators.required, Validators.minLength(9)]],
-      TIPO_CLIENTE: [{ value: TIPO_CLIENTE, disabled: true }],
-      NOMBRE: [NOMBRE, Validators.required],
-      APELLIDO_1: [APELLIDO_1, Validators.required],
-      APELLIDO_2: [APELLIDO_2, Validators.required],
-      AREA: [AREA, Validators.required],
-      MOTIVO: [MOTIVO, Validators.required],
-    })
-  }
 
   constructor(
     private fb: FormBuilder,
@@ -57,7 +58,6 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    this.cargarData();
     this.cargarAreas();
     this.cargarTramitesAsociados()
   }
@@ -95,6 +95,8 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   get controls(): any {
     return this.registroEntradaForm.controls;
   }
+
+
 
   registrar() {
     const formValue = { ...this.registroEntradaForm.value };
@@ -137,13 +139,24 @@ export class FormularioRegistroEntradaComponent implements OnInit {
     this.clienteService.getCliente(this.controls['CEDULA'].value).subscribe(OK => {
       if (OK ==true) {
         this.cliente = this.clienteService.cliente;
-        const {CEDULA, TIPO_CLIENTE, NOMBRE, APELLIDO_1, APELLIDO_2} = this.cliente;
-        this.cargarData(CEDULA,TIPO_CLIENTE,NOMBRE,APELLIDO_1,APELLIDO_2)  
+        this.setAfiliadoData(this.cliente);
       }else{
-        this.cargarData(this.controls['CEDULA'].value,'Invitado')
+        this.setInvitadoData();
         this.mensajeDeErrorCedula();
       }
     })
+  }
+
+  setInvitadoData(){
+    this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue('Invitado');
+  }
+
+  setAfiliadoData(cliente: Cliente){
+    console.log(this.cliente);
+    this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO_CLIENTE);
+    this.registroEntradaForm.get('NOMBRE')?.setValue(cliente.NOMBRE);
+    this.registroEntradaForm.get('APELLIDO_1')?.setValue(cliente.APELLIDO_1);
+    this.registroEntradaForm.get('APELLIDO_2')?.setValue(cliente.APELLIDO_2);
   }
 
   borrar() {
