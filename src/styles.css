@@ -6,6 +6,20 @@
     font-weight: 300;
 }
 
+.login-img {
+    backdrop-filter: blur(2px);
+
+
+    height: 100%;
+
+
+    background-image: url(../src/assets/images/FOBESO-10-3.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: initial;
+    background-position: center;
+}
+
 body::-webkit-scrollbar {
     width: 0.5em;
 }
@@ -20,17 +34,17 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-.fbs-roboto-100{
+.fbs-roboto-100 {
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
 }
 
-.fbs-roboto-300{
+.fbs-roboto-300 {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
 
-.fbs-roboto-500{
+.fbs-roboto-500 {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
 }
@@ -42,6 +56,15 @@ body {
     height: 100%;
     background-color: #f8f6fa;
 }
+
+.h-5{
+    height: 5%;
+}
+
+.footer {
+    height: 50px;
+    margin-top: -50px;
+  }
 
 .bg-fbs-orange {
     background-color: #FC9500;

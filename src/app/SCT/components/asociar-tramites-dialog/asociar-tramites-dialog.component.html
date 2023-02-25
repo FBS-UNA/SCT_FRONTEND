@@ -1,16 +1,28 @@
 
-<p-dialog [(visible)]="asociarDialog" [style]="{'width': '800px'}"
-    header="Asociar Trámites" [draggable]="false" [modal]="true">
+<p-dialog styleClass="fbs-roboto-300" [(visible)]="asociarDialog" [style]="{'width': '800px'}"
+     [draggable]="false" [modal]="true">
+    <ng-template pTemplate="header">
+        <h1 class="fbs-roboto-300">Asociar Trámites</h1>
+    </ng-template>
+    
     <ng-template pTemplate="content">
 
         <p-pickList 
             [responsive]="true"
-            sourceHeader="Disponibles"
-            targetHeader="Seleccionados" 
+            filterBy="NOMBRE_TRAMITE"
+            targetFilterPlaceholder="Buscar por nombre"
+            sourceFilterPlaceholder="Buscar por nombre"
             [source]="tramitesNoAsociados"
             [showSourceControls] = "false"
             [showTargetControls] = "false"
             [target]="tramitesAsociados">
+
+            <ng-template pTemplate="sourceHeader">
+                <h5 class="fbs-roboto-300">Disponibles</h5>
+            </ng-template>
+            <ng-template pTemplate="targetHeader">
+                <h5 class="fbs-roboto-300">Seleccionados</h5>
+            </ng-template>
             
             <ng-template  let-tramite pTemplate="item">
                 <div>
