@@ -87,7 +87,6 @@ export class FormularioRegistroEntradaComponent implements OnInit {
     })
   }
 
-
   buscar() {
     this.clienteService.getCliente(this.controls['CEDULA'].value).subscribe(OK => {
       if (OK ==true) {
