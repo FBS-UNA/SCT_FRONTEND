@@ -8,7 +8,7 @@
             <input pInputText #inputFilter type="text" (input)="dt.filterGlobal(inputFilter.value, 'contains')" [(ngModel)]="inputFiltro"
             placeholder="Filtro Global" />
             <button pButton class="p-button-outlined p-button-info" icon="pi pi-filter-slash"
-            (click)="clear(dt)"></button>   
+            (click)="clear(dt)"></button>
         </div>
     </div>
 </div>
@@ -21,14 +21,14 @@
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
-                {{col.header | titlecase}}
+                <span class="fbs-roboto-500">{{col.header | titlecase}}</span>
                 <p-sortIcon *ngIf="col.field" [field]="col.field"></p-sortIcon>
             </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-area>
         <tr>
-            <td>{{area.ID_AREA }}</td>
+            <td>{{area.ID_AREA}}</td>
             <td>{{area.NOMBRE_AREA | titlecase}}</td>
             <td>{{area.DESCRIPCION_AREA}}</td>
             <td>{{area.FECHA | date : 'dd/MM/YYYY'}}</td>

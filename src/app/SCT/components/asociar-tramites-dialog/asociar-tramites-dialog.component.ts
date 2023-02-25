@@ -11,10 +11,12 @@ import { TramitesService } from '../../services/tramites.service';
 })
 export class AsociarTramitesDialogComponent implements OnInit {
   asociarDialog: boolean = false;
-  area: Area = {};
+  idArea!: number;
 
-  tramitesNoAsociados: Tramite[] = [];
   tramitesAsociados: Tramite[] = [];
+  tramitesNoAsociados: Tramite[] = [];
+
+  tramitesTemp !: Tramite[];
   
 
 
@@ -23,29 +25,61 @@ export class AsociarTramitesDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cargarTramitesAsociados();
   }
 
   cargarTramitesAsociados() {
-    this.tramitesService.getTramitesAsociados(this.area.ID_AREA!).subscribe(res => {
+    this.tramitesService.getTramitesAsociados(this.idArea).subscribe(res => {
       if (res.OK === true) {
-        this.tramitesAsociados = res.TRAMITES;
+        this.tramitesAsociados = [...res.LISTA_TRAMITES_ASOCIADOS];
+        this.tramitesTemp = [...res.LISTA_TRAMITES_ASOCIADOS];
       }
     });
   }
 
+  cargarTramitesNoAsociado(){
+    this.tramitesService.getTramitesNoAsociados(this.idArea).subscribe(res => {
+      if (res.OK === true) {
+        this.tramitesNoAsociados = [...res.LISTA_TRAMITES_NO_ASOCIADOS];
+      }
+    });
+  }
 
   abrirDialog() {
     this.asociarDialog = true;
-    console.log(this.area);
+    this.cargarTramitesAsociados();
+    this.cargarTramitesNoAsociado();
   }
 
   cerrarDialog() {
     this.asociarDialog = false;
+    this.tramitesAsociados = [];
+    this.tramitesNoAsociados = [];
+    this.tramitesTemp = [];
   }
 
   guardarCambios() {
+    let listaEliminar: Tramite[] = this.tramitesTemp.filter((elem) => !this.tramitesAsociados.some((t) => t.ID_TRAMITE === elem.ID_TRAMITE));
 
+    let listAgregar: Tramite[] = this.tramitesAsociados.filter((elem) => !this.tramitesTemp.some((t) => t.ID_TRAMITE === elem.ID_TRAMITE));
+
+
+    this.realizarActualizacion(listAgregar, listaEliminar);
+    
+    this.cerrarDialog();
+  }
+
+  realizarActualizacion(listaAgregar: Tramite[], listaEliminar: Tramite[]): void{
+
+    listaAgregar.forEach(tramite=>{
+      this.tramitesService.asociarTramite(this.idArea, tramite.ID_TRAMITE!).subscribe();
+    })
+
+    listaEliminar.forEach(tramite=>{
+      this.tramitesService.desasociarTramite(this.idArea, tramite.ID_TRAMITE!).subscribe();
+    })
+    
+
+    
   }
 
 }

@@ -7,7 +7,8 @@ export interface TramiteResponse{
 
 export interface TramitesAsociados{
     OK                       : boolean;
-    LISTA_TRAMITES_ASOCIADOS : Tramite[];
+    LISTA_TRAMITES_ASOCIADOS?: Tramite[];
+    LISTA_TRAMITES_NO_ASOCIADOS?: Tramite[];
     MSG                     ?: string
 
 }
