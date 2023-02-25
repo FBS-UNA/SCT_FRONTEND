@@ -26,14 +26,13 @@ export class FormularioRegistroEntradaComponent implements OnInit {
 
   cliente!: Cliente;
   registro!: RegistroEntradaModel;
-
-  loading!: boolean;
-
   areas:Area[]=[];
   nombreAreas: AreaRegistro[] = [];
   tramitesAsociados: Tramite[] = [];
   nombreTramites: TramiteRegistro[] = [];
 
+  loading!: boolean;
+  idArea!: number;
 
   cargarData(CEDULA:string = '',TIPO_CLIENTE: string = '',NOMBRE:string = '',APELLIDO_1:string = '',APELLIDO_2:string= '',AREA:string='',MOTIVO:string='' ){
     this.registroEntradaForm = this.fb.group({
@@ -83,10 +82,12 @@ export class FormularioRegistroEntradaComponent implements OnInit {
     this.registroEntradaForm.get('AREA')?.valueChanges.pipe(
       tap( ( _ ) =>{
         this.registroEntradaForm.get('MOTIVO')?.reset('');
-      }), switchMap( area => this.tramitesService.getTramitesAsociados(area))
-      ).subscribe(paises =>{
-        this.nombreTramites = paises;
-        console.log(paises);
+      }), switchMap( area => 
+        this.tramitesService.getTramitesAsociados(area)
+      )
+      ).subscribe(tramites =>{
+        this.nombreTramites = tramites;
+        console.log(tramites);
       })
   }
 
