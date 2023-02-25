@@ -148,11 +148,10 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   }
 
   setInvitadoData(){
-    this.resetearFormulario();
-
-    this.registroEntradaForm.get('CEDULA')?.setValue(this.cliente.CEDULA);
     this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue('Invitado');
-    this.cliente = this.registroEntradaForm.value;
+    this.registroEntradaForm.get('NOMBRE')?.setValue('');
+    this.registroEntradaForm.get('APELLIDO_1')?.setValue('');
+    this.registroEntradaForm.get('APELLIDO_2')?.setValue('');
   }
 
   setAfiliadoData(cliente: Cliente){
