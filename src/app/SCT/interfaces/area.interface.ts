@@ -1,13 +1,18 @@
-export interface AreaResponse{
-    OK           : boolean;
-    AREAS       ?: Area[];
-    NOMBRE_AREA ?: string;
-    MSG         ?: string;
+export interface AreaResponse {
+    OK: boolean;
+    AREAS?: Area[];
+    NOMBRE_AREA?: string;
+    MSG?: string;
 }
 
 export interface Area {
-    ID_AREA         ?: -1;
-    NOMBRE_AREA     ?: '';
+    ID_AREA?: -1;
+    NOMBRE_AREA?: '';
     DESCRIPCION_AREA?: '';
-    FECHA           ?: Date | string;
+    FECHA?: Date | string;
+}
+
+export interface AreaRegistro {
+    NOMBRE_AREA: string;
+    id: number;
 }

@@ -16,40 +16,10 @@ import { MenuItem } from 'primeng/api';
       margin-left: 15%;
       height: 10%;
     }
-
-    /* :host ::ng-deep .p-menubar-start {
-      width: 30%;
-    } */
-
-    /* :host ::ng-deep p-menubarsub{
-      width: 100%;
-    } */
-    
     `
-]
+  ]
 })
 export class NavbarComponent implements OnInit {
-
-
-  items: MenuItem[] = [
-    {
-      label: 'Opcion 1',
-      icon: 'pi pi-info-circle'
-    },
-    {
-      label: 'Opcion 2',
-      icon: 'pi pi-info-circle'
-    },
-    {
-      label: 'Opcion 3',
-      icon: 'pi pi-info-circle'
-    },
-    {
-      label: 'Opcion 4',
-      icon: 'pi pi-info-circle'
-    },
-  ];
-
 
   constructor(
     public authService: AuthService,

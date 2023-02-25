@@ -21,3 +21,7 @@ export interface Tramite{
     FECHA              ?: Date | string;
     ESTADO             ?: boolean;
 }
+
+export interface TramiteRegistro{
+    nombre: string;
+}
