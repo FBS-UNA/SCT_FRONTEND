@@ -20,6 +20,7 @@ import {PasswordModule} from 'primeng/password';
 import {PickListModule} from 'primeng/picklist';
 import {RippleModule } from 'primeng/ripple';
 import {ScrollTopModule} from 'primeng/scrolltop';
+import {SidebarModule} from 'primeng/sidebar';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -54,6 +55,7 @@ import {ConfirmationService} from 'primeng/api';
     PickListModule,
     RippleModule,
     ScrollTopModule,
+    SidebarModule,
     TableModule,
     ToastModule,
     ToolbarModule

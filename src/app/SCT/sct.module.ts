@@ -13,11 +13,12 @@ import { SharedModule } from '../shared/shared.module';
 import { TablaAreasComponent } from './components/tabla-areas/tabla-areas.component';
 import { TablaTramitesComponent } from './components/tabla-tramites/tabla-tramites.component';
 import { AsociarTramitesDialogComponent } from './components/asociar-tramites-dialog/asociar-tramites-dialog.component';
+import { FormularioRegistroEntradaComponent } from './components/formulario-registro-entrada/formulario-registro-entrada.component';
+
 
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { AEDTramiteComponent } from './components/aed-tramite/aed-tramite.component';
 import { AEDAreaComponent } from './components/aed-area/aed-area.component';
-
 
 
 @NgModule({
@@ -30,9 +31,10 @@ import { AEDAreaComponent } from './components/aed-area/aed-area.component';
     TablaAreasComponent,
     TablaTramitesComponent,
     AsociarTramitesDialogComponent,
+    FormularioRegistroEntradaComponent,
 
     AEDTramiteComponent,
-    AEDAreaComponent
+    AEDAreaComponent,
   ],
   imports: [
     CommonModule,
