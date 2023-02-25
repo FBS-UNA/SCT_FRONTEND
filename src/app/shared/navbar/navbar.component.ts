@@ -16,14 +16,6 @@ import { MenuItem } from 'primeng/api';
       margin-left: 15%;
       height: 10%;
     }
-
-    /* :host ::ng-deep .p-menubar-start {
-      width: 30%;
-    } */
-
-    /* :host ::ng-deep p-menubarsub{
-      width: 100%;
-    } */
     
     `
 ]
@@ -31,24 +23,42 @@ import { MenuItem } from 'primeng/api';
 export class NavbarComponent implements OnInit {
 
 
-  items: MenuItem[] = [
+  items = [
     {
-      label: 'Opcion 1',
-      icon: 'pi pi-info-circle'
+
+      label: 'Mi actividad',
+      icon: 'pi pi-bookmark',
+      id:1,
+      styleClass: 'p-button-text',
+      
     },
     {
-      label: 'Opcion 2',
-      icon: 'pi pi-info-circle'
+
+      label: 'Mi Peril',
+      icon: 'pi pi-id-card',
+      id:2,
+      styleClass: 'p-button-text'
     },
     {
-      label: 'Opcion 3',
-      icon: 'pi pi-info-circle'
+
+      label: 'Salir',
+      icon: 'pi pi-sign-out',
+      styleClass: 'p-button-text p-button-danger ms-3',
+      id:3,
+      event : this.cerrarSesion
     },
-    {
-      label: 'Opcion 4',
-      icon: 'pi pi-info-circle'
-    },
+
   ];
+
+  foo(id: number){
+
+    this.items.forEach(item=>{
+      if(id === item.id){
+        item.event?.call
+      }
+    })
+
+  }
 
 
   constructor(

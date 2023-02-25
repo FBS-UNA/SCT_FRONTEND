@@ -1,15 +1,16 @@
-<p-menubar [model]="items">
+<p-menubar>
     <ng-template pTemplate="start">
         <h5 class="fbs-roboto-300">{{usuario.NOMBRE_COMPLETO | titlecase}}</h5>
     </ng-template>
     <ng-template pTemplate="end">
-        <button 
-        class="p-button-text p-button-danger"
+        <button *ngFor="let item of items"
+        class="{{item.styleClass}}"
+        #boton
         pButton 
         pRipple 
-        label="Salir" 
-        icon="pi pi-sign-out"
-        (click)="cerrarSesion()"
+        label="{{item.label}}" 
+        icon="{{item.icon}}"
+        (click)="foo(item.id)"
         ></button>
     </ng-template>
 </p-menubar>
