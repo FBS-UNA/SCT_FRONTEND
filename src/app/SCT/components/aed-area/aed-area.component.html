@@ -2,8 +2,13 @@
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
 
-<p-dialog [(visible)]="areaDialog" [style]="{width: '600px'}" header="Detalles del Área" [draggable]="false"
+<p-dialog [(visible)]="areaDialog" [style]="{width: '600px'}" [draggable]="false"
     [modal]="true" styleClass="p-fluid">
+
+    <ng-template pTemplate="header">
+        <h1 class="fbs-roboto-300">Detalles del Área</h1>
+    </ng-template>
+
     <ng-template pTemplate="content">
         <div class="field">
             <label for="name">Nombre</label>

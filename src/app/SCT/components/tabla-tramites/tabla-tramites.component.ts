@@ -27,10 +27,10 @@ export class TablaTramitesComponent implements OnInit {
   cols: TableCols[] = [
     { field: 'ID_TRAMITE', header: 'Código', style: 'width: 10%' },
     { field: 'NOMBRE_TRAMITE', header: 'Nombre', style: 'width: 15%' },
-    { field: 'DESCRIPCION_TRAMITE', header: 'Descripción', style: 'width: 35%' },
+    { field: 'DESCRIPCION_TRAMITE', header: 'Descripción', style: 'width: 30%' },
     { field: 'FECHA', header: 'Fecha de creacion', style: 'width: 20%' },
     { field: 'ESTADO', header: 'Estado', style: 'width: 10%' },
-    { field: '', header: '', style: 'width: 10%' },
+    { field: '', header: '', style: 'width: 15%' },
   ]
 
   constructor(

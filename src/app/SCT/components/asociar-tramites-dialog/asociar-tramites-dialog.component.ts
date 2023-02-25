@@ -17,9 +17,11 @@ export class AsociarTramitesDialogComponent implements OnInit {
   tramitesNoAsociados: Tramite[] = [];
 
   tramitesTemp !: Tramite[];
+
+  sourceFilterValue: string = '';
+
+
   
-
-
   constructor(
     private tramitesService: TramitesService
   ) { }
@@ -36,7 +38,7 @@ export class AsociarTramitesDialogComponent implements OnInit {
     });
   }
 
-  cargarTramitesNoAsociado(){
+  cargarTramitesNoAsociado() {
     this.tramitesService.getTramitesNoAsociados(this.idArea).subscribe(res => {
       if (res.OK === true) {
         this.tramitesNoAsociados = [...res.LISTA_TRAMITES_NO_ASOCIADOS];
@@ -64,22 +66,22 @@ export class AsociarTramitesDialogComponent implements OnInit {
 
 
     this.realizarActualizacion(listAgregar, listaEliminar);
-    
+
     this.cerrarDialog();
   }
 
-  realizarActualizacion(listaAgregar: Tramite[], listaEliminar: Tramite[]): void{
+  realizarActualizacion(listaAgregar: Tramite[], listaEliminar: Tramite[]): void {
 
-    listaAgregar.forEach(tramite=>{
+    listaAgregar.forEach(tramite => {
       this.tramitesService.asociarTramite(this.idArea, tramite.ID_TRAMITE!).subscribe();
     })
 
-    listaEliminar.forEach(tramite=>{
+    listaEliminar.forEach(tramite => {
       this.tramitesService.desasociarTramite(this.idArea, tramite.ID_TRAMITE!).subscribe();
     })
-    
 
-    
+
+
   }
 
 }
