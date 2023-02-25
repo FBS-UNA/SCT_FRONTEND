@@ -39,15 +39,14 @@ export class FormularioRegistroEntradaComponent implements OnInit {
 
   cliente!: Cliente;
   registro!: RegistroEntradaModel;
-
-  loading!: boolean;
-
   areas:Area[]=[];
   nombreAreas: Area[] = [];
   tramitesAsociados: Tramite[] = [];
   nombreTramites: TramiteRegistro[] = [];
   nombreAreaSeleccionada: string = '';
 
+  loading!: boolean;
+  idArea!: number;
 
   constructor(
     private fb: FormBuilder,
