@@ -9,12 +9,20 @@
 
         <p-pickList 
             [responsive]="true"
-            sourceHeader="Disponibles"
-            targetHeader="Seleccionados" 
+            filterBy="NOMBRE_TRAMITE"
+            targetFilterPlaceholder="Buscar por nombre"
+            sourceFilterPlaceholder="Buscar por nombre"
             [source]="tramitesNoAsociados"
             [showSourceControls] = "false"
             [showTargetControls] = "false"
             [target]="tramitesAsociados">
+
+            <ng-template pTemplate="sourceHeader">
+                <h5 class="fbs-roboto-300">Disponibles</h5>
+            </ng-template>
+            <ng-template pTemplate="targetHeader">
+                <h5 class="fbs-roboto-300">Seleccionados</h5>
+            </ng-template>
             
             <ng-template  let-tramite pTemplate="item">
                 <div>
