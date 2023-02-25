@@ -1,8 +1,8 @@
-<p-menubar [model]="items">
+<p-menubar [model]="items" class="w-100 justify-content-end"> 
     <ng-template pTemplate="start">
         <h5 class="fbs-roboto-300">{{usuario.NOMBRE_COMPLETO | titlecase}}</h5>
     </ng-template>
-    <ng-template pTemplate="end">
+    <ng-template pTemplate="end" >
         <button 
         class="p-button-text p-button-danger"
         pButton 
