@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Cliente } from '../../interfaces/cliente.interface';
-import { RegistroEntradaModel } from '../../interfaces/regsitro-entrada.interface';
+import { RegistroEntradaModel } from '../../interfaces/registro-entrada.interface';
 import { ClientesService } from '../../services/clientes.service';
 import { RegistroEntradaService } from '../../services/registro-entrada.service';
 import { TimestampService } from '../../services/timestamp.service';
-import { Area, AreaRegistro } from '../../interfaces/area.interface';
+import { Area } from '../../interfaces/area.interface';
 import { AreasService } from '../../services/areas.service';
 import { Tramite, TramiteRegistro } from '../../interfaces/tramite.interface';
 import { switchMap, tap } from 'rxjs/operators';
@@ -27,15 +27,7 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   // 
   // VOLVER A PONER LOS VALIDADORES A AREA, MOTIVO, LOS QUITÉ PARA UNAS PRUEBAS NADA MAS
 
-  registroEntradaForm : FormGroup = this.fb.group({
-    CEDULA: ['', [Validators.required, Validators.minLength(9)]],
-    TIPO_CLIENTE: [{ value: '', disabled: true }],
-    NOMBRE: ['', Validators.required],
-    APELLIDO_1: ['', Validators.required],
-    APELLIDO_2: ['', Validators.required],
-    AREA: ['', ],
-    MOTIVO: ['',],
-  });
+  registroEntradaForm !: FormGroup;
 
   cliente!: Cliente;
   registro!: RegistroEntradaModel;
@@ -44,9 +36,6 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   tramitesAsociados: Tramite[] = [];
   nombreTramites: TramiteRegistro[] = [];
   nombreAreaSeleccionada: string = '';
-
-  loading!: boolean;
-  idArea!: number;
 
   constructor(
     private fb: FormBuilder,
@@ -59,8 +48,23 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   ) { }
 
   ngOnInit(){
+    this.resetearFormulario();
+
+    //Cambiarlos a otro metodo del ciclo de vida
     this.cargarAreas();
-    this.cargarTramitesAsociados()
+    this.cargarTramitesAsociados();
+  }
+
+  resetearFormulario(){
+    this.registroEntradaForm = this.fb.group({
+      CEDULA: ['', [Validators.required, Validators.minLength(9)]],
+      TIPO_CLIENTE: [{ value: '', disabled: true }],
+      NOMBRE: ['', Validators.required],
+      APELLIDO_1: ['', Validators.required],
+      APELLIDO_2: ['', Validators.required],
+      AREA: ['', ],
+      MOTIVO: ['',],
+    });
   }
 
   cargarAreas(){
@@ -80,11 +84,8 @@ export class FormularioRegistroEntradaComponent implements OnInit {
         this.nombreTramites = [];
       }), switchMap( area => this.tramitesService.getTramitesAsociados(area))
       ).subscribe( ({OK, LISTA_TRAMITES_ASOCIADOS}) =>{
-
         if(OK === true){
-
           this.nombreTramites = LISTA_TRAMITES_ASOCIADOS;
-          console.log(this.nombreTramites);
         }
 
       })
@@ -121,7 +122,7 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   agregarRegistro(){
     this.registro = {
       CEDULA_CLIENTE : this.controls['CEDULA'].value,
-      AREA_DESTINO : this.controls['AREA'].value,
+      ID_AREA_DESTINO : this.controls['AREA'].value,
       MOTIVO_VISITA :this.controls['MOTIVO'].value,
       FECHA: this.timestampService.fechaActual,
       HORA: this.timestampService.horaCompleta
@@ -129,7 +130,7 @@ export class FormularioRegistroEntradaComponent implements OnInit {
     this.registroEntradaService.addRegistro(this.registro).subscribe(OK=>{
         if(OK){
           this.mensajeExito();
-          this.registroEntradaForm.reset();
+          this.ngOnInit();
         }
     })
   }
@@ -147,7 +148,11 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   }
 
   setInvitadoData(){
+    this.resetearFormulario();
+
+    this.registroEntradaForm.get('CEDULA')?.setValue(this.cliente.CEDULA);
     this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue('Invitado');
+    this.cliente = this.registroEntradaForm.value;
   }
 
   setAfiliadoData(cliente: Cliente){
@@ -158,7 +163,8 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   }
 
   borrar() {
-    this.registroEntradaForm.reset();
+    this.ngOnInit();
+    this.nombreTramites = [];
   }
 
   mensajeExito() {
