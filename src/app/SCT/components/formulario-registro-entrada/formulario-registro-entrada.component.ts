@@ -62,7 +62,7 @@ export class FormularioRegistroEntradaComponent implements OnInit{
       TIPO_CLIENTE: [{ value: '', disabled: true }],
       NOMBRE: ['', Validators.required],
       APELLIDO_1: ['', Validators.required],
-      APELLIDO_2: ['', Validators.required],
+      APELLIDO_2: [''],
       AREA: ['', Validators.required],
       MOTIVO: ['', Validators.required],
     });

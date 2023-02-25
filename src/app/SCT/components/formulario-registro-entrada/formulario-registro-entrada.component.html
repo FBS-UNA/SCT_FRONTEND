@@ -4,7 +4,11 @@
         <div class="col-lg-6 col-md-12">
             <label class="fbs-roboto-300">Cédula cliente</label>
             <div class="p-inputgroup">
-                <input type="text" pInputText
+                <input type="text"
+                    #inputCedula
+                    pInputText
+                    pAutoFocus
+                    [autofocus]="true"
                     formControlName="CEDULA"
                     (keyup.enter)="buscar()">
                 <span class="p-inputgroup-addon"><i class="pi pi-search" (click)="buscar()"></i></span>
@@ -64,7 +68,7 @@
                 optionLabel="NOMBRE_AREA" 
                 optionValue="ID_AREA"
                 placeholder="Seleccione un área"
-                [showClear]="true">
+                >
 
             </p-dropdown>
         </div>
@@ -77,7 +81,7 @@
                 optionLabel="NOMBRE_TRAMITE" 
                 optionValue="NOMBRE_TRAMITE"
                 placeholder="Seleccione un motivo"
-                [showClear]="true">
+                >
 
             </p-dropdown>
         </div>
@@ -87,10 +91,10 @@
         <div class="col">
             <div class="row float-end">
                 <div class="col">
-                    <p-button label="Borrar" styleClass="p-button-danger" icon="pi pi-trash" (click)="borrar()"></p-button>
+                    <p-button label="Borrar" styleClass="p-button-danger" icon="pi pi-trash" (click)="borrar(); inputCedula.focus()"></p-button>
                 </div>
                 <div class="col">
-                    <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check" (click)="registrar()"></p-button>
+                    <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check" (click)="registrar(); inputCedula.focus()"></p-button>
                     
                 </div>
             </div>

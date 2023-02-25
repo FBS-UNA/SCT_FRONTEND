@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 // PrimeNG
 // A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+import {AutoFocusModule} from 'primeng/autofocus';
 import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
 import {CardModule} from 'primeng/card';
@@ -38,6 +39,7 @@ import {ConfirmationService} from 'primeng/api';
     ConfirmationService
   ],
   exports:[
+    AutoFocusModule,
     ButtonModule,
     CalendarModule,
     CardModule,
