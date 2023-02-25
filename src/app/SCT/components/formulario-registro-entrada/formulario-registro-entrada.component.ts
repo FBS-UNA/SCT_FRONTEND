@@ -87,16 +87,12 @@ export class FormularioRegistroEntradaComponent implements OnInit{
         if(OK === true){
           this.nombreTramites = LISTA_TRAMITES_ASOCIADOS;
         }
-
       })
   }
 
-  
   get controls(): any {
     return this.registroEntradaForm.controls;
   }
-
-
 
   registrar() {
     const formValue = { ...this.registroEntradaForm.value };
@@ -173,7 +169,6 @@ export class FormularioRegistroEntradaComponent implements OnInit{
   mensajeDeErrorCedula() {
     this.messageService.add({severity: 'error', summary: 'Error', detail: 'No se encontro ningun cliente' });
   }
-
 
   esInvalido(campo: string): boolean | null {
     return this.controls[campo].errors && this.controls[campo].touched;
