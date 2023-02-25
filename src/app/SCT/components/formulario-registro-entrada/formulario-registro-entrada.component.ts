@@ -43,9 +43,10 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   loading!: boolean;
 
   areas:Area[]=[];
-  nombreAreas: AreaRegistro[] = [];
+  nombreAreas: Area[] = [];
   tramitesAsociados: Tramite[] = [];
   nombreTramites: TramiteRegistro[] = [];
+  nombreAreaSeleccionada: string = '';
 
 
   constructor(
@@ -64,29 +65,29 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   }
 
   cargarAreas(){
-    this.loading= true;
     this.areasService.getAreas().subscribe(OK => {
       if (OK) {
-        this.loading = false;
         this.areas = this.areasService.areas;
-        this.nombreAreas = this.areas.map(area=>{
-          return {
-            nombre: area.NOMBRE_AREA!,
-            id: area.ID_AREA!
-          };
-        })
+        this.nombreAreas = this.areas.map(({NOMBRE_AREA, ID_AREA})=>{ return { NOMBRE_AREA, ID_AREA} });
       }
     });
   }
 
   cargarTramitesAsociados(){
     this.registroEntradaForm.get('AREA')?.valueChanges.pipe(
-      tap( ( _ ) =>{
+      tap( ( res ) =>{
+        console.log(res)
         this.registroEntradaForm.get('MOTIVO')?.reset('');
+        this.nombreTramites = [];
       }), switchMap( area => this.tramitesService.getTramitesAsociados(area))
-      ).subscribe(paises =>{
-        this.nombreTramites = paises;
-        console.log(paises);
+      ).subscribe( ({OK, LISTA_TRAMITES_ASOCIADOS}) =>{
+
+        if(OK === true){
+
+          this.nombreTramites = LISTA_TRAMITES_ASOCIADOS;
+          console.log(this.nombreTramites);
+        }
+
       })
   }
 
@@ -151,7 +152,6 @@ export class FormularioRegistroEntradaComponent implements OnInit {
   }
 
   setAfiliadoData(cliente: Cliente){
-    console.log(this.cliente);
     this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO_CLIENTE);
     this.registroEntradaForm.get('NOMBRE')?.setValue(cliente.NOMBRE);
     this.registroEntradaForm.get('APELLIDO_1')?.setValue(cliente.APELLIDO_1);

@@ -2,7 +2,7 @@
 
     <div class="row mb-2">
         <div class="col-lg-6 col-md-12">
-            <label>Cédula</label>
+            <label>Cédula cliente</label>
             <div class="p-inputgroup">
                 <input type="text" pInputText
                     formControlName="CEDULA"
@@ -61,8 +61,8 @@
             <label for="float-input">Área</label>
             <p-dropdown [options]="nombreAreas" 
                 formControlName="AREA"
-                optionLabel="nombre" 
-                optionValue="nombre"
+                optionLabel="NOMBRE_AREA" 
+                optionValue="ID_AREA"
                 placeholder="Seleccione un área"
                 [showClear]="true">
 
@@ -71,9 +71,12 @@
         <div class="col-lg-6 col-md-12">
             <label for="float-input">Motivo de la visita</label>
             <p-dropdown 
-                formControlName="AREA"
-                
-                placeholder="Seleccione un área"
+                [options]="nombreTramites"
+                [editable]="true"
+                formControlName="MOTIVO"
+                optionLabel="NOMBRE_TRAMITE" 
+                optionValue="NOMBRE_TRAMITE"
+                placeholder="Seleccione un motivo"
                 [showClear]="true">
 
             </p-dropdown>

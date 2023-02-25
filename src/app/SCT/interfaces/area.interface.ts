@@ -13,6 +13,6 @@ export interface Area {
 }
 
 export interface AreaRegistro {
-    nombre: string;
+    NOMBRE_AREA: string;
     id: number;
 }
