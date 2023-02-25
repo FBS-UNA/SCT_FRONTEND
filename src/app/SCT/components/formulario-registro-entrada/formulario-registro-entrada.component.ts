@@ -20,7 +20,7 @@ import { TramitesService } from '../../services/tramites.service';
   styles: [
   ]
 })
-export class FormularioRegistroEntradaComponent implements OnInit {
+export class FormularioRegistroEntradaComponent implements OnInit{
 
 
   // IMPORTANTE
@@ -54,6 +54,7 @@ export class FormularioRegistroEntradaComponent implements OnInit {
     this.cargarTramitesAsociados();
   }
 
+
   resetearFormulario(){
     this.registroEntradaForm = this.fb.group({
       CEDULA: ['', [Validators.required, Validators.minLength(9)]],
@@ -61,8 +62,8 @@ export class FormularioRegistroEntradaComponent implements OnInit {
       NOMBRE: ['', Validators.required],
       APELLIDO_1: ['', Validators.required],
       APELLIDO_2: ['', Validators.required],
-      AREA: ['', ],
-      MOTIVO: ['',],
+      AREA: ['', Validators.required],
+      MOTIVO: ['', Validators.required],
     });
   }
 
@@ -77,8 +78,7 @@ export class FormularioRegistroEntradaComponent implements OnInit {
 
   cargarTramitesAsociados(){
     this.registroEntradaForm.get('AREA')?.valueChanges.pipe(
-      tap( ( res ) =>{
-        console.log(res)
+      tap( ( _ ) =>{
         this.registroEntradaForm.get('MOTIVO')?.reset('');
         this.nombreTramites = [];
       }), switchMap( area => this.tramitesService.getTramitesAsociados(area))
