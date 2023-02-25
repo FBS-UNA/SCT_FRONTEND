@@ -1,8 +1,8 @@
-<form  class="p-fluid" [formGroup]="registroEntradaForm" autocomplete="off">
+<form  class="p-fluid" [formGroup]="registroEntradaForm" autocomplete="off" >
 
     <div class="row mb-2">
         <div class="col-lg-6 col-md-12">
-            <label>Cédula cliente</label>
+            <label class="fbs-roboto-300">Cédula cliente</label>
             <div class="p-inputgroup">
                 <input type="text" pInputText
                     formControlName="CEDULA"
@@ -15,7 +15,7 @@
             </small>
         </div>
         <div class="col-lg-6 col-md-12">
-            <label for="float-input">Tipo de Afiliación</label>
+            <label class="fbs-roboto-300" for="float-input">Tipo de Afiliación</label>
             <span class="p-float-label">
                 <input class="form-control shadow disabled" id="float-input" type="text" pInputText 
                 formControlName="TIPO_CLIENTE"
@@ -26,7 +26,7 @@
 
     <div class="row mb-2">
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <label for="float-input">Nombre</label>
+            <label class="fbs-roboto-300" for="float-input">Nombre</label>
             <span class="p-float-label">
                 <input id="float-input" type="text" pInputText
                 formControlName="NOMBRE">
@@ -37,7 +37,7 @@
             </small>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <label for="float-input">Apellido 1</label>
+            <label class="fbs-roboto-300" for="float-input">Apellido 1</label>
             <span class="p-float-label">
                 <input id="float-input" type="text" pInputText
                 formControlName="APELLIDO_1">
@@ -48,7 +48,7 @@
             </small>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <label for="float-input">Apellido 2</label>
+            <label class="fbs-roboto-300" for="float-input">Apellido 2</label>
             <span class="p-float-label">
                 <input id="float-input" type="text" pInputText
                 formControlName="APELLIDO_2">
@@ -58,7 +58,7 @@
 
     <div class="row mb-4">
         <div class="col-lg-6 col-md-12">
-            <label for="float-input">Área</label>
+            <label class="fbs-roboto-300" for="float-input">Área</label>
             <p-dropdown [options]="nombreAreas" 
                 formControlName="AREA"
                 optionLabel="NOMBRE_AREA" 
@@ -69,7 +69,7 @@
             </p-dropdown>
         </div>
         <div class="col-lg-6 col-md-12">
-            <label for="float-input">Motivo de la visita</label>
+            <label class="fbs-roboto-300" for="float-input">Motivo de la visita</label>
             <p-dropdown 
                 [options]="nombreTramites"
                 [editable]="true"
