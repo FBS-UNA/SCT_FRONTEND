@@ -102,3 +102,6 @@ body {
     background-color: white;
     color: #00416B;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

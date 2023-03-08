@@ -35,7 +35,6 @@ export class FormularioRegistroEntradaComponent implements OnInit{
   nombreAreas: Area[] = [];
   tramitesAsociados: Tramite[] = [];
   nombreTramites: TramiteRegistro[] = [];
-  
 
   constructor(
     private fb: FormBuilder,
@@ -60,9 +59,9 @@ export class FormularioRegistroEntradaComponent implements OnInit{
     this.registroEntradaForm = this.fb.group({
       CEDULA: ['', [Validators.required, Validators.minLength(9)]],
       TIPO_CLIENTE: [{ value: '', disabled: true }],
-      NOMBRE: ['', Validators.required],
-      APELLIDO_1: ['', Validators.required],
-      APELLIDO_2: [''],
+      NOMBRE: [{ value: '', disabled: true }, Validators.required],
+      APELLIDO_1: [{ value: '', disabled: true }, Validators.required],
+      APELLIDO_2: [{ value: '', disabled: true }],
       AREA: ['', Validators.required],
       MOTIVO: ['', Validators.required],
     });
@@ -136,11 +135,18 @@ export class FormularioRegistroEntradaComponent implements OnInit{
       if (OK ==true) {
         this.cliente = this.clienteService.cliente;
         this.setAfiliadoData(this.cliente);
+        this.habilitarInputs();
       }else{
         this.setInvitadoData();
         this.mensajeDeErrorCedula();
       }
     })
+  }
+
+  habilitarInputs(){
+    this.registroEntradaForm.get('NOMBRE')?.enable(); 
+    this.registroEntradaForm.get('APELLIDO_1')?.enable(); 
+    this.registroEntradaForm.get('APELLIDO_2')?.enable(); 
   }
 
   setInvitadoData(){
