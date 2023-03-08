@@ -8,38 +8,7 @@ interface MenuItem{
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styles: [
-    `
-    #sidebar {
-    height: 100%;
-    width: 100%;
-    max-width: 15%;
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    background-color: #00416B;
-    overflow-x: hidden;
-    }
-
-    hr{
-      color: white;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-
-    li{
-      background-color: #00416B;
-      color:white;
-      border: none;
-      border-radius: 7px;
-      cursor: pointer;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-
-    `
-  ]
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
 
