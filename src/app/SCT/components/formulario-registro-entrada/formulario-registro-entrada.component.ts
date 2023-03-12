@@ -48,8 +48,6 @@ export class FormularioRegistroEntradaComponent implements OnInit{
 
   ngOnInit(){
     this.resetearFormulario();
-
-    //Cambiarlos a otro metodo del ciclo de vida
     this.cargarAreas();
     this.cargarTramitesAsociados();
   }
