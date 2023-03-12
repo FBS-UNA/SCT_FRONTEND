@@ -139,6 +139,7 @@ export class FormularioRegistroEntradaComponent implements OnInit{
       }else{
         this.setInvitadoData();
         this.mensajeDeErrorCedula();
+        this.habilitarInputs();
       }
     })
   }
