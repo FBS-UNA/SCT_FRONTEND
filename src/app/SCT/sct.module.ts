@@ -19,6 +19,7 @@ import { FormularioRegistroEntradaComponent } from './components/formulario-regi
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { AEDTramiteComponent } from './components/aed-tramite/aed-tramite.component';
 import { AEDAreaComponent } from './components/aed-area/aed-area.component';
+import { RegistroTamiteComponent } from './pages/registro-tamite/registro-tamite.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AEDAreaComponent } from './components/aed-area/aed-area.component';
 
     AEDTramiteComponent,
     AEDAreaComponent,
+    RegistroTamiteComponent,
   ],
   imports: [
     CommonModule,
