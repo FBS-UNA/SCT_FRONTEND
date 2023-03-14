@@ -43,7 +43,7 @@ export class FormularioRegistroEntradaComponent implements OnInit{
     private registroEntradaService: RegistroEntradaService,
     private timestampService: TimestampService,
     private areasService: AreasService,
-    private tramitesService: TramitesService
+    private tramitesService: TramitesService,
   ) { }
 
   ngOnInit(){
