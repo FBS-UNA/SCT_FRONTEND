@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Cliente } from '../../interfaces/cliente.interface';
 import { Tramite } from '../../interfaces/tramite.interface';
 import { ClientesService } from '../../services/clientes.service';
+import { RegistroTamiteService } from '../../services/registro-tamite.service';
+import { TimestampService } from '../../services/timestamp.service';
 import { TramitesService } from '../../services/tramites.service';
+import { RegistroHoraInicio, RegistroTramiteModel } from '../../interfaces/registro-tramite.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -20,6 +23,8 @@ export class RegistroTamiteComponent implements OnInit {
   cliente!: Cliente;
   tramites: Tramite[] = [];
   nombreTramites: Tramite[] = [];
+  registro!: RegistroTramiteModel;
+  registro_Inicio!: RegistroHoraInicio
 
 
 
@@ -27,6 +32,8 @@ export class RegistroTamiteComponent implements OnInit {
     private fb: FormBuilder,
     private clienteService: ClientesService,
     private messageService: MessageService,
+    private registroTramiteService: RegistroTamiteService,
+    private timestampService: TimestampService,
     private tramitesService: TramitesService,
     public authService: AuthService,
   ) { }
@@ -47,7 +54,7 @@ export class RegistroTamiteComponent implements OnInit {
 
   resetearFormulario(){
     this.registroTramiteForm = this.fb.group({
-      CEDULA: ['', [Validators.required, Validators.minLength(9)]],
+      CEDULA: ['204230406', [Validators.required, Validators.minLength(9)]],
       TIPO_CLIENTE: [{ value: '', disabled: true }],
       NOMBRE: [{ value: '', disabled: true }],
       APELLIDO_1: [{ value: '', disabled: true }],
@@ -73,14 +80,53 @@ export class RegistroTamiteComponent implements OnInit {
       if (OK ==true) {
         this.cliente = this.clienteService.cliente;
         this.setAfiliadoData(this.cliente);
+        this.horaIncio();
         
       }else{
         this.setInvitadoData();
         this.mensajeDeErrorCedula();
+        this.horaIncio();
       }
     })
   }
 
+  horaIncio(){
+    this.registro_Inicio ={
+      FECHA_INICIO    :   this.timestampService.fechaActual,
+      HORA_INICIO     :   this.timestampService.horaCompleta
+    }
+  }
+
+  agregarRegistroTramite(){
+    this.registro = {
+        ID_TRAMITE      :  this.controls['TRAMITE'].value,
+        CEDULA_CLIENTE  :  this.controls['CEDULA'].value,
+        CEDULA_USUARIO  :  this.usuario.CEDULA,
+        DESCRIPCION     :  this.controls['DESCRIPCION'].value,
+        REGISTRO_INICIO :  this.registro_Inicio,
+        FECHA_FINAL     :  this.timestampService.fechaActual,
+        HORA_FINAL      :  this.timestampService.horaCompleta 
+    };
+    console.log(this.registro)
+    this.registroTramiteService.addRegistroTramite(this.registro).subscribe(OK=>{
+        if(OK){
+          this.mensajeExito();
+          this.ngOnInit();
+        }
+    })
+  }
+
+  registrarTramite(){
+    const formValue = { ...this.registroTramiteForm.value };
+    if (this.registroTramiteForm.invalid) {
+      this.registroTramiteForm.markAllAsTouched();
+      return ;
+    }else{
+      this.cliente = formValue;
+      this.agregarRegistroTramite();
+    }
+    
+  }
 
   setInvitadoData(){
     this.registroTramiteForm.get('TIPO_CLIENTE')?.setValue('Invitado');
