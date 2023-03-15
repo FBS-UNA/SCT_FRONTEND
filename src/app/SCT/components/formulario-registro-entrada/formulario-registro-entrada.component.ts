@@ -43,13 +43,11 @@ export class FormularioRegistroEntradaComponent implements OnInit{
     private registroEntradaService: RegistroEntradaService,
     private timestampService: TimestampService,
     private areasService: AreasService,
-    private tramitesService: TramitesService
+    private tramitesService: TramitesService,
   ) { }
 
   ngOnInit(){
     this.resetearFormulario();
-
-    //Cambiarlos a otro metodo del ciclo de vida
     this.cargarAreas();
     this.cargarTramitesAsociados();
   }
@@ -139,6 +137,7 @@ export class FormularioRegistroEntradaComponent implements OnInit{
       }else{
         this.setInvitadoData();
         this.mensajeDeErrorCedula();
+        this.habilitarInputs();
       }
     })
   }

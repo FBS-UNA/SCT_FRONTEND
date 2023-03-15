@@ -49,6 +49,10 @@ export class SidebarComponent implements OnInit {
       nombre: 'Inicio'
     },
     {
+      ruta: './registrotramite',
+      nombre: 'Registro de tramite'
+    },
+    {
       ruta: './registroentrada',
       nombre: 'Registro de entrada'
     },
