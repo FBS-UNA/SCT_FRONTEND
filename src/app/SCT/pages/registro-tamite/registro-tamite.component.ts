@@ -108,4 +108,9 @@ export class RegistroTamiteComponent implements OnInit {
     return this.controls[campo].errors && this.controls[campo].touched;
   }
 
+  borrar() {
+    this.ngOnInit();
+    this.nombreTramites = [];
+  }
+
 }
