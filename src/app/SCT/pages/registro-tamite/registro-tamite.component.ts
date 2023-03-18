@@ -75,19 +75,19 @@ export class RegistroTamiteComponent implements OnInit {
         this.setAfiliadoData(this.cliente);
         
       }else{
-        this.setInvitadoData();
         this.mensajeDeErrorCedula();
       }
     })
   }
 
-
+/*
   setInvitadoData(){
     this.registroTramiteForm.get('TIPO_CLIENTE')?.setValue('Invitado');
     this.registroTramiteForm.get('NOMBRE')?.setValue('');
     this.registroTramiteForm.get('APELLIDO_1')?.setValue('');
     this.registroTramiteForm.get('APELLIDO_2')?.setValue('');
   }
+*/
 
   setAfiliadoData(cliente: Cliente){
     this.registroTramiteForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO_CLIENTE);
@@ -106,6 +106,11 @@ export class RegistroTamiteComponent implements OnInit {
 
   esInvalido(campo: string): boolean | null {
     return this.controls[campo].errors && this.controls[campo].touched;
+  }
+
+  borrar() {
+    this.ngOnInit();
+    this.nombreTramites = [];
   }
 
 }
