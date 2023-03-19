@@ -1,0 +1,39 @@
+<p-toast></p-toast>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<p-dialog [(visible)]="tramiteDialog" [style]="{width: '600px'}" [draggable]="false" [modal]="true"
+    styleClass="p-fluid">
+
+    <ng-template pTemplate="header">
+        <h1 class="fbs-roboto-300">Confirmar Información del Trámite</h1>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="name">Cédula del Cliente:</label>
+            <input type="text" pInputText [(ngModel)]="re_tramite.CEDULA_CLIENTE" disabled shadow required autofocus />
+
+        </div>
+        <div class="field">
+            <label for="name">Nombre del Trámite:</label>
+            <input type="text" pInputText [(ngModel)]="re_tramite.ID_TRAMITE" disabled shadow required autofocus />
+        </div>
+        <div class="field">
+            <label for="description">Descripcion</label>
+            <input type="text" pInputText [(ngModel)]="re_tramite.DESCRIPCION" shadow disabled required autofocus />
+        </div>
+
+        <div class="field col">
+            <label for="fecha">Fecha de Creación:</label>
+            <input type="text" pInputText [(ngModel)]="re_tramite.FECHA" disabled shadow required autofocus />
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text p-button-danger"
+            (click)="cerrarDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
+            (click)="guardarCambios()"></button>
+    </ng-template>
+</p-dialog>
