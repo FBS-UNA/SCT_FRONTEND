@@ -21,6 +21,7 @@ import { AEDTramiteComponent } from './components/aed-tramite/aed-tramite.compon
 import { AEDAreaComponent } from './components/aed-area/aed-area.component';
 import { RegistroTamiteComponent } from './pages/registro-tamite/registro-tamite.component';
 import { FormularioRegistroTramiteComponent } from './components/formulario-registro-tramite/formulario-registro-tramite.component';
+import { CancelarDialogRTComponent } from './components/cancelar-dialog-rt/cancelar-dialog-rt.component';
 
 
 
@@ -41,6 +42,7 @@ import { FormularioRegistroTramiteComponent } from './components/formulario-regi
     AEDAreaComponent,
     RegistroTamiteComponent,
     FormularioRegistroTramiteComponent,
+    CancelarDialogRTComponent,
   ],
   imports: [
     CommonModule,

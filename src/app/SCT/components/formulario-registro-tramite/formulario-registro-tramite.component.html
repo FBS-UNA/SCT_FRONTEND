@@ -84,7 +84,7 @@
         <div class="col">
             <div class="row float-end">
                 <div class="col">
-                    <p-button label="Limpiar" styleClass="p-button-danger" icon="pi pi-trash"></p-button>
+                    <p-button label="Limpiar" styleClass="p-button-danger" icon="pi pi-trash" (click)="limpiarFormulario()"></p-button>
                 </div>
                 <div class="col">
                     <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check" (click)="agregarRegistroTramite()"></p-button>
@@ -95,3 +95,6 @@
     </div>
 
 </form>
+
+<!-- Componentes necesarios -->
+<app-cancelar-dialog-rt></app-cancelar-dialog-rt>

@@ -6,9 +6,9 @@ import { Cliente } from '../../interfaces/cliente.interface';
 import { RegistroHoraInicio, RegistroTramiteModel } from '../../interfaces/registro-tramite.interface';
 import { Tramite } from '../../interfaces/tramite.interface';
 import { ClientesService } from '../../services/clientes.service';
-import { RegistroTamiteService } from '../../services/registro-tamite.service';
 import { TimestampService } from '../../services/timestamp.service';
 import { TramitesService } from '../../services/tramites.service';
+import { CancelarDialogRTComponent } from '../cancelar-dialog-rt/cancelar-dialog-rt.component';
 
 @Component({
   selector: 'app-formulario-registro-tramite',
@@ -18,6 +18,7 @@ import { TramitesService } from '../../services/tramites.service';
 })
 export class FormularioRegistroTramiteComponent implements OnInit {
 
+  @ViewChild(CancelarDialogRTComponent) cancelarDialogRT !: CancelarDialogRTComponent;
 
   registroTramiteForm !: FormGroup;
 
@@ -26,14 +27,12 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   nombreTramites: Tramite[] = [];
   registro!: RegistroTramiteModel;
   registro_Inicio!: RegistroHoraInicio
-
-
+  
 
   constructor(
     private fb: FormBuilder,
     private clienteService: ClientesService,
     private messageService: MessageService,
-    private registroTramiteService: RegistroTamiteService,
     private timestampService: TimestampService,
     private tramitesService: TramitesService,
     public authService: AuthService,
@@ -64,6 +63,7 @@ export class FormularioRegistroTramiteComponent implements OnInit {
       DESCRIPCION: [''],
     })
   }
+
 
   cargarTramites() {
     this.tramitesService.getTramites().subscribe(OK => {
@@ -99,34 +99,11 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   }
 
   agregarRegistroTramite(){
-    this.registro = {
-        ID_TRAMITE      :  this.controls['TRAMITE'].value,
-        CEDULA_CLIENTE  :  this.controls['CEDULA'].value,
-        CEDULA_USUARIO  :  this.usuario.CEDULA,
-        DESCRIPCION     :  this.controls['DESCRIPCION'].value,
-        REGISTRO_INICIO :  this.registro_Inicio,
-        FECHA_FINAL     :  this.timestampService.fechaActual,
-        HORA_FINAL      :  this.timestampService.horaCompleta 
-    };
-    console.log(this.registro)
-    this.registroTramiteService.addRegistroTramite(this.registro).subscribe(OK=>{
-        if(OK){
-          this.mensajeExito();
-          this.ngOnInit();
-        }
-    })
+    
   }
 
-  registrarTramite(){
-    const formValue = { ...this.registroTramiteForm.value };
-    if (this.registroTramiteForm.invalid) {
-      this.registroTramiteForm.markAllAsTouched();
-      return ;
-    }else{
-      this.cliente = formValue;
-      this.agregarRegistroTramite();
-    }
-    
+  limpiarFormulario(){
+    this.cancelarDialogRT.mostrarDialog();
   }
 
   setInvitadoData(){
