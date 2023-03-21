@@ -12,15 +12,14 @@ import { AedRegistroTramiteComponent } from '../aed-registro-tramite/aed-registr
 
 @Component({
   selector: 'app-formulario-registro-tamite',
-  templateUrl: './formulario-registro-tramite.component.html',
-  styles: [
-  ]
+  templateUrl: './formulario-registro-tramite.component.html'
 })
 export class FormularioRegistroTramiteComponent implements OnInit {
 
 
   @Output() refreshData = new EventEmitter<void>();
   @ViewChild(AedRegistroTramiteComponent) AedReTramiteDialog!: AedRegistroTramiteComponent;
+  @ViewChild('selectTramites') selectTramites!: any;
 
   registroTramiteForm !: FormGroup;
 
@@ -143,12 +142,13 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   setReTramite(){
     this.re_tramite = {
       CEDULA_CLIENTE : this.controls['CEDULA'].value,
+      NOMBRE_TRAMITE : this.selectTramites.selectedOption.NOMBRE_TRAMITE,
       ID_TRAMITE : this.controls['TRAMITE'].value,
       DESCRIPCION :this.controls['DESCRIPCION'].value,
       FECHA: this.timestampService.fechaActual,
       HORA: this.timestampService.horaCompleta
     };
-    
+
     this.confirmarTramiteDialog();
   }
 
