@@ -2,9 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Tramite } from '../../interfaces/tramite.interface';
 import { TimestampService } from '../../services/timestamp.service';
-import { TramitesService } from '../../services/tramites.service';
-import { RegistroEntradaModel } from '../../interfaces/registro-entrada.interface';
 import { RegistroTramiteModel } from '../../interfaces/registro-tramite.interface';
+import { RegistroTramiteService } from '../../services/registro-tramite.service';
 
 @Component({
   selector: 'app-aed-registro-tramite',
@@ -23,14 +22,13 @@ export class AedRegistroTramiteComponent implements OnInit {
   tramite !: Tramite;
 
   constructor(
-    private tramitesService: TramitesService,
+    private re_tramiteService: RegistroTramiteService,
     private messageService: MessageService,
     private timestampService: TimestampService,
     private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
-    console.log("SIUUUUUUUUu");
     
   }
 
@@ -57,14 +55,14 @@ export class AedRegistroTramiteComponent implements OnInit {
 
 
   agregarTramite() {
-    this.tramitesService.addTramite(this.tramite).subscribe(res => {
+    this.re_tramiteService.addRegistro(this.re_tramite).subscribe(res => {
       if (res.OK) {
         this.cargarDataEmit();
-        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El trámite llamado "${this.tramite.NOMBRE_TRAMITE}" se ha agregado correctamente` });
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El registro del trámite se ha agregado correctamente` });
       }
     });
   }
-
+/*
   actualizarTramite() {
     this.tramitesService.updateTramite(this.tramite).subscribe(res => {
       if (res.OK) {
@@ -75,14 +73,13 @@ export class AedRegistroTramiteComponent implements OnInit {
       }
     });
   }
-
-  guardarCambios() {
-    this.submitted = true;
-    this.editando ? this.actualizarTramite() : this.agregarTramite();
+*/
+  confirmarRegistroTramite() {
+    this.agregarTramite();
     this.tramiteDialog = false;
 
   }
-
+/*
   eliminarTramiteDialog(tramite: Tramite) {
     this.confirmationService.confirm({
       message: `¿Está seguro(a) de que desea eliminar el trámite llamado ${tramite.NOMBRE_TRAMITE}?`,
@@ -100,8 +97,8 @@ export class AedRegistroTramiteComponent implements OnInit {
         });
       }
     });
-  }
-
+  }*/
+/*
   actualizarEstadoTramite(tramite: Tramite) {
 
     this.confirmationService.confirm({
@@ -122,7 +119,7 @@ export class AedRegistroTramiteComponent implements OnInit {
       }
     });
 
-  }
+  }*/
 
 
   cerrarDialog() {

@@ -78,7 +78,7 @@
 
     <div class="row mb-2 mx-auto">
         <label class="fbs-roboto-300">Descripción</label>
-        <textarea rows="3" cols="30" pInputTextarea [autoResize]="true" formControlName="DESCRIPCION"></textarea>
+        <textarea rows="3" cols="30" pInputTextarea [autoResize]="true" formControlName="DESCRIPCION" placeholder="Opcional"></textarea>
     </div>
 
     <div class="row mb-1">
@@ -88,7 +88,7 @@
                     <p-button label="Limpiar" styleClass="p-button-danger" icon="pi pi-trash" (click)="borrar(); inputCedula.focus()"></p-button>
                 </div>
                 <div class="col">
-                    <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check" (click)="setReTramite()"></p-button>
+                    <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check" (click)="confirmar()"></p-button>
                     
                 </div>
             </div>

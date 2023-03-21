@@ -128,6 +128,18 @@ export class FormularioRegistroTramiteComponent implements OnInit {
     this.nombreTramites = [];
   }
 
+
+  confirmar(){
+    const formValue = { ...this.registroTramiteForm.value };
+    if (this.registroTramiteForm.invalid) {
+      this.registroTramiteForm.markAllAsTouched();
+      return ;
+    }
+
+    this.setReTramite();
+
+  }
+
   setReTramite(){
     this.re_tramite = {
       CEDULA_CLIENTE : this.controls['CEDULA'].value,
@@ -136,34 +148,12 @@ export class FormularioRegistroTramiteComponent implements OnInit {
       FECHA: this.timestampService.fechaActual,
       HORA: this.timestampService.horaCompleta
     };
-    console.log("CREANDO REGISTRO");
-    
-    console.log(this.re_tramite);
     
     this.confirmarTramiteDialog();
   }
 
   confirmarTramiteDialog(){
-
     this.AedReTramiteDialog.cargarReTramiteDialog(this.re_tramite);
-   /* this.confirmationService.confirm({
-      message: `¿Está seguro(a) de que desea eliminar el trámite llamado ?`,
-      header: 'Confirmar Trámite',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.tramitesService.deleteTramite(4).subscribe(res => {
-          console.log("ENTRA");
-          
-          if (res.OK) {
-            this.cargarDataEmit();
-            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El trámite llamado  se ha eliminado correctamente` });
-          } else {
-            this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo eliminar el trámite llamado ` });
-
-          }
-        });
-      }
-    });*/
   }
 
 }
