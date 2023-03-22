@@ -1,13 +1,16 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { RegistroTramiteModel } from '../../interfaces/registro-tramite.interface';
+import { FormularioRegistroTramiteComponent } from '../formulario-registro-tramite/formulario-registro-tramite.component';
 import { RegistroTramiteService } from '../../services/registro-tramite.service';
 
 @Component({
-  selector: 'app-confirmar-registro-tramite',
-  templateUrl: './confirmar-registro-tramite.component.html'
+  selector: 'app-cr-regsitro-tramite',
+  templateUrl: './cr-registro-tramite.component.html',
+  styles: [
+  ]
 })
-export class ConfirmarRegistroTramite implements OnInit {
+export class CRRegistroTramiteComponent implements OnInit {
 
   @Output() resetForm : EventEmitter<void> = new EventEmitter();
 
@@ -15,15 +18,29 @@ export class ConfirmarRegistroTramite implements OnInit {
 
   re_tramite!: RegistroTramiteModel;
 
-  constructor(
-    private re_tramiteService: RegistroTramiteService,
+  constructor(    
+    private confirmationService: ConfirmationService,
     private messageService: MessageService,
+    private formularioRegistroTramite: FormularioRegistroTramiteComponent,
+    private re_tramiteService: RegistroTramiteService,
   ) { }
 
   ngOnInit(): void {
   }
-  
-  resetFormEmit() {
+
+  limpiarDialog() {
+    this.confirmationService.confirm({
+      message: `¿Está seguro(a) de que desea limpiar el formulario?`,
+      header: '¡Cuidado!',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.formularioRegistroTramite.resetearFormulario();
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El formulario se ha limpiado correctamente` });
+      }
+    });
+  }
+
+   resetFormEmit() {
     this.resetForm.emit();
   }
 
@@ -56,3 +73,4 @@ export class ConfirmarRegistroTramite implements OnInit {
   }
 
 }
+
