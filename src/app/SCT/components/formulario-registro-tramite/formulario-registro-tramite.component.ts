@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Cliente } from '../../interfaces/cliente.interface';
-import { RegistroHoraInicio, RegistroTramiteModel } from '../../interfaces/registro-tramite.interface';
 import { Tramite } from '../../interfaces/tramite.interface';
 import { ClientesService } from '../../services/clientes.service';
 import { TimestampService } from '../../services/timestamp.service';
@@ -19,22 +18,19 @@ import { CRRegistroTramiteComponent } from '../cr-registro-tramite/cr-registro-t
 })
 export class FormularioRegistroTramiteComponent implements OnInit {
 
-  @ViewChild(CRRegistroTramiteComponent) cancelarDialogRT !: CRRegistroTramiteComponent;
+  @ViewChild(CRRegistroTramiteComponent) crRegistroTramiteDialog !: CRRegistroTramiteComponent;
 
   registroTramiteForm !: FormGroup;
 
   cliente!: Cliente;
   tramites: Tramite[] = [];
-  nombreTramites: Tramite[] = [];
-  registro!: RegistroTramiteModel;
-  registro_Inicio!: RegistroHoraInicio
+  nombreTramites: Tramite[] = []; 
   
 
   constructor(
     private fb: FormBuilder,
     private clienteService: ClientesService,
     private messageService: MessageService,
-    private timestampService: TimestampService,
     private tramitesService: TramitesService,
     public authService: AuthService,
   ) { }
@@ -82,21 +78,13 @@ export class FormularioRegistroTramiteComponent implements OnInit {
       if (OK ==true) {
         this.cliente = this.clienteService.cliente;
         this.setAfiliadoData(this.cliente);
-        this.horaIncio();
         
       }else{
         this.setInvitadoData();
         this.mensajeDeErrorCedula();
-        this.horaIncio();
+
       }
     })
-  }
-
-  horaIncio(){
-    this.registro_Inicio ={
-      FECHA_INICIO    :   this.timestampService.fechaActual,
-      HORA_INICIO     :   this.timestampService.horaCompleta
-    }
   }
 
   agregarRegistroTramite(){
@@ -104,7 +92,7 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   }
 
   limpiarFormulario(){
-    this.cancelarDialogRT.limpiarDialog();
+    this.crRegistroTramiteDialog.limpiarDialog();
   }
 
   setInvitadoData(){
