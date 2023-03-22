@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-registro-tramite',
-  templateUrl: './registro-tramite.component.html'
+  templateUrl: './registro-tramite.component.html',
+  styles: [
+  ]
 })
 export class RegistroTramiteComponent implements OnInit {
 
-  constructor() { }
+  constructor( ) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+
   }
 
 }
