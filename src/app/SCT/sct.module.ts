@@ -25,7 +25,6 @@ import { CRRegistroTramiteComponent } from './components/cr-registro-tramite/cr-
 
 
 
-
 @NgModule({
   declarations: [
     RegistroEntradaComponent,
@@ -38,12 +37,14 @@ import { CRRegistroTramiteComponent } from './components/cr-registro-tramite/cr-
     TablaTramitesComponent,
     AsociarTramitesDialogComponent,
     FormularioRegistroEntradaComponent,
+    FormularioRegistroTramiteComponent,
 
     AEDTramiteComponent,
     AEDAreaComponent,
     RegistroTramiteComponent,
     FormularioRegistroTramiteComponent,
-    CRRegistroTramiteComponent
+    CRRegistroTramiteComponent,
+    RegistroTramiteComponent,
   ],
   imports: [
     CommonModule,

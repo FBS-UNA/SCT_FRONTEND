@@ -14,5 +14,4 @@ export class RegistroTramiteComponent implements OnInit {
 
   }
 
-
 }

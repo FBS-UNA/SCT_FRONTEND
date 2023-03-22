@@ -1,12 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Cliente } from '../../interfaces/cliente.interface';
 import { Tramite } from '../../interfaces/tramite.interface';
 import { ClientesService } from '../../services/clientes.service';
+import { TimestampService } from '../../services/timestamp.service';
 import { TramitesService } from '../../services/tramites.service';
 import { CRRegistroTramiteComponent } from '../cr-registro-tramite/cr-registro-tramite.component';
+import { RegistroTramiteModel } from '../../interfaces/registro-tramite.interface';
 
 
 @Component({
@@ -17,6 +19,8 @@ import { CRRegistroTramiteComponent } from '../cr-registro-tramite/cr-registro-t
 })
 export class FormularioRegistroTramiteComponent implements OnInit {
 
+  @Output() refreshData = new EventEmitter<void>();
+  @ViewChild('selectTramites') selectTramites!: any;
   @ViewChild(CRRegistroTramiteComponent) crRegistroTramiteDialog !: CRRegistroTramiteComponent;
 
   registroTramiteForm !: FormGroup;
@@ -24,7 +28,8 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   cliente!: Cliente;
   tramites: Tramite[] = [];
   nombreTramites: Tramite[] = []; 
-  
+  re_tramite!: RegistroTramiteModel;
+
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +37,7 @@ export class FormularioRegistroTramiteComponent implements OnInit {
     private messageService: MessageService,
     private tramitesService: TramitesService,
     public authService: AuthService,
+    private timestampService: TimestampService
   ) { }
 
   ngOnInit(){
@@ -39,6 +45,9 @@ export class FormularioRegistroTramiteComponent implements OnInit {
     this.cargarTramites();
   }
 
+  cargarDataEmit() {
+    this.refreshData.emit();
+  }
   get controls(): any {
     return this.registroTramiteForm.controls;
   }
@@ -115,9 +124,32 @@ export class FormularioRegistroTramiteComponent implements OnInit {
     return this.controls[campo].errors && this.controls[campo].touched;
   }
 
-  borrar() {
-    this.ngOnInit();
-    this.nombreTramites = [];
+  confirmar(){
+    const formValue = { ...this.registroTramiteForm.value };
+    if (this.registroTramiteForm.invalid) {
+      this.registroTramiteForm.markAllAsTouched();
+      return ;
+    }
+
+    this.setReTramite();
+
+  }
+
+  setReTramite(){
+    this.re_tramite = {
+      CEDULA_CLIENTE : this.controls['CEDULA'].value,
+      NOMBRE_TRAMITE : this.selectTramites.selectedOption.NOMBRE_TRAMITE,
+      ID_TRAMITE : this.controls['TRAMITE'].value,
+      DESCRIPCION :this.controls['DESCRIPCION'].value,
+      FECHA: this.timestampService.fechaActual,
+      HORA: this.timestampService.horaCompleta
+    };
+
+    this.confirmarTramiteDialog();
+  }
+
+  confirmarTramiteDialog(){
+    this.crRegistroTramiteDialog.cargarReTramiteDialog(this.re_tramite);
   }
 
 }
