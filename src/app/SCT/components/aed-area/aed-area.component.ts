@@ -10,6 +10,9 @@ import { TimestampService } from '../../services/timestamp.service';
   styles: [
   ]
 })
+// A -> Add
+// E -> Edit
+// D -> Delete
 export class AEDAreaComponent implements OnInit {
 
   @Output() refreshData = new EventEmitter<void>();
