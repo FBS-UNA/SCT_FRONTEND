@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { RegistroTramiteModel } from '../../interfaces/registro-tramite.interface';
 import { FormularioRegistroTramiteComponent } from '../formulario-registro-tramite/formulario-registro-tramite.component';
+import { RegistroTramiteService } from '../../services/registro-tramite.service';
 
 @Component({
   selector: 'app-cr-regsitro-tramite',
@@ -10,13 +12,17 @@ import { FormularioRegistroTramiteComponent } from '../formulario-registro-trami
 })
 export class CRRegistroTramiteComponent implements OnInit {
 
+  @Output() resetForm : EventEmitter<void> = new EventEmitter();
 
-  cancelarDialog: boolean = false;
+  reTramiteDialog: boolean = false;
+
+  re_tramite!: RegistroTramiteModel;
 
   constructor(    
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private formularioRegistroTramite: FormularioRegistroTramiteComponent
+    private formularioRegistroTramite: FormularioRegistroTramiteComponent,
+    private re_tramiteService: RegistroTramiteService,
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +38,38 @@ export class CRRegistroTramiteComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El formulario se ha limpiado correctamente` });
       }
     });
+  }
+
+   resetFormEmit() {
+    this.resetForm.emit();
+  }
+
+  abrirDialogConfirmacion() {
+    this.reTramiteDialog = true;
+  }
+
+  agregarRegistroTramite() {
+    this.re_tramiteService.addRegistro(this.re_tramite).subscribe(res => {
+      if (res.OK) {
+        this.resetFormEmit();
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El registro del trámite se ha agregado correctamente` });
+      }
+    });
+  }
+
+  confirmarRegistroTramite() {
+    this.agregarRegistroTramite();
+    this.cerrarDialogConfirmacion();
+
+  }
+
+  cerrarDialogConfirmacion() {
+    this.reTramiteDialog = false;
+  }
+
+  cargarReTramiteDialog(reTramite: RegistroTramiteModel){
+    this.re_tramite = {...reTramite};
+    this.abrirDialogConfirmacion();
   }
 
 }
