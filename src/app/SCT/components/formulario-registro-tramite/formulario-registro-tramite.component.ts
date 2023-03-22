@@ -5,7 +5,6 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { Cliente } from '../../interfaces/cliente.interface';
 import { Tramite } from '../../interfaces/tramite.interface';
 import { ClientesService } from '../../services/clientes.service';
-import { TimestampService } from '../../services/timestamp.service';
 import { TramitesService } from '../../services/tramites.service';
 import { CRRegistroTramiteComponent } from '../cr-registro-tramite/cr-registro-tramite.component';
 
@@ -80,15 +79,10 @@ export class FormularioRegistroTramiteComponent implements OnInit {
         this.setAfiliadoData(this.cliente);
         
       }else{
-        this.setInvitadoData();
         this.mensajeDeErrorCedula();
 
       }
     })
-  }
-
-  agregarRegistroTramite(){
-    
   }
 
   limpiarFormulario(){
@@ -121,6 +115,9 @@ export class FormularioRegistroTramiteComponent implements OnInit {
     return this.controls[campo].errors && this.controls[campo].touched;
   }
 
-
+  borrar() {
+    this.ngOnInit();
+    this.nombreTramites = [];
+  }
 
 }
