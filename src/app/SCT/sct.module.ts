@@ -19,7 +19,7 @@ import { FormularioRegistroEntradaComponent } from './components/formulario-regi
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { AEDTramiteComponent } from './components/aed-tramite/aed-tramite.component';
 import { AEDAreaComponent } from './components/aed-area/aed-area.component';
-import { AedRegistroTramiteComponent } from './components/aed-registro-tramite/aed-registro-tramite.component';
+import { ConfirmarRegistroTramite } from './components/confirmar-registro-tramite/confirmar-registro-tramite.component';
 import { RegistroTramiteComponent } from './pages/registro-tramite/registro-tramite.component';
 import { FormularioRegistroTramiteComponent } from './components/formulario-registro-tramite/formulario-registro-tramite.component';
 
@@ -41,7 +41,7 @@ import { FormularioRegistroTramiteComponent } from './components/formulario-regi
     AEDTramiteComponent,
     AEDAreaComponent,
     RegistroTramiteComponent,
-    AedRegistroTramiteComponent,
+    ConfirmarRegistroTramite,
     RegistroTramiteComponent,
   ],
   imports: [

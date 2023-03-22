@@ -8,17 +8,17 @@ import { TramitesService } from '../../services/tramites.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { RegistroTramiteModel } from '../../interfaces/registro-tramite.interface';
 import { TimestampService } from '../../services/timestamp.service';
-import { AedRegistroTramiteComponent } from '../aed-registro-tramite/aed-registro-tramite.component';
+import { ConfirmarRegistroTramite } from '../confirmar-registro-tramite/confirmar-registro-tramite.component';
 
 @Component({
-  selector: 'app-formulario-registro-tamite',
+  selector: 'app-formulario-registro-tramite',
   templateUrl: './formulario-registro-tramite.component.html'
 })
 export class FormularioRegistroTramiteComponent implements OnInit {
 
 
   @Output() refreshData = new EventEmitter<void>();
-  @ViewChild(AedRegistroTramiteComponent) AedReTramiteDialog!: AedRegistroTramiteComponent;
+  @ViewChild(ConfirmarRegistroTramite) ConfReTramiteDialog!: ConfirmarRegistroTramite;
   @ViewChild('selectTramites') selectTramites!: any;
 
   registroTramiteForm !: FormGroup;
@@ -153,7 +153,7 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   }
 
   confirmarTramiteDialog(){
-    this.AedReTramiteDialog.cargarReTramiteDialog(this.re_tramite);
+    this.ConfReTramiteDialog.cargarReTramiteDialog(this.re_tramite);
   }
 
 }
