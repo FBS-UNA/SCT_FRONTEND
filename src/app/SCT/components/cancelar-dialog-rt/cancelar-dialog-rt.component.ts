@@ -24,12 +24,12 @@ export class CancelarDialogRTComponent implements OnInit {
 
   mostrarDialog() {
     this.confirmationService.confirm({
-      message: `¿Está seguro(a) de que limpiar el formulario?`,
+      message: `¿Está seguro(a) de que desea limpiar el formulario?`,
       header: '¡Cuidado!',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.formularioRegistroTramite.resetearFormulario();
-        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El formularui se ha limpiado correctamente` });
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El formulario se ha limpiado correctamente` });
       }
     });
   }
