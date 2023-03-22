@@ -3,15 +3,15 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormularioRegistroTramiteComponent } from '../formulario-registro-tramite/formulario-registro-tramite.component';
 
 @Component({
-  selector: 'app-cancelar-dialog-rt',
-  templateUrl: './cancelar-dialog-rt.component.html',
+  selector: 'app-cr-regsitro-tramite',
+  templateUrl: './cr-registro-tramite.component.html',
   styles: [
   ]
 })
-export class CancelarDialogRTComponent implements OnInit {
+export class CRRegistroTramiteComponent implements OnInit {
 
 
-  display: boolean = false;
+  cancelarDialog: boolean = false;
 
   constructor(    
     private confirmationService: ConfirmationService,
@@ -22,7 +22,7 @@ export class CancelarDialogRTComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  mostrarDialog() {
+  limpiarDialog() {
     this.confirmationService.confirm({
       message: `¿Está seguro(a) de que desea limpiar el formulario?`,
       header: '¡Cuidado!',

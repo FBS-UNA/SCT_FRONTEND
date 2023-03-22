@@ -8,7 +8,8 @@ import { Tramite } from '../../interfaces/tramite.interface';
 import { ClientesService } from '../../services/clientes.service';
 import { TimestampService } from '../../services/timestamp.service';
 import { TramitesService } from '../../services/tramites.service';
-import { CancelarDialogRTComponent } from '../cancelar-dialog-rt/cancelar-dialog-rt.component';
+import { CRRegistroTramiteComponent } from '../cancelar-dialog-rt/cr-registro-tramite.component';
+
 
 @Component({
   selector: 'app-formulario-registro-tramite',
@@ -18,7 +19,7 @@ import { CancelarDialogRTComponent } from '../cancelar-dialog-rt/cancelar-dialog
 })
 export class FormularioRegistroTramiteComponent implements OnInit {
 
-  @ViewChild(CancelarDialogRTComponent) cancelarDialogRT !: CancelarDialogRTComponent;
+  @ViewChild(CRRegistroTramiteComponent) cancelarDialogRT !: CRRegistroTramiteComponent;
 
   registroTramiteForm !: FormGroup;
 
@@ -103,7 +104,7 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   }
 
   limpiarFormulario(){
-    this.cancelarDialogRT.mostrarDialog();
+    this.cancelarDialogRT.limpiarDialog();
   }
 
   setInvitadoData(){

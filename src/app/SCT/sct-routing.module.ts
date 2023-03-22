@@ -5,7 +5,7 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { MantenimientoAreasComponent } from './pages/mantenimiento-areas/mantenimiento-areas.component';
 import { MantenimientoTramitesComponent } from './pages/mantenimiento-tramites/mantenimiento-tramites.component';
 import { MainComponent } from './pages/main/main.component';
-import { RegistroTamiteComponent } from './pages/registro-tamite/registro-tamite.component';
+import { RegistroTramiteComponent } from './pages/registro-tramite/registro-tramite.component';
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
     children:[
       {path: 'inicio', component: InicioComponent},
       {path: 'registroentrada', component: RegistroEntradaComponent},
-      {path: 'registrotramite', component: RegistroTamiteComponent},
+      {path: 'registrotramite', component: RegistroTramiteComponent},
       {path: 'mantenimientoareas', component: MantenimientoAreasComponent},
       {path: 'mantenimientotramites', component: MantenimientoTramitesComponent},
       {path: '**', redirectTo: 'inicio'},
