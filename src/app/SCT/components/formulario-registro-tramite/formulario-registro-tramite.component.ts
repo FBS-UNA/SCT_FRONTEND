@@ -8,7 +8,7 @@ import { Tramite } from '../../interfaces/tramite.interface';
 import { ClientesService } from '../../services/clientes.service';
 import { TimestampService } from '../../services/timestamp.service';
 import { TramitesService } from '../../services/tramites.service';
-import { CRRegistroTramiteComponent } from '../cancelar-dialog-rt/cr-registro-tramite.component';
+import { CRRegistroTramiteComponent } from '../cr-registro-tramite/cr-registro-tramite.component';
 
 
 @Component({

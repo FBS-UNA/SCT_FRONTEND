@@ -21,7 +21,7 @@ import { AEDTramiteComponent } from './components/aed-tramite/aed-tramite.compon
 import { AEDAreaComponent } from './components/aed-area/aed-area.component';
 import { RegistroTramiteComponent } from './pages/registro-tramite/registro-tramite.component';
 import { FormularioRegistroTramiteComponent } from './components/formulario-registro-tramite/formulario-registro-tramite.component';
-import { CRRegistroTramiteComponent } from './components/cancelar-dialog-rt/cr-registro-tramite.component';
+import { CRRegistroTramiteComponent } from './components/cr-registro-tramite/cr-registro-tramite.component';
 
 
 
