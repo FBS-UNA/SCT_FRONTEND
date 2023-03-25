@@ -86,6 +86,10 @@
                 >
 
             </p-dropdown>
+            <small class="p-error block" *ngIf="esInvalido('AREA')">
+                <i class="pi pi-exclamation-circle"></i>
+                El área es obligatoria
+            </small>
         </div>
         <div class="col-lg-6 col-md-12">
             <label class="fbs-roboto-300" for="float-input">
@@ -100,8 +104,11 @@
                 optionValue="NOMBRE_TRAMITE"
                 placeholder="Seleccione un motivo"
                 >
-
             </p-dropdown>
+            <small class="p-error block" *ngIf="esInvalido('MOTIVO')">
+                <i class="pi pi-exclamation-circle"></i>
+                El trámite motivo de la visita es obligatorio
+            </small>
         </div>
     </div>
 
