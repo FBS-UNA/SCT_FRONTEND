@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       ruta: './registrotramite',
-      nombre: 'Registro de tramite'
+      nombre: 'Registro de trámite'
     },
     {
       ruta: './registroentrada',
