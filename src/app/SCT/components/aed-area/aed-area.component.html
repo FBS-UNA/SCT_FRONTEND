@@ -10,13 +10,13 @@
     </ng-template>
 
     <ng-template pTemplate="content">
-        <div class="field">
+        <div class="field mb-2">
             <label for="name">Nombre</label>
             <input type="text" pInputText id="name" [(ngModel)]="area.NOMBRE_AREA" required autofocus />
             <small class="p-error" *ngIf="submitted && !area.NOMBRE_AREA">El nombre es obligatorio</small>
         </div>
         <div class="field">
-            <label for="description">Descripcion</label>
+            <label for="description">Descripción</label>
             <textarea id="description" pInputTextarea [(ngModel)]="area.DESCRIPCION_AREA" rows="3" cols="20"></textarea>
         </div>
 

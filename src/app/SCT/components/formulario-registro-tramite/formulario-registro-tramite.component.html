@@ -1,17 +1,15 @@
-<form  class="p-fluid" [formGroup]="registroTramiteForm" autocomplete="off" >
+<form class="p-fluid" [formGroup]="registroTramiteForm" autocomplete="off">
 
     <div class="row mb-3">
         <div class="col-lg-6 col-md-12">
-            <label class="fbs-roboto-300">Cédula cliente</label>
+            <label class="fbs-roboto-300">
+                Cédula del Cliente
+                <span class="text-danger">*</span>
+            </label>
             <div class="p-inputgroup">
-                <input type="text"
-                    #inputCedula
-                    pInputText
-                    pAutoFocus
-                    [autofocus]="true"
-                    formControlName="CEDULA"
+                <input type="text" #inputCedula pInputText pAutoFocus [autofocus]="true" formControlName="CEDULA"
                     (keyup.enter)="buscar()">
-                    
+
                 <span class="p-inputgroup-addon"><i class="pi pi-search" (click)="buscar()"></i></span>
             </div>
             <small class="p-error block" *ngIf="esInvalido('CEDULA')">
@@ -20,75 +18,79 @@
             </small>
         </div>
         <div class="col-lg-6 col-md-12">
-            <label class="fbs-roboto-300" >Tipo de Afiliación</label>
+            <label class="fbs-roboto-300">Tipo de Afiliación</label>
             <span class="p-float-label">
-                <input class="form-control shadow disabled" type="text" pInputText 
-                    formControlName="TIPO_CLIENTE">
+                <input class="form-control shadow disabled" type="text" pInputText formControlName="TIPO_CLIENTE">
             </span>
         </div>
     </div>
 
     <div class="row mb-3">
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <label class="fbs-roboto-300" for="float-input">Nombre</label>
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText
-                formControlName="NOMBRE"
+        <div class="col-lg-4 col-md-12">
+            <label class="fbs-roboto-300" for="float-input">
+                Nombre
+                <span class="text-danger">*</span>
+            </label>
+            <input id="float-input" type="text" pInputText formControlName="NOMBRE"
                 class="form-control shadow disabled">
-            </span>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <label class="fbs-roboto-300" for="float-input">Apellido 1</label>
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText
-                formControlName="APELLIDO_1"
+        <div class="col-lg-4 col-md-12">
+            <label class="fbs-roboto-300" for="float-input">
+                Primer Apellido
+                <span class="text-danger">*</span>
+            </label>
+
+            <input id="float-input" type="text" pInputText formControlName="APELLIDO_1"
                 class="form-control shadow disabled">
-            </span>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <label class="fbs-roboto-300" for="float-input">Apellido 2</label>
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText
-                formControlName="APELLIDO_2"
-                class="form-control shadow disabled">
-            </span>
+        <div class="col-lg-4 col-md-12">
+            <label class="fbs-roboto-300" for="float-input">
+                Segundo Apellido
+            </label>
+
+            <input id="float-input" type="text" pInputText formControlName="APELLIDO_2" class="form-control shadow"
+                placeholder="Opcional">
+
         </div>
     </div>
 
     <div class="row mb-3">
         <div class="col-lg-12 col-md-12">
-            <label class="fbs-roboto-300" for="float-input">Trámite Realizado</label>
+            <label class="fbs-roboto-300" for="float-input">
+                Trámite Realizado
+                <span class="text-danger">*</span>
+            </label>
             <div>
-                <p-dropdown
-                    #selectTramites
-                    [options]="nombreTramites"
-                    [editable]="false"
-                    optionLabel="NOMBRE_TRAMITE" 
-                    optionValue="ID_TRAMITE"
-                    placeholder="Seleccione Trámite"
-                    formControlName="TRAMITE">
+                <p-dropdown #selectTramites [options]="nombreTramites" [editable]="false" optionLabel="NOMBRE_TRAMITE"
+                    optionValue="ID_TRAMITE" placeholder="Seleccione Trámite" formControlName="TRAMITE">
                 </p-dropdown>
             </div>
             <small class="p-error block" *ngIf="esInvalido('TRAMITE')">
                 <i class="pi pi-exclamation-circle"></i>
-                Favor seleccionar el tramite realizado
+                Favor seleccionar el trámite realizado
             </small>
         </div>
     </div>
 
-    <div class="row mb-2 mx-auto">
-        <label class="fbs-roboto-300">Descripción</label>
-        <textarea rows="3" cols="30" pInputTextarea [autoResize]="true" formControlName="DESCRIPCION" placeholder="Opcional"></textarea>
+    <div class="row mb-2">
+        <div class="col-lg-12 col-md-12">
+
+            <label class="fbs-roboto-300">Descripción</label>
+            <textarea rows="3" cols="30" pInputTextarea [autoResize]="true" formControlName="DESCRIPCION"
+                placeholder="Opcional"></textarea>
+        </div>
     </div>
 
     <div class="row mb-1">
         <div class="col">
             <div class="row float-end">
                 <div class="col">
-                    <p-button label="Limpiar" styleClass="p-button-danger" icon="pi pi-trash" (click)="limpiarFormulario()"></p-button>
+                    <p-button label="Limpiar" styleClass="p-button-danger" icon="pi pi-trash"
+                        (click)="limpiarFormulario()"></p-button>
                 </div>
                 <div class="col">
-                    <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check" (click)="confirmar()"></p-button>      
+                    <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check"
+                        (click)="confirmar()"></p-button>
                 </div>
             </div>
         </div>
@@ -97,4 +99,4 @@
 </form>
 
 <!-- Componentes necesarios -->
-<app-cr-regsitro-tramite></app-cr-regsitro-tramite>
+<app-cr-regsitro-tramite (resetForm)="resetearFormulario()"></app-cr-regsitro-tramite>

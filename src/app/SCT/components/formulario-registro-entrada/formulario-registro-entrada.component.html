@@ -1,15 +1,13 @@
-<form  class="p-fluid" [formGroup]="registroEntradaForm" autocomplete="off" >
+<form class="p-fluid" [formGroup]="registroEntradaForm" autocomplete="off">
 
     <div class="row mb-2">
         <div class="col-lg-6 col-md-12">
-            <label class="fbs-roboto-300">Cédula cliente</label>
+            <label class="fbs-roboto-300">
+                Cédula del Cliente
+                <span class="text-danger">*</span>
+            </label>
             <div class="p-inputgroup">
-                <input type="text"
-                    #inputCedula
-                    pInputText
-                    pAutoFocus
-                    [autofocus]="true"
-                    formControlName="CEDULA"
+                <input type="text" #inputCedula pInputText pAutoFocus [autofocus]="true" formControlName="CEDULA"
                     (keyup.enter)="buscar()">
                 <span class="p-inputgroup-addon"><i class="pi pi-search" (click)="buscar()"></i></span>
             </div>
@@ -19,74 +17,75 @@
             </small>
         </div>
         <div class="col-lg-6 col-md-12">
-            <label class="fbs-roboto-300" >Tipo de Afiliación</label>
+            <label class="fbs-roboto-300">Tipo de Afiliación</label>
             <span class="p-float-label">
-                <input class="form-control shadow disabled" type="text" pInputText 
-                formControlName="TIPO_CLIENTE"
-                >
+                <input class="form-control shadow disabled" type="text" pInputText formControlName="TIPO_CLIENTE">
             </span>
         </div>
     </div>
 
     <div class="row mb-2">
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <label class="fbs-roboto-300" for="float-input">Nombre</label>
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText
-                formControlName="NOMBRE"
+            <label class="fbs-roboto-300" for="float-input">
+                Nombre
+                <span class="text-danger">*</span>
+            </label>
+            <input id="float-input" type="text" pInputText formControlName="NOMBRE"
                 class="form-control shadow disabled">
-            </span>
+
             <small class="p-error block" *ngIf="esInvalido('NOMBRE')">
                 <i class="pi pi-exclamation-circle"></i>
                 Ingrese el nombre
             </small>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <label class="fbs-roboto-300" for="float-input">Apellido 1</label>
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText
-                formControlName="APELLIDO_1"
+            <label class="fbs-roboto-300" for="float-input">
+                Primer Apellido
+                <span class="text-danger">*</span>
+            </label>
+            <input id="float-input" type="text" pInputText formControlName="APELLIDO_1"
                 class="form-control shadow disabled">
-            </span>
+
             <small class="p-error block" *ngIf="esInvalido('APELLIDO_1')">
                 <i class="pi pi-exclamation-circle"></i>
-                Ingrese el Apellido 1
+                Ingrese el primer apellido
             </small>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <label class="fbs-roboto-300" for="float-input">Apellido 2</label>
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText
-                formControlName="APELLIDO_2"
+            <label class="fbs-roboto-300" for="float-input">Segundo Apellido</label>
+            <input id="float-input" type="text" pInputText formControlName="APELLIDO_2" placeholder="Opcional"
                 class="form-control shadow disabled">
-            </span>
+
         </div>
     </div>
 
     <div class="row mb-4">
         <div class="col-lg-6 col-md-12">
-            <label class="fbs-roboto-300" for="float-input">Área</label>
-            <p-dropdown [options]="nombreAreas" 
-                formControlName="AREA"
-                optionLabel="NOMBRE_AREA" 
-                optionValue="ID_AREA"
-                placeholder="Seleccione un área"
-                >
+            <label class="fbs-roboto-300" for="float-input">
+                Área
+                <span class="text-danger">*</span>
+            </label>
+            <p-dropdown [options]="nombreAreas" formControlName="AREA" optionLabel="NOMBRE_AREA" optionValue="ID_AREA"
+                placeholder="Seleccione un área">
 
             </p-dropdown>
+            <small class="p-error block" *ngIf="esInvalido('AREA')">
+                <i class="pi pi-exclamation-circle"></i>
+                El área es obligatoria
+            </small>
         </div>
         <div class="col-lg-6 col-md-12">
-            <label class="fbs-roboto-300" for="float-input">Motivo de la visita</label>
-            <p-dropdown 
-                [options]="nombreTramites"
-                [editable]="true"
-                formControlName="MOTIVO"
-                optionLabel="NOMBRE_TRAMITE" 
-                optionValue="NOMBRE_TRAMITE"
-                placeholder="Seleccione un motivo"
-                >
-
+            <label class="fbs-roboto-300" for="float-input">
+                Motivo de la visita
+                <span class="text-danger">*</span>
+            </label>
+            <p-dropdown [options]="nombreTramites" [editable]="true" formControlName="MOTIVO"
+                optionLabel="NOMBRE_TRAMITE" optionValue="NOMBRE_TRAMITE" placeholder="Seleccione un motivo">
             </p-dropdown>
+            <small class="p-error block" *ngIf="esInvalido('MOTIVO')">
+                <i class="pi pi-exclamation-circle"></i>
+                Favor seleccionar un motivo de visita
+            </small>
         </div>
     </div>
 
@@ -94,11 +93,13 @@
         <div class="col">
             <div class="row float-end">
                 <div class="col">
-                    <p-button label="Limpiar" styleClass="p-button-danger" icon="pi pi-trash" (click)="borrar(); inputCedula.focus()"></p-button>
+                    <p-button label="Limpiar" styleClass="p-button-danger" icon="pi pi-trash"
+                        (click)="borrar(); inputCedula.focus()"></p-button>
                 </div>
                 <div class="col">
-                    <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check" (click)="registrar(); inputCedula.focus()"></p-button>
-                    
+                    <p-button label="Registrar" styleClass="p-button-warning" icon="pi pi-check"
+                        (click)="registrar(); inputCedula.focus()"></p-button>
+
                 </div>
             </div>
         </div>

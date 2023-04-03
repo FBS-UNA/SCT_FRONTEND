@@ -30,7 +30,7 @@ export class TablaAreasComponent implements OnInit {
     { field: 'ID_AREA', header: 'Código', style: 'width: 10%' },
     { field: 'NOMBRE_AREA', header: 'Nombre', style: 'width: 15%' },
     { field: 'DESCRIPCION_AREA', header: 'Descripción', style: 'width: 40%' },
-    { field: 'FECHA', header: 'Fecha de creacion', style: 'width: 20%' },
+    { field: 'FECHA', header: 'Fecha de creación', style: 'width: 20%' },
     { field: '', header: '', style: 'width: 15%' },
   ]
   

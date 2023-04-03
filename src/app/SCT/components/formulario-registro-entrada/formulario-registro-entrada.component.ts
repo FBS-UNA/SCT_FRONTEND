@@ -55,7 +55,7 @@ export class FormularioRegistroEntradaComponent implements OnInit{
 
   resetearFormulario(){
     this.registroEntradaForm = this.fb.group({
-      CEDULA: ['', [Validators.required, Validators.minLength(9)]],
+      CEDULA: ['', [Validators.required, Validators.minLength(9), Validators.pattern('^([A-Za-z]\\d{8}|\\d{9})$')]],
       TIPO_CLIENTE: [{ value: '', disabled: true }],
       NOMBRE: [{ value: '', disabled: true }, Validators.required],
       APELLIDO_1: [{ value: '', disabled: true }, Validators.required],

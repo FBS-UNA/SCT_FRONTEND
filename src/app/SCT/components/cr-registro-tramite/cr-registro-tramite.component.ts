@@ -12,13 +12,13 @@ import { RegistroTramiteService } from '../../services/registro-tramite.service'
 })
 export class CRRegistroTramiteComponent implements OnInit {
 
-  @Output() resetForm : EventEmitter<void> = new EventEmitter();
+  @Output() resetForm: EventEmitter<void> = new EventEmitter();
 
   reTramiteDialog: boolean = false;
 
   re_tramite!: RegistroTramiteModel;
 
-  constructor(    
+  constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private formularioRegistroTramite: FormularioRegistroTramiteComponent,
@@ -40,7 +40,7 @@ export class CRRegistroTramiteComponent implements OnInit {
     });
   }
 
-   resetFormEmit() {
+  resetFormEmit() {
     this.resetForm.emit();
   }
 
@@ -67,8 +67,8 @@ export class CRRegistroTramiteComponent implements OnInit {
     this.reTramiteDialog = false;
   }
 
-  cargarReTramiteDialog(reTramite: RegistroTramiteModel){
-    this.re_tramite = {...reTramite};
+  cargarReTramiteDialog(reTramite: RegistroTramiteModel) {
+    this.re_tramite = { ...reTramite };
     this.abrirDialogConfirmacion();
   }
 

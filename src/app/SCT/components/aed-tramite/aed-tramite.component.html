@@ -1,26 +1,27 @@
-
-<p-toast ></p-toast>
+<p-toast></p-toast>
 
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
-<p-dialog [(visible)]="tramiteDialog" [style]="{width: '600px'}" [draggable]="false"
-    [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="tramiteDialog" [style]="{width: '600px'}" [draggable]="false" [modal]="true"
+    styleClass="p-fluid">
 
     <ng-template pTemplate="header">
         <h1 class="fbs-roboto-300">Detalles del Trámite</h1>
     </ng-template>
 
     <ng-template pTemplate="content">
-        <div class="field">
+
+        <div class="field mb-2">
             <label for="name">Nombre</label>
             <input type="text" pInputText id="name" [(ngModel)]="tramite.NOMBRE_TRAMITE" required autofocus />
             <small class="p-error" *ngIf="submitted && !tramite.NOMBRE_TRAMITE">El nombre es obligatorio</small>
         </div>
         <div class="field">
-            <label for="description">Descripcion</label>
+            <label for="description">Descripción</label>
             <textarea id="description" pInputTextarea [(ngModel)]="tramite.DESCRIPCION_TRAMITE" rows="3"
                 cols="20"></textarea>
         </div>
+
 
         <div *ngIf="editando" class="formgrid row">
             <div class="field col">
