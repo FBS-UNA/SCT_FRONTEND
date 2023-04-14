@@ -6,6 +6,7 @@ import { MantenimientoAreasComponent } from './pages/mantenimiento-areas/manteni
 import { MantenimientoTramitesComponent } from './pages/mantenimiento-tramites/mantenimiento-tramites.component';
 import { MainComponent } from './pages/main/main.component';
 import { RegistroTramiteComponent } from './pages/registro-tramite/registro-tramite.component';
+import { AsignacionRolesComponent } from './pages/asignacion-roles/asignacion-roles.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path: 'registrotramite', component: RegistroTramiteComponent},
       {path: 'mantenimientoareas', component: MantenimientoAreasComponent},
       {path: 'mantenimientotramites', component: MantenimientoTramitesComponent},
+      {path: 'asignacionroles', component: AsignacionRolesComponent },
       {path: '**', redirectTo: 'inicio'},
     ]
   }
