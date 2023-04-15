@@ -24,4 +24,5 @@ export interface Usuario {
     APELLIDO_2      : string;
     NOMBRE_COMPLETO : string;
     ROL             : string;
+    FECHA_NAC      ?: Date | string;
 }
