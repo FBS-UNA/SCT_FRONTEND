@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableCols } from '../../interfaces/table.interface';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-asignacion-roles',
@@ -23,6 +24,10 @@ export class AsignacionRolesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  
+  clear(table: Table) {
+    table.clear();
   }
 
 }
