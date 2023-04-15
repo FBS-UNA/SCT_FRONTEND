@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TableCols } from '../../interfaces/table.interface';
 
 @Component({
   selector: 'app-asignacion-roles',
@@ -7,6 +8,17 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class AsignacionRolesComponent implements OnInit {
+
+  loading!: boolean;
+
+  cols: TableCols[] = [
+    { field: '', header: 'Cédula', style: 'width: 10%' },
+    { field: '', header: 'Nombre', style: 'width: 10%' },
+    { field: '', header: 'Primer Apellido', style: 'width: 11%' },
+    { field: '', header: 'Segundo Apellido', style: 'width: 12%' },
+    { field: '', header: 'Fecha de Nacimiento', style: 'width: 15%' },
+    { field: '', header: 'Roles', style: 'width: 10%' },
+  ]
 
   constructor() { }
 
