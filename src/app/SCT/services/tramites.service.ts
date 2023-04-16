@@ -42,15 +42,16 @@ export class TramitesService {
 
   getTramitesHabilitados(){
     const url = `${this.baseUrl}/tramites/habilitados`;
-
     return this.http.get<TramiteResponse>(url).pipe(
       catchError(err => of(err.error.msg))
     );
   }
 
-  getTramitesAsociados(idArea: number) {
+  getTramitesAsociados(idArea: number, habilidados?: number) {
     const url = `${this.baseUrl}/tramites-areas/asociados`;
-    const headers = new HttpHeaders().set('id-area', idArea.toString());
+    const headers = new HttpHeaders()
+      .set('id-area', idArea.toString())
+      .set('habilitados',habilidados?.toString() || '-1')
 
     return this.http.get<TramitesAsociados>(url, { headers }).pipe(
       catchError(err => of(err.error.msg))
