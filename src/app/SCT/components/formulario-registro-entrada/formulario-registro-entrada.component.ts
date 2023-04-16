@@ -79,7 +79,7 @@ export class FormularioRegistroEntradaComponent implements OnInit{
       tap( ( _ ) =>{
         this.registroEntradaForm.get('MOTIVO')?.reset('');
         this.nombreTramites = [];
-      }), switchMap( area => this.tramitesService.getTramitesAsociados(area))
+      }), switchMap( idArea => this.tramitesService.getTramitesAsociados(idArea, 1))
       ).subscribe( ({OK, LISTA_TRAMITES_ASOCIADOS}) =>{
         if(OK === true){
           this.nombreTramites = LISTA_TRAMITES_ASOCIADOS;

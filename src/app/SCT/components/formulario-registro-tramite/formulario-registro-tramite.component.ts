@@ -71,9 +71,9 @@ export class FormularioRegistroTramiteComponent implements OnInit {
 
 
   cargarTramites() {
-    this.tramitesService.getTramites().subscribe(OK => {
-      if (OK) {
-        this.tramites = this.tramitesService.tramites;
+    this.tramitesService.getTramitesHabilitados().subscribe(res => {
+      if (res.OK) {
+        this.tramites = res.TRAMITES;
         this.nombreTramites = this.tramites.map(({NOMBRE_TRAMITE, ID_TRAMITE})=>{
           return {NOMBRE_TRAMITE, ID_TRAMITE}
         })
