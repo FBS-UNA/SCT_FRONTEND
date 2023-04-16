@@ -8,10 +8,15 @@ import { catchError, delay, map, of, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuariosServicesService {
+export class UsuariosService {
 
   private baseUrl : string = environment.baseUrl;
   private _usuarios : Usuario[]=[];
+
+
+  get usuarios(){
+    return [...this._usuarios];
+  }
 
   constructor(
     private http: HttpClient
