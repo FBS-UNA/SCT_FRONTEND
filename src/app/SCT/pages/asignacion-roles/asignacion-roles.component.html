@@ -15,10 +15,10 @@
             </div>
         </div>
         
-        <p-table #dt dataKey="id" [columns]="cols" [loading]="loading" 
+         <p-table #dt dataKey="id" [columns]="cols" [value]="usuarios" [loading]="loading" 
         [rowsPerPageOptions]="[10,25,50]" [rows]="15" [rowHover]="true" [paginator]="true" [showCurrentPageReport]="true"
-        currentPageReportTemplate="{first} a {last} de {totalRecords} páginas"
-        [globalFilterFields]="[]">
+        currentPageReportTemplate="{first} a {last} de {totalRecords} páginas">
+           
            
             <ng-template pTemplate="header" let-columns>
                 <tr>
@@ -29,8 +29,18 @@
                     </th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" >
-                
+            <ng-template pTemplate="body" let-usuario>
+                <tr>
+                    <td>{{usuario.CEDULA}}</td>
+                    <td>{{usuario.NOMBRE | titlecase}}</td>
+                    <td>{{usuario.APELLIDO_1}}</td>
+                    <td>{{usuario.APELLIDO_2}}</td>
+                    <td>{{usuario.FECHA_NAC | date : 'dd/MM/YYYY'}}</td>
+                    <td>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning me-2"
+                            ></button>
+                    </td>
+                </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <tr>
