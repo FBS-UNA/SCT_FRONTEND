@@ -132,6 +132,7 @@ export class FormularioRegistroEntradaComponent implements OnInit{
     this.clienteService.getCliente(this.controls['CEDULA'].value).subscribe(OK => {
       if (OK ==true) {
         this.cliente = this.clienteService.cliente;
+        console.log(this.cliente)
         this.setAfiliadoData(this.cliente);
         this.habilitarInputs();
       }else{
