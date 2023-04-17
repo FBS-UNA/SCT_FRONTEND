@@ -43,7 +43,6 @@ export class TablaAsignacionRolesComponent implements OnInit {
       if (OK) {
         this.loading = false;
         this.usuarios = this.usuarioService.usuarios;
-        console.log(this.usuarios)
       }
     });
   }
