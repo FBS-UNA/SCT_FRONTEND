@@ -20,11 +20,11 @@ export class TablaAsignacionRolesComponent implements OnInit {
   usuarios: Usuario[] = [];
 
   cols: TableCols[] = [
-    { field: '', header: 'Cédula', style: 'width: 10%' },
-    { field: '', header: 'Nombre', style: 'width: 10%' },
-    { field: '', header: 'Primer Apellido', style: 'width: 11%' },
-    { field: '', header: 'Segundo Apellido', style: 'width: 12%' },
-    { field: '', header: 'Fecha de Nacimiento', style: 'width: 15%' },
+    { field: 'CEDULA', header: 'Cédula', style: 'width: 10%' },
+    { field: 'NOMBRE', header: 'Nombre', style: 'width: 10%' },
+    { field: 'APELLIDO_1', header: 'Primer Apellido', style: 'width: 11%' },
+    { field: 'APELLIDO_2', header: 'Segundo Apellido', style: 'width: 12%' },
+    { field: 'FECHA_NAC', header: 'Fecha de Nacimiento', style: 'width: 15%' },
     { field: '', header: 'Roles', style: 'width: 10%' },
   ]
 
