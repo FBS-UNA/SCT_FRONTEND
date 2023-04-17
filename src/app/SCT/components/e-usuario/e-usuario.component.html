@@ -40,7 +40,10 @@
                 <input type="text" pInputText id="fecha" placeholder="{{usuario.FECHA_NAC | date:'dd/MM/YYYY'}}"
                     disabled="true" />
             </div>
-
+            <div class="field col">
+                <label for="codigo">Roles</label>
+                <p-multiSelect appendTo="body" [options]="roles" [(ngModel)]="rolesSeleccionados" optionLabel="NOMBRE_ROL"></p-multiSelect>
+            </div>
         </div>
     </ng-template>
 

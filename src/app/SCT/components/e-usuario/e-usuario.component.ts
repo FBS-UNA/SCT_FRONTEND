@@ -21,7 +21,8 @@ export class EUsuarioComponent implements OnInit {
   editando: boolean = false;
 
   usuario!: Usuario
-
+  roles: Rol[] = []
+  rolesSeleccionados: Rol[] = [];
 
   constructor(
     private rolesService: RolesService,
@@ -32,10 +33,16 @@ export class EUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    this.cargarRoles();
   }
 
-  
+  cargarRoles() {
+    this.rolesService.getRoles().subscribe(OK => {
+      if (OK) {
+        this.roles = this.rolesService.roles;
+      }
+    });
+  }
 
   cargarDataEmit() {
     this.refreshData.emit();
