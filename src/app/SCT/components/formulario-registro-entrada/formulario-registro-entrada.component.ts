@@ -132,7 +132,6 @@ export class FormularioRegistroEntradaComponent implements OnInit{
     this.clienteService.getCliente(this.controls['CEDULA'].value).subscribe(OK => {
       if (OK ==true) {
         this.cliente = this.clienteService.cliente;
-        console.log(this.cliente)
         this.setAfiliadoData(this.cliente);
         this.habilitarInputs();
       }else{
@@ -157,7 +156,8 @@ export class FormularioRegistroEntradaComponent implements OnInit{
   }
 
   setAfiliadoData(cliente: Cliente){
-    this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO_CLIENTE);
+    console.log(cliente)
+    this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO);
     this.registroEntradaForm.get('NOMBRE')?.setValue(cliente.NOMBRE);
     this.registroEntradaForm.get('APELLIDO_1')?.setValue(cliente.APELLIDO_1);
     this.registroEntradaForm.get('APELLIDO_2')?.setValue(cliente.APELLIDO_2);
