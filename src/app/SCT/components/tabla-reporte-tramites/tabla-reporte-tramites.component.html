@@ -1,1 +1,48 @@
-<p>tabla-reporte-tramites works!</p>
+<div class="p-fluid row mb-2 gap-1">
+    <div class="field col-lg-2 col-md col-sm-12">
+        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)"></button>
+    </div>
+    <div class="field col-lg-3 col-md col-sm-12 ms-auto">
+        <div class="p-inputgroup">
+            <span (click)="inputFilter.focus()" class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+            <input pInputText #inputFilter type="text" (input)="dt.filterGlobal(inputFilter.value, 'contains')"
+                placeholder="Filtro Global" />
+        </div>
+    </div>
+</div>
+
+<p-table #dt dataKey="id" [columns]="cols" [value]="reportes" [loading]="loading" [rowsPerPageOptions]="[10,25,50]"
+    [rows]="15" [rowHover]="true" [paginator]="true" [showCurrentPageReport]="true"
+    currentPageReportTemplate="{first} a {last} de {totalRecords} páginas">
+
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
+                <span class="fbs-roboto-500">{{col.header | titlecase}}</span>
+                <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
+                <p-sortIcon *ngIf="col.field" [field]="col.field"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-reporte>
+        <tr>
+
+
+            <td>{{reporte.ID_REGISTRO_TRAMITE}}</td>
+            <td>{{reporte.NOMBRE_AREA | titlecase}}</td>
+            <td>{{reporte.NOMBRE_TRAMITE}}</td>
+            <td>{{reporte.NOMBRE_CLIENTE}}</td>
+            <td>{{reporte.NOMBRE_USUARIO}}</td>
+            <td>{{reporte.FECHA_Y_HORA | date : 'dd/MM/YYYY'}}</td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning me-2"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="7">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
