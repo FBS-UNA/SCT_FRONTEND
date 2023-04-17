@@ -3,6 +3,8 @@ import { Usuario } from 'src/app/auth/interfaces/auth.interface';
 import { UsuariosService } from '../../services/usuarios.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TimestampService } from '../../services/timestamp.service';
+import { Rol } from '../../interfaces/roles.interface';
+import { RolesService } from '../../services/roles.service';
 
 @Component({
   selector: 'app-e-usuario',
@@ -20,7 +22,9 @@ export class EUsuarioComponent implements OnInit {
 
   usuario!: Usuario
 
+
   constructor(
+    private rolesService: RolesService,
     private usuariosService: UsuariosService,
     private messageService: MessageService,
     private timestampService: TimestampService,
@@ -28,7 +32,10 @@ export class EUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
   }
+
+  
 
   cargarDataEmit() {
     this.refreshData.emit();
@@ -38,8 +45,8 @@ export class EUsuarioComponent implements OnInit {
     this.usuarioDialog = true;
   }
 
-  editarUsuarioDialog(usuario: Usuario){
-    this.usuario = {...usuario};
+  editarUsuarioDialog(usuario: Usuario) {
+    this.usuario = { ...usuario };
     this.editando = true;
     this.usuarioDialog = true;
   }

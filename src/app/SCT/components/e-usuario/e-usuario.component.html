@@ -1,8 +1,8 @@
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
-<p-dialog [(visible)]="usuarioDialog" [style]="{width: '600px'}" [draggable]="false"
-    [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="usuarioDialog" [style]="{width: '600px'}" [draggable]="false" [modal]="true"
+    styleClass="p-fluid">
 
     <ng-template pTemplate="header">
         <h1 class="fbs-roboto-300">Detalles del Usuario</h1>
@@ -40,10 +40,7 @@
                 <input type="text" pInputText id="fecha" placeholder="{{usuario.FECHA_NAC | date:'dd/MM/YYYY'}}"
                     disabled="true" />
             </div>
-            <div class="field col">
-                <label for="codigo">Roles</label>
-                <!-- <input id="disabled-input" type="number" pInputText [disabled]="true" [(ngModel)]="area.ID_AREA" /> -->
-            </div>
+
         </div>
     </ng-template>
 
@@ -52,6 +49,6 @@
             (click)="cerrarDialog()"></button>
         <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
             (click)="guardarCambios()"></button>
-    </ng-template> 
-    
+    </ng-template>
+
 </p-dialog>
