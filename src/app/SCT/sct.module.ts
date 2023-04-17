@@ -24,6 +24,7 @@ import { FormularioRegistroTramiteComponent } from './components/formulario-regi
 import { CRRegistroTramiteComponent } from './components/cr-registro-tramite/cr-registro-tramite.component';
 import { AsignacionRolesComponent } from './pages/asignacion-roles/asignacion-roles.component';
 import { TablaAsignacionRolesComponent } from './components/tabla-asignacion-roles/tabla-asignacion-roles.component';
+import { EUsuarioComponent } from './components/e-usuario/e-usuario.component';
 
 
 
@@ -49,6 +50,7 @@ import { TablaAsignacionRolesComponent } from './components/tabla-asignacion-rol
     RegistroTramiteComponent,
     AsignacionRolesComponent,
     TablaAsignacionRolesComponent,
+    EUsuarioComponent,
   ],
   imports: [
     CommonModule,
