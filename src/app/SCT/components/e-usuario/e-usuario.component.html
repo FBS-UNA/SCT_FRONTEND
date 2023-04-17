@@ -4,5 +4,54 @@
 <p-dialog [(visible)]="usuarioDialog" [style]="{width: '600px'}" [draggable]="false"
     [modal]="true" styleClass="p-fluid">
 
+    <ng-template pTemplate="header">
+        <h1 class="fbs-roboto-300">Detalles del Usuario</h1>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="field mb-2 col">
+                <label for="name">Cédula</label>
+                <input type="text" pInputText id="name" [(ngModel)]="usuario.CEDULA" required autofocus />
+                <small class="p-error" *ngIf="submitted && !usuario.CEDULA">El nombre es obligatorio</small>
+            </div>
+            <div class="field mb-2 col">
+                <label for="name">Nombre</label>
+                <input type="text" pInputText id="name" [(ngModel)]="usuario.NOMBRE" required autofocus />
+                <small class="p-error" *ngIf="submitted && !usuario.NOMBRE">El nombre es obligatorio</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="field mb-2 col">
+                <label for="name">Primer Apellido</label>
+                <input type="text" pInputText id="name" [(ngModel)]="usuario.APELLIDO_1" required autofocus />
+                <small class="p-error" *ngIf="submitted && !usuario.APELLIDO_1">El nombre es obligatorio</small>
+            </div>
+            <div class="field mb-2 col">
+                <label for="name">Segundo Apellido</label>
+                <input type="text" pInputText id="name" [(ngModel)]="usuario.APELLIDO_2" required autofocus />
+                <small class="p-error" *ngIf="submitted && !usuario.APELLIDO_2">El nombre es obligatorio</small>
+            </div>
+        </div>
+
+        <div *ngIf="editando" class="formgrid row">
+            <div class="field col">
+                <label for="fecha">Fecha de nacimiento</label>
+                <input type="text" pInputText id="fecha" placeholder="{{usuario.FECHA_NAC | date:'dd/MM/YYYY'}}"
+                    disabled="true" />
+            </div>
+            <div class="field col">
+                <label for="codigo">Roles</label>
+                <!-- <input id="disabled-input" type="number" pInputText [disabled]="true" [(ngModel)]="area.ID_AREA" /> -->
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text p-button-danger"
+            (click)="cerrarDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"
+            (click)="guardarCambios()"></button>
+    </ng-template> 
     
 </p-dialog>
