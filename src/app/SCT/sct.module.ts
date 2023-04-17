@@ -25,6 +25,7 @@ import { CRRegistroTramiteComponent } from './components/cr-registro-tramite/cr-
 import { AsignacionRolesComponent } from './pages/asignacion-roles/asignacion-roles.component';
 import { TablaAsignacionRolesComponent } from './components/tabla-asignacion-roles/tabla-asignacion-roles.component';
 import { ReporteTramitesComponent } from './pages/reporte-tramites/reporte-tramites.component';
+import { TablaReporteTramitesComponent } from './components/tabla-reporte-tramites/tabla-reporte-tramites.component';
 
 
 
@@ -51,6 +52,7 @@ import { ReporteTramitesComponent } from './pages/reporte-tramites/reporte-trami
     AsignacionRolesComponent,
     TablaAsignacionRolesComponent,
     ReporteTramitesComponent,
+    TablaReporteTramitesComponent,
   ],
   imports: [
     CommonModule,
