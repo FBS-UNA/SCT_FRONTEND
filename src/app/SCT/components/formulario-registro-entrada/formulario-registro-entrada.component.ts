@@ -156,7 +156,6 @@ export class FormularioRegistroEntradaComponent implements OnInit{
   }
 
   setAfiliadoData(cliente: Cliente){
-    console.log(cliente)
     this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO);
     this.registroEntradaForm.get('NOMBRE')?.setValue(cliente.NOMBRE);
     this.registroEntradaForm.get('APELLIDO_1')?.setValue(cliente.APELLIDO_1);
