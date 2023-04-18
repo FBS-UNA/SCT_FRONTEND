@@ -17,12 +17,12 @@ export class TablaAsignacionRolesComponent implements OnInit {
   usuarios: Usuario[] = [];
 
   cols: TableCols[] = [
-    { field: '', header: 'Cédula', style: 'width: 10%' },
-    { field: '', header: 'Nombre', style: 'width: 10%' },
-    { field: '', header: 'Primer Apellido', style: 'width: 11%' },
-    { field: '', header: 'Segundo Apellido', style: 'width: 12%' },
-    { field: '', header: 'Fecha de Nacimiento', style: 'width: 15%' },
-    { field: '', header: 'Roles', style: 'width: 10%' },
+    { field: 'CEDULA', header: 'Cédula', style: 'width: 10%', type: 'text' },
+    { field: 'NOMBRE', header: 'Nombre', style: 'width: 10%', type: 'text' },
+    { field: 'APELLIDO_1', header: 'Primer Apellido', style: 'width: 11%', type: 'text' },
+    { field: 'APELLIDO_2', header: 'Segundo Apellido', style: 'width: 12%', type: 'text' },
+    { field: 'FECHA_NAC', header: 'Fecha de Nacimiento', style: 'width: 15%', type: 'date' },
+    { field: '', header: 'Roles', style: 'width: 10%', type: 'text'},
   ]
 
   constructor(
@@ -38,12 +38,15 @@ export class TablaAsignacionRolesComponent implements OnInit {
   }
 
   cargarUsuarios() {
-    this.loading= true;
+    this.loading = true;
     this.usuarioService.getUsuarios().subscribe(OK => {
       if (OK) {
         this.loading = false;
-        this.usuarios = this.usuarioService.usuarios;
-        console.log(this.usuarios)
+        this.usuarios = this.usuarioService.usuarios.map(usuario => {
+          const fechaNac = new Date(usuario.FECHA_NAC!);
+          return { ...usuario, FECHA_NAC: fechaNac };
+        });
+        console.log(this.usuarios);
       }
     });
   }

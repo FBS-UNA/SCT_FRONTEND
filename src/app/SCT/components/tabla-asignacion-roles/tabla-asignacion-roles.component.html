@@ -15,14 +15,15 @@
 
 <p-table #dt dataKey="id" [columns]="cols" [value]="usuarios" [loading]="loading" [rowsPerPageOptions]="[10,25,50]"
     [rows]="15" [rowHover]="true" [paginator]="true" [showCurrentPageReport]="true"
-    currentPageReportTemplate="{first} a {last} de {totalRecords} páginas">
+    currentPageReportTemplate="{first} a {last} de {totalRecords} páginas"
+    [globalFilterFields]="['CEDULA','NOMBRE','APELLIDO_1','APELLIDO_2', 'FECHA_NAC']">
 
 
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
                 <span class="fbs-roboto-500">{{col.header | titlecase}}</span>
-                <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
+                <p-columnFilter [type]="col.type || 'text'" [field]="col.field" display="menu"></p-columnFilter>
                 <p-sortIcon *ngIf="col.field" [field]="col.field"></p-sortIcon>
             </th>
         </tr>
