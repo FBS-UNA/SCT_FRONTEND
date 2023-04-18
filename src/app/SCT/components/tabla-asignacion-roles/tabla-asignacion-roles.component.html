@@ -24,7 +24,6 @@
             <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
                 <span class="fbs-roboto-500">{{col.header | titlecase}}</span>
                 <p-columnFilter [type]="col.type || 'text'" [field]="col.field" display="menu"></p-columnFilter>
-                <p-sortIcon *ngIf="col.field" [field]="col.field"></p-sortIcon>
             </th>
         </tr>
     </ng-template>
@@ -36,8 +35,7 @@
             <td>{{usuario.APELLIDO_2}}</td>
             <td>{{usuario.FECHA_NAC | date : 'dd/MM/YYYY'}}</td>
             <td>
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning me-2"></button>
-            </td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning me-2" (click)="editarRolDialog(usuario)"></button>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
@@ -46,3 +44,8 @@
         </tr>
     </ng-template>
 </p-table>
+
+
+<!-- Componentes necesarios  -->
+
+<app-e-usuario (refreshData)="cargarUsuarios()"></app-e-usuario>

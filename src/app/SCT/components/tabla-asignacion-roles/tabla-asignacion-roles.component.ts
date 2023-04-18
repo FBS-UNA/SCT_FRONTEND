@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
 import { Table } from 'primeng/table';
 import { TableCols } from '../../interfaces/table.interface';
 import { Usuario } from 'src/app/auth/interfaces/auth.interface';
+import { EUsuarioComponent } from '../e-usuario/e-usuario.component';
 
 @Component({
   selector: 'app-tabla-asignacion-roles',
@@ -11,6 +12,8 @@ import { Usuario } from 'src/app/auth/interfaces/auth.interface';
   ]
 })
 export class TablaAsignacionRolesComponent implements OnInit {
+
+  @ViewChild(EUsuarioComponent) EUsuarioDialog !: EUsuarioComponent;
 
   loading!: boolean;
 
@@ -49,6 +52,10 @@ export class TablaAsignacionRolesComponent implements OnInit {
         console.log(this.usuarios);
       }
     });
+  }
+
+  editarRolDialog(usuario: Usuario) {
+    this.EUsuarioDialog.editarUsuarioDialog(usuario);
   }
 
 }
