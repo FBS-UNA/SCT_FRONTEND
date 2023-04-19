@@ -49,7 +49,7 @@ export class TablaAsignacionRolesComponent implements OnInit {
           const fechaNac = new Date(usuario.FECHA_NAC!);
           return { ...usuario, FECHA_NAC: fechaNac };
         });
-        console.log(this.usuarios);
+        //console.log(this.usuarios);
       }
     });
   }

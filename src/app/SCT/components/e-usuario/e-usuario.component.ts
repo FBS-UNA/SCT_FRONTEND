@@ -3,6 +3,8 @@ import { Usuario } from 'src/app/auth/interfaces/auth.interface';
 import { UsuariosService } from '../../services/usuarios.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TimestampService } from '../../services/timestamp.service';
+import { Rol } from '../../interfaces/roles.interface';
+import { RolesService } from '../../services/roles.service';
 
 @Component({
   selector: 'app-e-usuario',
@@ -19,8 +21,11 @@ export class EUsuarioComponent implements OnInit {
   editando: boolean = false;
 
   usuario!: Usuario
+  roles: Rol[] = []
+  rolesSeleccionados: Rol[] = [];
 
   constructor(
+    private rolesService: RolesService,
     private usuariosService: UsuariosService,
     private messageService: MessageService,
     private timestampService: TimestampService,
@@ -28,6 +33,15 @@ export class EUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.cargarRoles();
+  }
+
+  cargarRoles() {
+    this.rolesService.getRoles().subscribe(OK => {
+      if (OK) {
+        this.roles = this.rolesService.roles;
+      }
+    });
   }
 
   cargarDataEmit() {
@@ -38,8 +52,8 @@ export class EUsuarioComponent implements OnInit {
     this.usuarioDialog = true;
   }
 
-  editarUsuarioDialog(usuario: Usuario){
-    this.usuario = {...usuario};
+  editarUsuarioDialog(usuario: Usuario) {
+    this.usuario = { ...usuario };
     this.editando = true;
     this.usuarioDialog = true;
   }
