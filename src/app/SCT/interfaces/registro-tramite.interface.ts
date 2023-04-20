@@ -6,5 +6,5 @@ export interface RegistroTramiteModel{
     FECHA               : Date | string;
     HORA                : Date | string;
     CEDULA_USUARIO      : string;
-    NOMBRE_AREA         : string;
+    ID_AREA         : number;
 }
