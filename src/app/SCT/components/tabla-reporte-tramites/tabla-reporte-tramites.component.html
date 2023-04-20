@@ -11,10 +11,9 @@
     </div>
 </div>
 
-<p-table #dt dataKey="id" [columns]="cols" [value]="reportes" [loading]="loading" [rowsPerPageOptions]="[10,25,50]"
+<p-table #dt dataKey="id" [columns]="cols" [value]="reporte" [loading]="loading" [rowsPerPageOptions]="[10,25,50]"
     [rows]="15" [rowHover]="true" [paginator]="true" [showCurrentPageReport]="true"
     currentPageReportTemplate="{first} a {last} de {totalRecords} páginas">
-
 
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -35,9 +34,6 @@
             <td>{{reporte.NOMBRE_CLIENTE}}</td>
             <td>{{reporte.NOMBRE_USUARIO}}</td>
             <td>{{reporte.FECHA_Y_HORA | date : 'dd/MM/YYYY'}}</td>
-            <td>
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning me-2"></button>
-            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
