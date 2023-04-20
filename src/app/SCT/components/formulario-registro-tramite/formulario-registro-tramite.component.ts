@@ -82,7 +82,6 @@ export class FormularioRegistroTramiteComponent implements OnInit {
     this.areasService.getAreasPorUsuario(this.usuario.CEDULA).subscribe(OK => {
       if (OK == true) {
         this.areas = this.areasService.areas;
-        console.log(this.areas);
         this.nombreAreas = this.areas.map(({NOMBRE_AREA, ID_AREA})=>{ return { NOMBRE_AREA, ID_AREA} });
       }
     })
