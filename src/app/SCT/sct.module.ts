@@ -24,6 +24,8 @@ import { FormularioRegistroTramiteComponent } from './components/formulario-regi
 import { CRRegistroTramiteComponent } from './components/cr-registro-tramite/cr-registro-tramite.component';
 import { AsignacionRolesComponent } from './pages/asignacion-roles/asignacion-roles.component';
 import { TablaAsignacionRolesComponent } from './components/tabla-asignacion-roles/tabla-asignacion-roles.component';
+import { ReporteTramitesComponent } from './pages/reporte-tramites/reporte-tramites.component';
+import { TablaReporteTramitesComponent } from './components/tabla-reporte-tramites/tabla-reporte-tramites.component';
 import { EUsuarioComponent } from './components/e-usuario/e-usuario.component';
 
 
@@ -50,6 +52,8 @@ import { EUsuarioComponent } from './components/e-usuario/e-usuario.component';
     RegistroTramiteComponent,
     AsignacionRolesComponent,
     TablaAsignacionRolesComponent,
+    ReporteTramitesComponent,
+    TablaReporteTramitesComponent,
     EUsuarioComponent,
   ],
   imports: [

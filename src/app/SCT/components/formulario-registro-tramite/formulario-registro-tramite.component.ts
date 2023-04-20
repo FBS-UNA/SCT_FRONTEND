@@ -133,7 +133,7 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   }
 
   setAfiliadoData(cliente: Cliente){
-    this.registroTramiteForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO_CLIENTE);
+    this.registroTramiteForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO);
     this.registroTramiteForm.get('NOMBRE')?.setValue(cliente.NOMBRE);
     this.registroTramiteForm.get('APELLIDO_1')?.setValue(cliente.APELLIDO_1);
     this.registroTramiteForm.get('APELLIDO_2')?.setValue(cliente.APELLIDO_2);
