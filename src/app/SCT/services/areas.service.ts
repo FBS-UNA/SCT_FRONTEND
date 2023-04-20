@@ -13,6 +13,7 @@ export class AreasService {
 
   private baseUrl : string = environment.baseUrl;
   private _areas : Area[] = [];
+  private _area !: Area;
 
   constructor(
     private http: HttpClient
@@ -20,6 +21,10 @@ export class AreasService {
 
   get areas(){
     return [...this._areas];
+  }
+
+  get area(){
+    return {...this._area}
   }
 
 
@@ -36,6 +41,24 @@ export class AreasService {
       delay(500),
       map(res => res.OK),
       catchError(err => of(err.error.msg))
+    );
+  }
+
+  getAreaPorNombre(nombreArea :string){
+    const url = `${this.baseUrl}/areas/area-por-nombre`;
+    
+    const headers = new HttpHeaders().set('nombre-area', nombreArea)
+    return this.http.get<AreaResponse>(url, {headers}).pipe(
+      tap(
+        res=>{
+          if(res.OK){
+            this._area = res.AREA!;
+          }
+        }
+      ),map(
+        res => res.OK
+      ),
+      catchError(err => of(err.error.MSG))
     );
   }
 

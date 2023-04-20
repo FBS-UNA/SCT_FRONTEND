@@ -1,6 +1,7 @@
 export interface AreaResponse {
     OK: boolean;
     AREAS?: Area[];
+    AREA?: Area;
     NOMBRE_AREA?: string;
     MSG?: string;
 }
