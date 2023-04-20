@@ -15,7 +15,6 @@
     [rows]="15" [rowHover]="true" [paginator]="true" [showCurrentPageReport]="true"
     currentPageReportTemplate="{first} a {last} de {totalRecords} páginas">
 
-
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
