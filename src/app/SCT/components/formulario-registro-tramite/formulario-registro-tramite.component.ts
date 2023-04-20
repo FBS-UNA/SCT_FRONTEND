@@ -73,6 +73,7 @@ export class FormularioRegistroTramiteComponent implements OnInit {
     })
   }
 
+  //GET AREA CON EL NOMBRE DEL ROL DEL USUARIO
   cargarAreaDelUsuario(){
     this.areasService.getAreaPorNombre(this.usuario.ROL.toString()).subscribe(OK => {
 
