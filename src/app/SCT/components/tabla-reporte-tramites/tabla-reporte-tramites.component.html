@@ -19,8 +19,7 @@
         <tr>
             <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
                 <span class="fbs-roboto-500">{{col.header | titlecase}}</span>
-                <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
-                <p-sortIcon *ngIf="col.field" [field]="col.field"></p-sortIcon>
+                <p-columnFilter [type]="col.type || 'text'" [field]="col.field" display="menu"></p-columnFilter>
             </th>
         </tr>
     </ng-template>

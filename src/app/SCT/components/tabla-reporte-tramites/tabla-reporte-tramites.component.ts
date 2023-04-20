@@ -17,12 +17,12 @@ export class TablaReporteTramitesComponent implements OnInit {
   reporte : Reporte[] = []
 
   cols: TableCols[] = [
-    { field: '', header: 'Código', style: 'width: 10%' },
-    { field: '', header: 'Área', style: 'width: 10%' },
-    { field: '', header: 'Trámite', style: 'width: 10%' },
-    { field: '', header: 'Cliente', style: 'width: 10%' },
-    { field: '', header: 'Usuario', style: 'width: 10%' },
-    { field: '', header: 'Fecha', style: 'width: 10%' },
+    { field: 'ID_REGISTRO_TRAMITE', header: 'Código', style: 'width: 10%', type: 'text' },
+    { field: 'NOMBRE_AREA', header: 'Área', style: 'width: 10%', type: 'text' },
+    { field: 'NOMBRE_TRAMITE', header: 'Trámite', style: 'width: 10%', type: 'text' },
+    { field: 'NOMBRE_CLIENTE', header: 'Cliente', style: 'width: 10%', type: 'text' },
+    { field: 'NOMBRE_USUARIO', header: 'Usuario', style: 'width: 10%', type: 'text' },
+    { field: 'FECHA_Y_HORA', header: 'Fecha', style: 'width: 10%', type: 'date' },
 
   ];
 
