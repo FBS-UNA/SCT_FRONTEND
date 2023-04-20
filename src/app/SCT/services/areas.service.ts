@@ -44,15 +44,15 @@ export class AreasService {
     );
   }
 
-  getAreaPorNombre(nombreArea :string){
-    const url = `${this.baseUrl}/areas/area-por-nombre`;
+  getAreasPorUsuario(cedulaUsuario :string){
+    const url = `${this.baseUrl}/areas/areas-por-usuario`;
     
-    const headers = new HttpHeaders().set('nombre-area', nombreArea)
+    const headers = new HttpHeaders().set('cedula-usuario', cedulaUsuario)
     return this.http.get<AreaResponse>(url, {headers}).pipe(
       tap(
         res=>{
           if(res.OK){
-            this._area = res.AREA!;
+            this._areas = res.AREAS!;            
           }
         }
       ),map(
