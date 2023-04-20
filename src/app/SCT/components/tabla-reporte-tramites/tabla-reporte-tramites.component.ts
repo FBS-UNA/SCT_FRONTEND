@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableCols } from '../../interfaces/table.interface';
 import { Reporte } from '../../interfaces/reporte.interface';
 import { Table } from 'primeng/table';
+import { ReporteService } from '../../services/reporte.service';
 
 @Component({
   selector: 'app-tabla-reporte-tramites',
@@ -13,7 +14,7 @@ export class TablaReporteTramitesComponent implements OnInit {
 
   loading !: boolean;
 
-  reportes : Reporte[] = []
+  reporte : Reporte[] = []
 
   cols: TableCols[] = [
     { field: '', header: 'Código', style: 'width: 10%' },
@@ -26,13 +27,26 @@ export class TablaReporteTramitesComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor(
+    private reporteService: ReporteService
+  ) { }
 
   ngOnInit(): void {
+    this.cargarReporte();
   }
 
   clear(table: Table){
     table.clear();
+  }
+
+  cargarReporte(){
+    this.loading = true;
+    this.reporteService.getReporte().subscribe(OK=>{
+      if(OK == true){
+        this.loading = false;
+        this.reporte = this.reporteService.reporte;
+      }
+    });
   }
 
 }
