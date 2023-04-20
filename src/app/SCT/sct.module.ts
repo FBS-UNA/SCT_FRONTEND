@@ -26,6 +26,7 @@ import { AsignacionRolesComponent } from './pages/asignacion-roles/asignacion-ro
 import { TablaAsignacionRolesComponent } from './components/tabla-asignacion-roles/tabla-asignacion-roles.component';
 import { ReporteTramitesComponent } from './pages/reporte-tramites/reporte-tramites.component';
 import { TablaReporteTramitesComponent } from './components/tabla-reporte-tramites/tabla-reporte-tramites.component';
+import { EUsuarioComponent } from './components/e-usuario/e-usuario.component';
 
 
 
@@ -53,6 +54,7 @@ import { TablaReporteTramitesComponent } from './components/tabla-reporte-tramit
     TablaAsignacionRolesComponent,
     ReporteTramitesComponent,
     TablaReporteTramitesComponent,
+    EUsuarioComponent,
   ],
   imports: [
     CommonModule,

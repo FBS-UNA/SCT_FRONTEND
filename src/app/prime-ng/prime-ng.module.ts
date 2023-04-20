@@ -18,6 +18,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
 import {MenubarModule} from 'primeng/menubar';
+import {MultiSelectModule} from 'primeng/multiselect';
 import {PasswordModule} from 'primeng/password';
 import {PickListModule} from 'primeng/picklist';
 import {RippleModule } from 'primeng/ripple';
@@ -55,6 +56,7 @@ import {ConfirmationService} from 'primeng/api';
     InputTextareaModule,
     InputTextModule,
     MenubarModule,
+    MultiSelectModule,
     PasswordModule,
     PickListModule,
     RippleModule,
