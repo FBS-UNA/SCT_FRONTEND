@@ -49,6 +49,7 @@ export class CRRegistroTramiteComponent implements OnInit {
   }
 
   agregarRegistroTramite() {
+    console.log(this.re_tramite)
     this.re_tramiteService.addRegistro(this.re_tramite).subscribe(res => {
       if (res.OK) {
         this.resetFormEmit();

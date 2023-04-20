@@ -82,7 +82,6 @@ export class FormularioRegistroTramiteComponent implements OnInit {
     this.areasService.getAreasPorUsuario(this.usuario.CEDULA).subscribe(OK => {
       if (OK == true) {
         this.areas = this.areasService.areas;
-        console.log(this.areas);
         this.nombreAreas = this.areas.map(({NOMBRE_AREA, ID_AREA})=>{ return { NOMBRE_AREA, ID_AREA} });
       }
     })
@@ -165,13 +164,12 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   setReTramite(){
     this.re_tramite = {
       CEDULA_CLIENTE : this.controls['CEDULA'].value,
-      NOMBRE_TRAMITE : this.selectTramites.selectedOption.NOMBRE_TRAMITE,
-      ID_TRAMITE : this.controls['TRAMITE'].value,
+      CEDULA_USUARIO: this.usuario.CEDULA,
       DESCRIPCION :this.controls['DESCRIPCION'].value,
       FECHA: this.timestampService.fechaActual,
       HORA: this.timestampService.horaCompleta,
-      CEDULA_USUARIO: this.usuario.CEDULA,
-      NOMBRE_AREA: this.nombreAreas.find(a => a.ID_AREA === this.idAreaSeleccionada)?.NOMBRE_AREA  || ""
+      ID_TRAMITE : this.controls['TRAMITE'].value,
+      ID_AREA: this.idAreaSeleccionada
     };    
 
     this.confirmarTramiteDialog();
