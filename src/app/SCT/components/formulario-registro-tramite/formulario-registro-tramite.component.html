@@ -50,21 +50,33 @@
 
             <input id="float-input" type="text" pInputText formControlName="APELLIDO_2" class="form-control shadow"
                 placeholder="Opcional">
-
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-lg-12 col-md-12">
+    <div class="row mb-4">
+        <div class="col-lg-6 col-md-12">
+            <label class="fbs-roboto-300" for="float-input">
+                Área
+                <span class="text-danger">*</span>
+            </label>
+            <p-dropdown [options]="nombreAreas" formControlName="AREA" optionLabel="NOMBRE_AREA" optionValue="ID_AREA"
+                placeholder="Seleccione un área" (onChange)="obtenerIdArea($event)" >
+
+            </p-dropdown>
+            <small class="p-error block" *ngIf="esInvalido('AREA')">
+                <i class="pi pi-exclamation-circle"></i>
+                El área es obligatoria
+            </small>
+        </div>
+        <div class="col-lg-6 col-md-12">
             <label class="fbs-roboto-300" for="float-input">
                 Trámite Realizado
                 <span class="text-danger">*</span>
             </label>
-            <div>
-                <p-dropdown #selectTramites [options]="nombreTramites" [editable]="false" optionLabel="NOMBRE_TRAMITE"
-                    optionValue="ID_TRAMITE" placeholder="Seleccione Trámite" formControlName="TRAMITE">
-                </p-dropdown>
-            </div>
+            <p-dropdown #selectTramites [options]="nombreTramites" [editable]="false"
+                formControlName="TRAMITE" optionLabel="NOMBRE_TRAMITE" optionValue="ID_TRAMITE"
+                placeholder="Seleccione un trámite">
+            </p-dropdown>
             <small class="p-error block" *ngIf="esInvalido('TRAMITE')">
                 <i class="pi pi-exclamation-circle"></i>
                 Favor seleccionar el trámite realizado

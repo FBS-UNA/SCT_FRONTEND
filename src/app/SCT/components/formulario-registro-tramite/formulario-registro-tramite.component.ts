@@ -9,6 +9,8 @@ import { TimestampService } from '../../services/timestamp.service';
 import { TramitesService } from '../../services/tramites.service';
 import { CRRegistroTramiteComponent } from '../cr-registro-tramite/cr-registro-tramite.component';
 import { RegistroTramiteModel } from '../../interfaces/registro-tramite.interface';
+import { Area } from '../../interfaces/area.interface';
+import { AreasService } from '../../services/areas.service';
 
 
 @Component({
@@ -29,6 +31,10 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   tramites: Tramite[] = [];
   nombreTramites: Tramite[] = []; 
   re_tramite!: RegistroTramiteModel;
+  area!: Area;
+  areas:Area[]=[];
+  nombreAreas: Area[] = [];
+  idAreaSeleccionada: number = -1;
 
 
   constructor(
@@ -36,13 +42,14 @@ export class FormularioRegistroTramiteComponent implements OnInit {
     private clienteService: ClientesService,
     private messageService: MessageService,
     private tramitesService: TramitesService,
+    private areasService: AreasService,
     public authService: AuthService,
     private timestampService: TimestampService
   ) { }
 
   ngOnInit(){
     this.resetearFormulario();
-    this.cargarTramites();
+    this.cargarAreasDelUsuario();
   }
 
   cargarDataEmit() {
@@ -64,21 +71,41 @@ export class FormularioRegistroTramiteComponent implements OnInit {
       NOMBRE: [{ value: '', disabled: true }],
       APELLIDO_1: [{ value: '', disabled: true }],
       APELLIDO_2: [{ value: '', disabled: true }],
+      AREA: ['', Validators.required],
       TRAMITE: ['', Validators.required],
       DESCRIPCION: [''],
     })
   }
 
+  //GET AREA CON EL NOMBRE DEL ROL DEL USUARIO
+  cargarAreasDelUsuario(){    
+    this.areasService.getAreasPorUsuario(this.usuario.CEDULA).subscribe(OK => {
+      if (OK == true) {
+        this.areas = this.areasService.areas;
+        console.log(this.areas);
+        this.nombreAreas = this.areas.map(({NOMBRE_AREA, ID_AREA})=>{ return { NOMBRE_AREA, ID_AREA} });
+      }
+    })
+  }
 
-  cargarTramites() {
-    this.tramitesService.getTramitesHabilitados().subscribe(res => {
-      if (res.OK) {
-        this.tramites = res.TRAMITES;
+  cargarTramites() {    
+      
+    this.tramitesService.getTramitesAsociados(this.idAreaSeleccionada, 1).subscribe(res => {
+      
+      if (res.OK === true) {
+        this.tramites = [...res.LISTA_TRAMITES_ASOCIADOS];
+        console.log(this.tramites);
+        
         this.nombreTramites = this.tramites.map(({NOMBRE_TRAMITE, ID_TRAMITE})=>{
           return {NOMBRE_TRAMITE, ID_TRAMITE}
         })
       }
     });
+  }
+
+  obtenerIdArea(event: any): void {
+    this.idAreaSeleccionada = event.value;
+    this.cargarTramites();
   }
 
   buscar(){
@@ -142,8 +169,10 @@ export class FormularioRegistroTramiteComponent implements OnInit {
       ID_TRAMITE : this.controls['TRAMITE'].value,
       DESCRIPCION :this.controls['DESCRIPCION'].value,
       FECHA: this.timestampService.fechaActual,
-      HORA: this.timestampService.horaCompleta
-    };
+      HORA: this.timestampService.horaCompleta,
+      CEDULA_USUARIO: this.usuario.CEDULA,
+      NOMBRE_AREA: this.nombreAreas.find(a => a.ID_AREA === this.idAreaSeleccionada)?.NOMBRE_AREA  || ""
+    };    
 
     this.confirmarTramiteDialog();
   }
