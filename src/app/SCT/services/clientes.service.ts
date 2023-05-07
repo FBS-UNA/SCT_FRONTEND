@@ -27,7 +27,6 @@ export class ClientesService {
         res=>{
           if(res.OK){
             this._cliente = res.CLIENTE!;
-            // console.log(this._cliente)
           }
         }
       ),map(

@@ -9,7 +9,7 @@ export interface Cliente{
     NOMBRE            : string;
     APELLIDO_1        : string;
     APELLIDO_2        : string;
-    TIPO_CLIENTE      : string;
+    TIPO              : string;
     FECHA_NAC        ?: string;
     GENERO           ?: string;
 }

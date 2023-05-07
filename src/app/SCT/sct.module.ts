@@ -22,6 +22,11 @@ import { AEDAreaComponent } from './components/aed-area/aed-area.component';
 import { RegistroTramiteComponent } from './pages/registro-tramite/registro-tramite.component';
 import { FormularioRegistroTramiteComponent } from './components/formulario-registro-tramite/formulario-registro-tramite.component';
 import { CRRegistroTramiteComponent } from './components/cr-registro-tramite/cr-registro-tramite.component';
+import { AsignacionRolesComponent } from './pages/asignacion-roles/asignacion-roles.component';
+import { TablaAsignacionRolesComponent } from './components/tabla-asignacion-roles/tabla-asignacion-roles.component';
+import { ReporteTramitesComponent } from './pages/reporte-tramites/reporte-tramites.component';
+import { TablaReporteTramitesComponent } from './components/tabla-reporte-tramites/tabla-reporte-tramites.component';
+import { EUsuarioComponent } from './components/e-usuario/e-usuario.component';
 
 
 
@@ -45,6 +50,11 @@ import { CRRegistroTramiteComponent } from './components/cr-registro-tramite/cr-
     FormularioRegistroTramiteComponent,
     CRRegistroTramiteComponent,
     RegistroTramiteComponent,
+    AsignacionRolesComponent,
+    TablaAsignacionRolesComponent,
+    ReporteTramitesComponent,
+    TablaReporteTramitesComponent,
+    EUsuarioComponent,
   ],
   imports: [
     CommonModule,

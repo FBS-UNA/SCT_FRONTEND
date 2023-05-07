@@ -33,6 +33,14 @@ export class SidebarComponent implements OnInit {
       ruta: './mantenimientotramites',
       nombre: 'Mantenimiento de trámites'
     },
+    {
+      ruta: './asignacionroles',
+      nombre: 'Asignacion de roles'
+    },
+    {
+      ruta: './reportetramites',
+      nombre: 'Reporte de Trámites'
+    },
   ];
 
   constructor() { }

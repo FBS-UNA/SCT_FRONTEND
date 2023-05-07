@@ -79,7 +79,7 @@ export class FormularioRegistroEntradaComponent implements OnInit{
       tap( ( _ ) =>{
         this.registroEntradaForm.get('MOTIVO')?.reset('');
         this.nombreTramites = [];
-      }), switchMap( area => this.tramitesService.getTramitesAsociados(area))
+      }), switchMap( idArea => this.tramitesService.getTramitesAsociados(idArea, 1))
       ).subscribe( ({OK, LISTA_TRAMITES_ASOCIADOS}) =>{
         if(OK === true){
           this.nombreTramites = LISTA_TRAMITES_ASOCIADOS;
@@ -156,7 +156,7 @@ export class FormularioRegistroEntradaComponent implements OnInit{
   }
 
   setAfiliadoData(cliente: Cliente){
-    this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO_CLIENTE);
+    this.registroEntradaForm.get('TIPO_CLIENTE')?.setValue(cliente.TIPO);
     this.registroEntradaForm.get('NOMBRE')?.setValue(cliente.NOMBRE);
     this.registroEntradaForm.get('APELLIDO_1')?.setValue(cliente.APELLIDO_1);
     this.registroEntradaForm.get('APELLIDO_2')?.setValue(cliente.APELLIDO_2);
