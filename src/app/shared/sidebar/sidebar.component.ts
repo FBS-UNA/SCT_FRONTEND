@@ -38,10 +38,6 @@ export class SidebarComponent implements OnInit {
       nombre: 'Asignacion de roles'
     },
     {
-      ruta: './reportepersonal',
-      nombre: 'Reporte Personal'
-    },
-    {
       ruta: './reportetramites',
       nombre: 'Reporte de Trámites'
     },
