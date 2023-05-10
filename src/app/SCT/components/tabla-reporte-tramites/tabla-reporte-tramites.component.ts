@@ -3,6 +3,7 @@ import { TableCols } from '../../interfaces/table.interface';
 import { Reporte } from '../../interfaces/reporte.interface';
 import { Table } from 'primeng/table';
 import { ReporteService } from '../../services/reporte.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-tabla-reporte-tramites',
@@ -49,4 +50,31 @@ export class TablaReporteTramitesComponent implements OnInit {
     });
   }
 
+    generarReporteXLSX() {
+      // Nombre de la hoja
+      const nombreHoja = 'ReporteDeTramites';
+  
+      // Nombre del archivo
+      const nombreArchivo = 'ReporteDeTramites_' + this.fecha() + '.xlsx';
+  
+      // Crea la hoja de cálculo a partir del array de datos
+      const hoja = XLSX.utils.json_to_sheet(this.reporte);
+  
+      // Crea un objeto Workbook y agrega la hoja de cálculo
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, hoja, nombreHoja);
+  
+      // Descarga el archivo xlsx en el navegador
+      XLSX.writeFile(workbook, nombreArchivo);
+    
+  }
+
+  fecha() {
+    const fechaActual = new Date();
+    const anio = fechaActual.getFullYear();
+    const mes = fechaActual.getMonth() + 1;
+    const dia = fechaActual.getDate();
+    const fechaString = `${dia}/${mes}/${anio}`;
+    return fechaString;
+  }
 }
