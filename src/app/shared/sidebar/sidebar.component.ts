@@ -41,6 +41,7 @@ export class SidebarComponent implements OnInit {
       ruta: './reportetramites',
       nombre: 'Reporte de Trámites'
     },
+    
   ];
 
   constructor() { }

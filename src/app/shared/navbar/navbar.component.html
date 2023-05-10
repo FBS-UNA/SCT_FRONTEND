@@ -3,7 +3,7 @@
         <h5 class="fbs-roboto-300">{{usuario.NOMBRE_COMPLETO | titlecase}}</h5>
     </ng-template>
     <ng-template pTemplate="end">
-        <button class="p-button-text ms-2" label="Mi actividad" icon="pi pi-bookmark" pButton pRipple ></button>
+        <button class="p-button-text ms-2" routerLink="./reportepersonal" label="Mi actividad" icon="pi pi-bookmark" pButton pRipple ></button>
         <button class="p-button-text ms-2" label="Mi Perfil" icon="pi pi-id-card" pButton pRipple ></button>
         <button (click)="cerrarSesion()" class="p-button-text p-button-danger ms-2" label="Salir" icon="pi pi-sign-out" pButton pRipple ></button>
     </ng-template>
