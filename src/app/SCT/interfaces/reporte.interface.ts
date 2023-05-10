@@ -5,6 +5,7 @@ export interface Reporte{
     NOMBRE_CLIENTE : string;
     NOMBRE_USUARIO : string;
     FECHA_Y_HORA : string;
+    CEDULA : string;
 } 
 
 export interface ReporteResponse{

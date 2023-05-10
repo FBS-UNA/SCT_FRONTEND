@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth/services/auth.service';
 import { MenuItem } from 'primeng/api';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -21,6 +22,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class NavbarComponent implements OnInit {
 
+
   constructor(
     public authService: AuthService,
     private router: Router
@@ -34,6 +36,10 @@ export class NavbarComponent implements OnInit {
     this.authService.cerrarSesion();
     this.router.navigateByUrl('/auth');
   }
+
+  toReportePersonal() {
+    this.router.navigateByUrl('./reportepersonal');
+  }  
 
   ngOnInit(): void {
   }
