@@ -27,9 +27,10 @@ export class AuthService {
 
     return this.http.post<AuthResponse>(url, body)
       .pipe(
-        tap(({OK, TOKEN})=>{
+        tap(({OK, TOKEN, ROL})=>{
           if(OK){
             sessionStorage.setItem('token', TOKEN!);
+            sessionStorage.setItem('roles', ROL!)
           }
         }),
         map(res => res.OK),
@@ -40,6 +41,7 @@ export class AuthService {
 
   cerrarSesion(){
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('roles');
   }
 
   validarToken(){

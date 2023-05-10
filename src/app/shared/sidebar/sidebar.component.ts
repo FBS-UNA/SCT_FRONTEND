@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-interface MenuItem{
+interface MenuItem {
   ruta: string;
   nombre: string;
 }
@@ -12,19 +12,22 @@ interface MenuItem{
 })
 export class SidebarComponent implements OnInit {
 
-  menuItems: MenuItem[] = [
-    {
-      ruta: './inicio',
-      nombre: 'Inicio'
-    },
-    {
-      ruta: './registrotramite',
-      nombre: 'Registro de trámite'
-    },
+
+  rutasVigilante: MenuItem[] = [
     {
       ruta: './registroentrada',
       nombre: 'Registro de entrada'
-    },
+    }
+  ]
+
+  rutasAdministrativos: MenuItem[] = [
+    {
+      ruta: './registrotramite',
+      nombre: 'Registro de trámite'
+    }
+  ]
+
+  rutasAdministrador: MenuItem[] = [
     {
       ruta: './mantenimientoareas',
       nombre: 'Mantenimiento de áreas'
@@ -40,12 +43,42 @@ export class SidebarComponent implements OnInit {
     {
       ruta: './reportetramites',
       nombre: 'Reporte de Trámites'
-    },
+    }
+  ]
+
+  menuItems: MenuItem[] = [
+    {
+      ruta: './inicio',
+      nombre: 'Inicio'
+    }
   ];
 
-  constructor() { }
+  constructor() { 
+    this.permitirVerRutas()
+  }
 
   ngOnInit(): void {
+  }
+
+  permitirVerRutas(){
+
+    const roles = sessionStorage.getItem('roles');
+    
+    if(roles?.includes('ADMINISTRADOR')){
+      this.menuItems = this.menuItems.concat(this.rutasAdministrador)
+      this.menuItems = this.menuItems.concat(this.rutasAdministrativos)
+      this.menuItems = this.menuItems.concat(this.rutasVigilante)
+      return;
+    }
+    if(roles?.includes('VIGILANTE')){
+      this.menuItems = this.menuItems.concat(this.rutasVigilante)
+    }
+    else{      
+      this.menuItems = this.menuItems.concat(this.rutasAdministrativos)
+    }
+
+    
+
   }
 
 }
