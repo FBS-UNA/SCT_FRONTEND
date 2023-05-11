@@ -1,10 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Usuario } from 'src/app/auth/interfaces/auth.interface';
-import { UsuariosService } from '../../services/usuarios.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { TimestampService } from '../../services/timestamp.service';
+import { MessageService } from 'primeng/api';
 import { Rol } from '../../interfaces/roles.interface';
 import { RolesService } from '../../services/roles.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-e-usuario',
@@ -20,20 +19,19 @@ export class EUsuarioComponent implements OnInit {
   usuarioDialog: boolean = false;
   editando: boolean = false;
 
-  usuario!: Usuario
-  roles: Rol[] = []
+  usuario!: Usuario;
+  roles: Rol[] = [];
   rolesSeleccionados: Rol[] = [];
+  
 
   constructor(
     private rolesService: RolesService,
-    private usuariosService: UsuariosService,
     private messageService: MessageService,
-    private timestampService: TimestampService,
-    private confirmationService: ConfirmationService
+
   ) { }
 
   ngOnInit(): void {
-    this.cargarRoles();
+    
   }
 
   cargarRoles() {
@@ -42,6 +40,41 @@ export class EUsuarioComponent implements OnInit {
         this.roles = this.rolesService.roles;
       }
     });
+  }
+
+  cargarRolesUsuario(cedulaUsuario: string) {
+    this.rolesService.getRolesUsuario(cedulaUsuario).subscribe(OK => {
+      if (OK) {
+        this.rolesSeleccionados = this.rolesService.rolesU;
+      }
+    });
+  }
+
+  deleteUsuarioRoles(){
+    this.rolesService.deleteUsuarioRoles(this.usuario.CEDULA).subscribe(res=>{
+      if(res.OK){
+        this.cargarDataEmit()
+        this.rolesSeleccionados = this.rolesService.rolesU
+      }
+    })
+  }
+
+  insertNuevosRoles() {
+    const updateObservables = this.rolesSeleccionados.map(rol => {
+      return this.rolesService.updateUsuarioRoles(this.usuario.CEDULA, rol.NOMBRE_ROL);
+    });
+  
+    forkJoin(updateObservables)
+      .subscribe(responses => {
+        const success = responses.every(res => !!res);
+        if (success) {
+          this.cargarDataEmit();
+          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Se han actualizado los roles del usuario correctamente' });
+          this.rolesSeleccionados = this.rolesService.rolesU;
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Falló', detail: 'No se han actualizado los roles del usuario correctamente' });
+        }
+      });
   }
 
   cargarDataEmit() {
@@ -54,30 +87,27 @@ export class EUsuarioComponent implements OnInit {
 
   editarUsuarioDialog(usuario: Usuario) {
     this.usuario = { ...usuario };
+    this.cargarRoles();
+    this.cargarRolesUsuario(usuario.CEDULA); 
     this.editando = true;
     this.usuarioDialog = true;
   }
 
   cerrarDialog() {
     this.usuarioDialog = false;
-    this.submitted = false;
+    this.submitted = false;    
   }
 
-  // actualizarUsuario(){
-  //   this.usuariosService.(this.usuario).subscribe(res => {
-  //     if (res.OK) {
-  //       this.cargarDataEmit();
-  //       this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El área llamada "${this.area.NOMBRE_AREA}" se ha actualizado correctamente` });
-  //     } else {
-  //       this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo actualizar el área llamada "${this.area.NOMBRE_AREA}"` });
-  //     }
-  //   });
-  // }
-
   guardarCambios() {
-    this.submitted = true;
-    // this.editando ? this.actualizarArea() : this.agregarArea();
-    // this.areaDialog = false;
+    if (this.rolesSeleccionados.length === 0) { 
+      this.messageService.add({ severity: 'error', summary: 'Falló', detail: `El usuario debe tener al menos un rol` });
+    }else{
+      this.submitted = true;
+      this.deleteUsuarioRoles();
+      this.insertNuevosRoles();
+      this.cargarRolesUsuario(this.usuario.CEDULA)
+      this.cerrarDialog();
+    }
   }
 
 }

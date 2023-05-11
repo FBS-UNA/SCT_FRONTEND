@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { Rol, RolesResponse } from '../interfaces/roles.interface';
 import { HttpClient } from '@angular/common/http';
 import { catchError, delay, map, of, tap } from 'rxjs';
+import { Usuario } from 'src/app/auth/interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,14 @@ export class RolesService {
 
   private baseUrl : string = environment.baseUrl;
   private _roles : Rol[]=[];
-
+  private _rolesU : Rol[]=[];
 
   get roles(){
     return [...this._roles];
+  }
+
+  get rolesU(){
+    return [...this._rolesU]
   }
 
   constructor(
@@ -36,4 +41,43 @@ export class RolesService {
       catchError(err => of(err.error.msg))
     );
   }
+
+
+  getRolesUsuario(cedula: string){
+    const url = `${this.baseUrl}/roles/rolesusuario`;
+    const body = {
+      CEDULA_USUARIO: cedula
+    };
+    return this.http.post<RolesResponse>(url, body).pipe(
+      tap(res=>{
+        if(res.OK){
+          this._rolesU = res.ROLES!;
+        }
+      }),
+      map(res => res.ROLES),
+      catchError(err => of([]))
+    );
+  }
+
+  updateUsuarioRoles(cedula:string, rol: string){
+    const url = `${this.baseUrl}/roles/asignarroles`
+    const body = {
+      CEDULA_USUARIO: cedula,
+      NOMBRE_ROL: rol
+    }
+    return this.http.post<RolesResponse>(url,body).pipe(
+      catchError(err => of(err.error.msg))
+    );
+  }
+
+  deleteUsuarioRoles(cedula:string){
+    const url = `${this.baseUrl}/roles/deleterolusuario`
+    const body = {
+      CEDULA_USUARIO: cedula,
+    }
+    return this.http.post<RolesResponse>(url,body).pipe(
+      catchError(err => of(err.error.msg))
+    );
+  }
+
 }
