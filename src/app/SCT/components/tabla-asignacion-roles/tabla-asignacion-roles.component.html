@@ -23,7 +23,9 @@
         <tr>
             <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style]="col.style">
                 <span class="fbs-roboto-500">{{col.header | titlecase}}</span>
-                <p-columnFilter [type]="col.type || 'text'" [field]="col.field" display="menu"></p-columnFilter>
+                <ng-container *ngIf="col.header !== 'Roles'">
+                    <p-columnFilter [type]="col.type || ''" [field]="col.field" display="menu"></p-columnFilter>
+                  </ng-container>
             </th>
         </tr>
     </ng-template>

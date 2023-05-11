@@ -15,7 +15,8 @@ export class TablaReporteTramitesComponent implements OnInit {
 
   loading !: boolean;
 
-  reporte : Reporte[] = []
+  reporte: Reporte[] = []
+  filteredReporte: Reporte[] = [];
 
   cols: TableCols[] = [
     { field: 'ID_REGISTRO_TRAMITE', header: 'Código', style: 'width: 10%', type: 'text' },
@@ -36,37 +37,42 @@ export class TablaReporteTramitesComponent implements OnInit {
     this.cargarReporte();
   }
 
-  clear(table: Table){
+  clear(table: Table) {
     table.clear();
   }
 
-  cargarReporte(){
+  cargarReporte() {
     this.loading = true;
-    this.reporteService.getReporte().subscribe(OK=>{
-      if(OK == true){
+    this.reporteService.getReporte().subscribe(OK => {
+      if (OK == true) {
         this.loading = false;
-        this.reporte = this.reporteService.reporte;
+        this.reporte = this.reporteService.reporte
+          .map(item => {
+            const fechaYHoraString = item.FECHA_Y_HORA; // Suponiendo que FECHA_Y_HORA es una cadena de texto
+            const fechaYHora = new Date(fechaYHoraString);
+            return { ...item, FECHA_Y_HORA: fechaYHora };
+          });
       }
     });
   }
 
-    generarReporteXLSX() {
-      // Nombre de la hoja
-      const nombreHoja = 'ReporteDeTramites';
-  
-      // Nombre del archivo
-      const nombreArchivo = 'ReporteDeTramites_' + this.fecha() + '.xlsx';
-  
-      // Crea la hoja de cálculo a partir del array de datos
-      const hoja = XLSX.utils.json_to_sheet(this.reporte);
-  
-      // Crea un objeto Workbook y agrega la hoja de cálculo
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, hoja, nombreHoja);
-  
-      // Descarga el archivo xlsx en el navegador
-      XLSX.writeFile(workbook, nombreArchivo);
-    
+  generarReporteXLSX() {
+    // Nombre de la hoja
+    const nombreHoja = 'ReporteDeTramites';
+
+    // Nombre del archivo
+    const nombreArchivo = 'ReporteDeTramites_' + this.fecha() + '.xlsx';
+
+    // Crea la hoja de cálculo a partir del array de datos
+    const hoja = XLSX.utils.json_to_sheet(this.filteredReporte);
+
+    // Crea un objeto Workbook y agrega la hoja de cálculo
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, hoja, nombreHoja);
+
+    // Descarga el archivo xlsx en el navegador
+    XLSX.writeFile(workbook, nombreArchivo);
+
   }
 
   fecha() {
@@ -77,4 +83,10 @@ export class TablaReporteTramitesComponent implements OnInit {
     const fechaString = `${dia}/${mes}/${anio}`;
     return fechaString;
   }
+
+  onFilter(event: any) {
+    // Obtener el nuevo arreglo filtrado
+   this.filteredReporte = event.filteredValue;
+ }
+
 }

@@ -25,7 +25,7 @@ export class TablaAsignacionRolesComponent implements OnInit {
     { field: 'APELLIDO_1', header: 'Primer Apellido', style: 'width: 11%', type: 'text' },
     { field: 'APELLIDO_2', header: 'Segundo Apellido', style: 'width: 12%', type: 'text' },
     { field: 'FECHA_NAC', header: 'Fecha de Nacimiento', style: 'width: 15%', type: 'date' },
-    { field: '', header: 'Roles', style: 'width: 10%', type: 'text'},
+    { field: '', header: 'Roles', style: 'width: 10%', type: ''},
   ]
 
   constructor(
