@@ -4,6 +4,8 @@ import { Reporte } from '../../interfaces/reporte.interface';
 import { Table } from 'primeng/table';
 import { ReporteService } from '../../services/reporte.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import * as XLSX from 'xlsx';
+
 
 
 @Component({
@@ -14,7 +16,7 @@ export class TablaReportePersonalComponent implements OnInit {
 
   loading !: boolean;
 
-  reporte : Reporte[] = []
+  reporte: Reporte[] = []
 
   cols: TableCols[] = [
     { field: 'ID_REGISTRO_TRAMITE', header: 'Código', style: 'width: 10%', type: 'text' },
@@ -41,17 +43,47 @@ export class TablaReportePersonalComponent implements OnInit {
     this.cargarReporte();
   }
 
-  clear(table: Table){
+  clear(table: Table) {
     table.clear();
   }
 
-  cargarReporte(){
+  cargarReporte() {
     this.loading = true;
-    this.reporteService.getReporte().subscribe(OK=>{
-      if(OK == true){
+    this.reporteService.getReporte().subscribe(OK => {
+      if (OK == true) {
         this.loading = false;
         this.reporte = this.reporteService.reporte.filter(item => this.authService.usuario.CEDULA === item.CEDULA);
       }
     });
   }
+
+  generarReporteXLSX() {
+    // Nombre de la hoja
+    const nombreHoja = 'ReportePersonal';
+
+    // Nombre del archivo
+    const nombreArchivo = 'Reporte_' + this.fecha() + '_' + this.usuario.NOMBRE + this.usuario.APELLIDO_1 + '.xlsx';
+
+    // Crea la hoja de cálculo a partir del array de datos
+    const hoja = XLSX.utils.json_to_sheet(this.reporte);
+
+    // Crea un objeto Workbook y agrega la hoja de cálculo
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, hoja, nombreHoja);
+
+    // Descarga el archivo xlsx en el navegador
+    XLSX.writeFile(workbook, nombreArchivo);
+
+  }
+
+  fecha() {
+    const fechaActual = new Date();
+    const anio = fechaActual.getFullYear();
+    const mes = fechaActual.getMonth() + 1;
+    const dia = fechaActual.getDate();
+    const fechaString = `${dia}/${mes}/${anio}`;
+    return fechaString;
+
+  }
+
 }
