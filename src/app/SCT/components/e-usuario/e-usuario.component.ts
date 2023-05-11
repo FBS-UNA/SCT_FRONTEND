@@ -1,8 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Usuario } from 'src/app/auth/interfaces/auth.interface';
-import { UsuariosService } from '../../services/usuarios.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { TimestampService } from '../../services/timestamp.service';
+import { MessageService } from 'primeng/api';
 import { Rol } from '../../interfaces/roles.interface';
 import { RolesService } from '../../services/roles.service';
 
@@ -20,14 +18,14 @@ export class EUsuarioComponent implements OnInit {
   usuarioDialog: boolean = false;
   editando: boolean = false;
 
-  usuario!: Usuario
-  roles: Rol[] = []
-  rolesSeleccionados: Rol[] = [
-
-  ];
+  usuario!: Usuario;
+  roles: Rol[] = [];
+  rolesSeleccionados: Rol[] = [];
+  
 
   constructor(
     private rolesService: RolesService,
+    private messageService: MessageService,
 
   ) { }
 
@@ -51,6 +49,17 @@ export class EUsuarioComponent implements OnInit {
     });
   }
 
+  updateUsuarioRoles(){
+    this.rolesService.updateUsuarioRoles(this.usuario.CEDULA,this.rolesSeleccionados).subscribe(res=>{
+      if(res.OK){
+        this.cargarDataEmit()
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `Se han actualizado los roles del usuario correctamente` })
+        this.rolesSeleccionados = this.rolesService.rolesU
+      }
+      this.messageService.add({ severity: 'error', summary: 'Falló', detail: `No se han actualizado los roles del usuario correctamente` })
+    })
+  }
+
   cargarDataEmit() {
     this.refreshData.emit();
   }
@@ -72,21 +81,9 @@ export class EUsuarioComponent implements OnInit {
     this.submitted = false;
   }
 
-  actualizarUsuario(){
-  //   this.usuariosService.(this.usuario).subscribe(res => {
-  //     if (res.OK) {
-  //       this.cargarDataEmit();
-  //       this.messageService.add({ severity: 'success', summary: 'Éxito', detail: `El área llamada "${this.area.NOMBRE_AREA}" se ha actualizado correctamente` });
-  //     } else {
-  //       this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo actualizar el área llamada "${this.area.NOMBRE_AREA}"` });
-  //     }
-  //   });
-  }
-
   guardarCambios() {
     this.submitted = true;
-    // this.editando ? this.actualizarArea() : this.agregarArea();
-    // this.areaDialog = false;
+    this.updateUsuarioRoles();
   }
 
 }

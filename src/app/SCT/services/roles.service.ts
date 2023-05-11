@@ -59,4 +59,22 @@ export class RolesService {
     );
   }
 
+  updateUsuarioRoles(cedula:string, roles:Rol[]){
+    const url = `${this.baseUrl}/roles/asignarroles`
+    const body = {
+      CEDULA_USUARIO: cedula,
+      NOMBRE_ROL: roles
+    }
+    return this.http.post<RolesResponse>(url,body).pipe(
+      tap(res=>{
+        if(res.OK){
+          this._rolesU = res.ROLES!;
+          console.log(this._rolesU)
+        }
+      }),
+      map(res => res.OK),
+      catchError(err=> of(err.error.msg))
+    );
+  }
+
 }

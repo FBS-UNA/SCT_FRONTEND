@@ -30,7 +30,6 @@ export class UsuariosService {
       tap(res => {
         if (res.OK) {
           this._usuarios = res.USUARIOS!;
-          console.log(this._usuarios)
         }
       }),
       // Quitar este Delay, solo sirve para probar o ver la animacion de carga
