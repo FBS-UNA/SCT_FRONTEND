@@ -13,7 +13,8 @@
 
 <p-table #dt dataKey="id" [columns]="cols" [value]="reporte" [loading]="loading" [rowsPerPageOptions]="[10,25,50]"
     [rows]="15" [rowHover]="true" [paginator]="true" [showCurrentPageReport]="true"
-    currentPageReportTemplate="{first} a {last} de {totalRecords} páginas">
+    currentPageReportTemplate="{first} a {last} de {totalRecords} páginas"
+    [globalFilterFields]="['ID_REGISTRO_TRAMITE','NOMBRE_AREA','NOMBRE_TRAMITE','NOMBRE_CLIENTE', 'NOMBRE_USUARIO']" (onFilter)="onFilter($event)" >
 
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -25,14 +26,12 @@
     </ng-template>
     <ng-template pTemplate="body" let-reporte>
         <tr>
-
-
             <td>{{reporte.ID_REGISTRO_TRAMITE}}</td>
             <td>{{reporte.NOMBRE_AREA | titlecase}}</td>
             <td>{{reporte.NOMBRE_TRAMITE}}</td>
             <td>{{reporte.NOMBRE_CLIENTE}}</td>
             <td>{{reporte.NOMBRE_USUARIO}}</td>
-            <td>{{reporte.FECHA_Y_HORA | date : 'dd/MM/YYYY'}}</td>
+            <td>{{ reporte.FECHA_Y_HORA | date: 'dd/MM/YYYY HH:mm:ss' }}</td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">

@@ -17,6 +17,7 @@ export class TablaReportePersonalComponent implements OnInit {
   loading !: boolean;
 
   reporte: Reporte[] = []
+  filteredReporte: Reporte[] = [];
 
   cols: TableCols[] = [
     { field: 'ID_REGISTRO_TRAMITE', header: 'Código', style: 'width: 10%', type: 'text' },
@@ -25,7 +26,6 @@ export class TablaReportePersonalComponent implements OnInit {
     { field: 'NOMBRE_CLIENTE', header: 'Cliente', style: 'width: 10%', type: 'text' },
     { field: 'NOMBRE_USUARIO', header: 'Usuario', style: 'width: 10%', type: 'text' },
     { field: 'FECHA_Y_HORA', header: 'Fecha', style: 'width: 10%', type: 'date' },
-
   ];
 
 
@@ -52,7 +52,12 @@ export class TablaReportePersonalComponent implements OnInit {
     this.reporteService.getReporte().subscribe(OK => {
       if (OK == true) {
         this.loading = false;
-        this.reporte = this.reporteService.reporte.filter(item => this.authService.usuario.CEDULA === item.CEDULA);
+        this.reporte = this.reporteService.reporte.filter(item => this.authService.usuario.CEDULA === item.CEDULA)
+        .map(item => {
+          const fechaYHoraString = item.FECHA_Y_HORA; // Suponiendo que FECHA_Y_HORA es una cadena de texto
+          const fechaYHora = new Date(fechaYHoraString);
+          return { ...item, FECHA_Y_HORA: fechaYHora };
+        });
       }
     });
   }
@@ -65,7 +70,7 @@ export class TablaReportePersonalComponent implements OnInit {
     const nombreArchivo = 'Reporte_' + this.fecha() + '_' + this.usuario.NOMBRE + this.usuario.APELLIDO_1 + '.xlsx';
 
     // Crea la hoja de cálculo a partir del array de datos
-    const hoja = XLSX.utils.json_to_sheet(this.reporte);
+    const hoja = XLSX.utils.json_to_sheet(this.filteredReporte);
 
     // Crea un objeto Workbook y agrega la hoja de cálculo
     const workbook = XLSX.utils.book_new();
@@ -74,6 +79,11 @@ export class TablaReportePersonalComponent implements OnInit {
     // Descarga el archivo xlsx en el navegador
     XLSX.writeFile(workbook, nombreArchivo);
 
+  }
+
+  onFilter(event: any) {
+     // Obtener el nuevo arreglo filtrado    
+    this.filteredReporte = event.filteredValue;
   }
 
   fecha() {
