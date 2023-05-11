@@ -1,0 +1,46 @@
+<div class="my-3">
+
+    <div class="row my-3">
+        <div class="col-4">
+            <p-card class="my-3">
+                <h1 class="fbs-roboto-500 mb-3">Total de Reportes</h1>
+                <h1 class="fbs-roboto-300 mb-3">{{totalReportes}}</h1>
+            </p-card>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col">
+            <p-card class="my-3">
+                <h1 class="fbs-roboto-500 mb-3">Reportes de cada trámite</h1>
+                <p-chart type="doughnut" [data]="tramitesDonut"  width="30vw" height="70vh"></p-chart>
+            </p-card>
+        </div>
+        <div class="col">
+            <p-card class="my-3">
+                <h1 class="fbs-roboto-500 mb-3">Reportes de cada área</h1>
+                <p-chart type="doughnut" [data]="areasDonut"  width="30vw" height="70vh"></p-chart>
+            </p-card>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col">
+            <p-card>
+                <h1 class="fbs-roboto-500 mb-3">Concurrencia en cada mes</h1>
+                <p-chart type="line" [data]="reportePorMesLine" width="80vw" height="50vh"></p-chart>
+            </p-card>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col">
+            <p-card>
+                <h1 class="fbs-roboto-500 mb-3">Concurrencia en cada año</h1>
+                <p-chart type="line" [data]="reportePorAnnioLine" width="80vw" height="50vh"></p-chart>
+            </p-card>
+        </div>
+    </div>
+
+</div>
+

@@ -7,6 +7,7 @@ import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
 import {CardModule} from 'primeng/card';
 import {CarouselModule} from 'primeng/carousel';
+import {ChartModule} from 'primeng/chart';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {DialogModule} from 'primeng/dialog';
@@ -45,6 +46,7 @@ import {ConfirmationService} from 'primeng/api';
     CalendarModule,
     CardModule,
     CarouselModule,
+    ChartModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
     DialogModule,

@@ -29,6 +29,7 @@ import { TablaReporteTramitesComponent } from './components/tabla-reporte-tramit
 import { EUsuarioComponent } from './components/e-usuario/e-usuario.component';
 import { ReportePersonalComponent } from './pages/reporte-personal/reporte-personal.component';
 import { TablaReportePersonalComponent } from './components/tabla-reporte-personal/tabla-reporte-personal.component';
+import { GraficosComponent } from './pages/graficos/graficos.component';
 
 
 
@@ -59,6 +60,7 @@ import { TablaReportePersonalComponent } from './components/tabla-reporte-person
     EUsuarioComponent,
     ReportePersonalComponent,
     TablaReportePersonalComponent,
+    GraficosComponent,
   ],
   imports: [
     CommonModule,

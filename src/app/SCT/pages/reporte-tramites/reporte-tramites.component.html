@@ -1,6 +1,13 @@
 <div class="my-3">
     <p-card>
-        <h1 class="fbs-roboto-500 mb-3">Reporte de Trámites</h1>
+        <div class="row p-fluid mb-1">
+            <div class="field col">
+                <h1 class="fbs-roboto-500 mb-3">Reporte de Trámites</h1>
+            </div>
+            <div class="field col-lg-3 col-md col-sm-12 ">
+                <button routerLink="../graficos" pButton pRipple label="Ver Gráficas" icon="pi pi-chart-pie" class="p-button-outlined p-button-help" ></button>
+            </div>
+        </div>
         <app-tabla-reporte-tramites></app-tabla-reporte-tramites>
     </p-card>
 </div>

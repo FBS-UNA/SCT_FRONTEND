@@ -9,6 +9,7 @@ import { RegistroTramiteComponent } from './pages/registro-tramite/registro-tram
 import { AsignacionRolesComponent } from './pages/asignacion-roles/asignacion-roles.component';
 import { ReporteTramitesComponent } from './pages/reporte-tramites/reporte-tramites.component';
 import { ReportePersonalComponent } from './pages/reporte-personal/reporte-personal.component';
+import { GraficosComponent } from './pages/graficos/graficos.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       {path: 'asignacionroles', component: AsignacionRolesComponent },
       {path: 'reportetramites', component: ReporteTramitesComponent },
       {path: 'reportepersonal', component: ReportePersonalComponent },
+      {path: 'graficos', component: GraficosComponent },
       {path: '**', redirectTo: 'inicio'},
     ]
   }
