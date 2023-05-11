@@ -59,21 +59,24 @@ export class RolesService {
     );
   }
 
-  updateUsuarioRoles(cedula:string, roles:Rol[]){
+  updateUsuarioRoles(cedula:string, rol: string){
     const url = `${this.baseUrl}/roles/asignarroles`
     const body = {
       CEDULA_USUARIO: cedula,
-      NOMBRE_ROL: roles
+      NOMBRE_ROL: rol
     }
     return this.http.post<RolesResponse>(url,body).pipe(
-      tap(res=>{
-        if(res.OK){
-          this._rolesU = res.ROLES!;
-          console.log(this._rolesU)
-        }
-      }),
-      map(res => res.OK),
-      catchError(err=> of(err.error.msg))
+      catchError(err => of(err.error.msg))
+    );
+  }
+
+  deleteUsuarioRoles(cedula:string){
+    const url = `${this.baseUrl}/roles/deleterolusuario`
+    const body = {
+      CEDULA_USUARIO: cedula,
+    }
+    return this.http.post<RolesResponse>(url,body).pipe(
+      catchError(err => of(err.error.msg))
     );
   }
 
