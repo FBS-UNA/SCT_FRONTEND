@@ -1,5 +1,5 @@
 export interface ChartInfo{
-    LABEL : string;
+    LABEL ?: string;
     DATA : number;
 }
 
@@ -19,18 +19,18 @@ export interface AreasDonutResponse{
 export interface TotalRegistroResponse{
     OK   : boolean;
     MSG ?: string;
-    CANTIDAD_REGISTROS : number;
+    DATA ?: number;
 }
 
 export interface RegistrosPorMesResponse{
     OK   : boolean;
     MSG ?: string;
-    CANTIDAD_REGISTRO_POR_MES_LINE : ChartInfo[];
+    CANTIDAD_REGISTRO_POR_MES_LINE ?: ChartInfo[];
 }
 
 export interface RegistrosPorAnnioResponse{
     OK   : boolean;
     MSG ?: string;
-    CANTIDAD_REGISTRO_POR_ANNIO_LINE : ChartInfo[];
+    CANTIDAD_REGISTRO_POR_ANNIO_LINE ?: ChartInfo[];
 }
 

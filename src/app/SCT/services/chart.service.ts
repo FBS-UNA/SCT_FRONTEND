@@ -32,6 +32,41 @@ export class ChartService {
     private http: HttpClient
   ) { }
 
+  get tramitesDonutLabels(){
+    return [...this._tramitesDonutLabels];
+  }
+  get tramitesDonutData(){
+    return [...this._tramitesDonutData];
+  }
+
+  get areasDonutLabels(){
+    return [...this._areasDonutLabels];
+  }
+  get areasDonutData(){
+    return [...this._areasDonutData];
+  }
+
+  get totalReportesMesLabels(){
+    return [...this._totalReportesMesLineLabels];
+  }
+
+  get totalReportesMesData(){
+    return [...this._totalReportesMesLineData];
+  }
+
+  get totalReportesAnnioLabels(){
+    return [...this._totalReportesAnnioLineLabels];
+  }
+  get totalReportesAnnioData(){
+    return [...this._totalReportesAnnioLineData];
+  }
+
+  get totalReportes(){
+    return this._totalReportes;
+  }
+
+  
+
 
   getTramitesDonut() {
     const url = `${this.baseUrl}/graficas/donut-tramites`;
@@ -41,8 +76,8 @@ export class ChartService {
       tap(res => {
         if (res.OK) {
           data = this.splitDataResponse(res.TRAMITES_DONUT!);
-          this._tramitesDonutLabels = data[0];
-          this._tramitesDonutData = data[1];
+          this._tramitesDonutLabels = data.labels;
+          this._tramitesDonutData = data.data;
         }
       }),
       map(res => res.OK),
@@ -59,8 +94,9 @@ export class ChartService {
       tap(res => {
         if (res.OK) {
           data = this.splitDataResponse(res.AREAS_DONUT!);
-          this._areasDonutLabels = data[0];
-          this._areasDonutData = data[1];
+          this._areasDonutLabels = data.labels;
+          this._areasDonutData = data.data;
+          
         }
       }),
       map(res => res.OK),
@@ -70,12 +106,11 @@ export class ChartService {
 
   getTotalReportes() {
     const url = `${this.baseUrl}/graficas/total-registros`;
-    let data: any;
 
     return this.http.get<TotalRegistroResponse>(url).pipe(
       tap(res => {
         if (res.OK) {
-          this._totalReportes = res.CANTIDAD_REGISTROS!;
+          this._totalReportes = res.DATA!;
         }
       }),
       map(res => res.OK),
@@ -91,8 +126,8 @@ export class ChartService {
       tap(res => {
         if (res.OK) {
           data = this.splitDataResponse(res.CANTIDAD_REGISTRO_POR_MES_LINE!);
-          this._totalReportesMesLineLabels = data[0];
-          this._totalReportesMesLineData = data[1];
+          this._totalReportesMesLineLabels = data.labels;
+          this._totalReportesMesLineData = data.data;
         }
       }),
       map(res => res.OK),
@@ -100,15 +135,15 @@ export class ChartService {
     );
   }
   getTotalReportesPorAnnio() {
-    const url = `${this.baseUrl}/graficas/total-registros/mes`;
+    const url = `${this.baseUrl}/graficas/total-registros/annio`;
     let data: any;
 
     return this.http.get<RegistrosPorAnnioResponse>(url).pipe(
       tap(res => {
         if (res.OK) {
           data = this.splitDataResponse(res.CANTIDAD_REGISTRO_POR_ANNIO_LINE!);
-          this._totalReportesAnnioLineLabels = data[0];
-          this._totalReportesAnnioLineData = data[1];
+          this._totalReportesAnnioLineLabels = data.labels;
+          this._totalReportesAnnioLineData = data.data;
         }
       }),
       map(res => res.OK),
@@ -121,7 +156,7 @@ export class ChartService {
     let data: number[] = [];
 
     chartInfo.map(res => {
-      labels.push(res.LABEL)
+      labels.push(res.LABEL!)
       data.push(res.DATA)
     })
 
