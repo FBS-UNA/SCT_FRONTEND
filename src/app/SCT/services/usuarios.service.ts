@@ -4,17 +4,18 @@ import { Usuario } from 'src/app/auth/interfaces/auth.interface';
 import { environment } from 'src/environments/environment';
 import { UsuarioResponse } from '../interfaces/usuario.interface';
 import { catchError, delay, map, of, tap } from 'rxjs';
+import { Rol, RolesResponse } from '../interfaces/roles.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
 
-  private baseUrl : string = environment.baseUrl;
-  private _usuarios : Usuario[]=[];
+  private baseUrl: string = environment.baseUrl;
+  private _usuarios: Usuario[] = [];
 
 
-  get usuarios(){
+  get usuarios() {
     return [...this._usuarios];
   }
 
@@ -22,13 +23,14 @@ export class UsuariosService {
     private http: HttpClient
   ) { }
 
-  getUsuarios(){
+  getUsuarios() {
     const url = `${this.baseUrl}/usuarios`;
 
-    return this.http.get<UsuarioResponse>(url).pipe(    
-      tap(res=>{
-        if(res.OK){
+    return this.http.get<UsuarioResponse>(url).pipe(
+      tap(res => {
+        if (res.OK) {
           this._usuarios = res.USUARIOS!;
+          console.log(this._usuarios)
         }
       }),
       // Quitar este Delay, solo sirve para probar o ver la animacion de carga

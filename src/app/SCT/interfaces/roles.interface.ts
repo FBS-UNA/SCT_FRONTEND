@@ -9,3 +9,4 @@ export interface Rol{
     ID_ROL      : number;
     NOMBRE_ROL  : string;
 }
+

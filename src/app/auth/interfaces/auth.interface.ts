@@ -1,3 +1,5 @@
+import { Rol } from "src/app/SCT/interfaces/roles.interface";
+
 export interface LoginForm {
     CEDULA: string;
     CONTRASENA: string;

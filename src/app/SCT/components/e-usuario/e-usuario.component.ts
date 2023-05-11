@@ -22,7 +22,17 @@ export class EUsuarioComponent implements OnInit {
 
   usuario!: Usuario
   roles: Rol[] = []
-  rolesSeleccionados: Rol[] = [];
+  rolesSeleccionados: Rol[] = [
+    {
+    NOMBRE_ROL: "ADMINISTRADOR",
+    ID_ROL: 1
+    },
+    {
+    NOMBRE_ROL: "CAJAS",
+    ID_ROL: 5
+    },
+
+  ];
 
   constructor(
     private rolesService: RolesService,
@@ -33,13 +43,22 @@ export class EUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cargarRoles();
+    
   }
 
   cargarRoles() {
     this.rolesService.getRoles().subscribe(OK => {
       if (OK) {
         this.roles = this.rolesService.roles;
+      }
+    });
+  }
+
+  cargarRolesUsuario(cedulaUsuario: string) {
+    this.rolesService.getRolesUsuario(cedulaUsuario).subscribe(OK => {
+      if (OK) {
+        this.rolesSeleccionados = this.rolesService.rolesU;
+        console.log(this.rolesSeleccionados)
       }
     });
   }
@@ -54,6 +73,9 @@ export class EUsuarioComponent implements OnInit {
 
   editarUsuarioDialog(usuario: Usuario) {
     this.usuario = { ...usuario };
+    console.log(this.usuario)
+    this.cargarRoles();
+    this.cargarRolesUsuario(usuario.CEDULA); 
     this.editando = true;
     this.usuarioDialog = true;
   }
@@ -63,7 +85,7 @@ export class EUsuarioComponent implements OnInit {
     this.submitted = false;
   }
 
-  // actualizarUsuario(){
+  actualizarUsuario(){
   //   this.usuariosService.(this.usuario).subscribe(res => {
   //     if (res.OK) {
   //       this.cargarDataEmit();
@@ -72,7 +94,7 @@ export class EUsuarioComponent implements OnInit {
   //       this.messageService.add({ severity: 'error', summary: 'Oh oh...', detail: `No se pudo actualizar el área llamada "${this.area.NOMBRE_AREA}"` });
   //     }
   //   });
-  // }
+  }
 
   guardarCambios() {
     this.submitted = true;
