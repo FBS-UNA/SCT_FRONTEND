@@ -23,23 +23,12 @@ export class EUsuarioComponent implements OnInit {
   usuario!: Usuario
   roles: Rol[] = []
   rolesSeleccionados: Rol[] = [
-    {
-    NOMBRE_ROL: "ADMINISTRADOR",
-    ID_ROL: 1
-    },
-    {
-    NOMBRE_ROL: "CAJAS",
-    ID_ROL: 5
-    },
 
   ];
 
   constructor(
     private rolesService: RolesService,
-    private usuariosService: UsuariosService,
-    private messageService: MessageService,
-    private timestampService: TimestampService,
-    private confirmationService: ConfirmationService
+
   ) { }
 
   ngOnInit(): void {
@@ -58,7 +47,6 @@ export class EUsuarioComponent implements OnInit {
     this.rolesService.getRolesUsuario(cedulaUsuario).subscribe(OK => {
       if (OK) {
         this.rolesSeleccionados = this.rolesService.rolesU;
-        console.log(this.rolesSeleccionados)
       }
     });
   }
@@ -73,7 +61,6 @@ export class EUsuarioComponent implements OnInit {
 
   editarUsuarioDialog(usuario: Usuario) {
     this.usuario = { ...usuario };
-    console.log(this.usuario)
     this.cargarRoles();
     this.cargarRolesUsuario(usuario.CEDULA); 
     this.editando = true;
