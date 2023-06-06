@@ -5,6 +5,14 @@ export interface LoginForm {
     CONTRASENA: string;
 }
 
+export interface RegisterForm {
+    CEDULA: string;
+    CONTRASENA: string;
+    NOMBRE: string;
+    APELLIDO_1      : string;
+    APELLIDO_2     : string;
+    FECHA_NAC      ?: Date | string;
+}
 
 export interface AuthResponse {
 

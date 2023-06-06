@@ -1,0 +1,129 @@
+<p-toast></p-toast>
+
+<div class="row h-100 login-img">
+
+    <div class="col-lg-7 col-md-7 mx-auto my-auto">
+            <p-card styleClass="my-3">
+                <h2 class="fbs-roboto-300">Registro de Usuario</h2>
+
+                <form class="mt-4 p-fluid" [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
+    
+                    <div class="field mb-4">
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-id-card"></i></span>
+                            <input
+                                [ngClass]="{'ng-invalid ng-dirty': isInvalid('CEDULA')}"
+                                type="text" 
+                                pInputText 
+                                placeholder="Cédula" 
+                                formControlName="CEDULA">
+                        </div>
+                        <small class="p-error block"  *ngIf="isInvalid('CEDULA')">
+                            <i class="pi pi-exclamation-circle"></i>
+                            Ingrese su cédula
+                        </small>
+    
+                    </div>
+    
+                    <div class="field mb-3">
+    
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                            <input 
+                                [ngClass]="{'ng-invalid ng-dirty': isInvalid('CONTRASENA')}"
+                                type="password" 
+                                pInputText 
+                                placeholder="Contraseña" 
+                                formControlName="CONTRASENA">
+                        </div>
+                        <small class="p-error block" *ngIf="isInvalid('CONTRASENA')"  >
+                            <i class="pi pi-exclamation-circle"></i>
+                            Ingrese una contraseña
+                        </small>
+    
+                    </div>
+    
+                    <div class="field mb-3">
+    
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <input 
+                            [ngClass]="{'ng-invalid ng-dirty': isInvalid('NOMBRE')}"
+                                type="text" 
+                                pInputText 
+                                placeholder="nombre" 
+                                formControlName="NOMBRE">
+                        </div>
+                        <small class="p-error block" *ngIf="isInvalid('NOMBRE')" >
+                            <i class="pi pi-exclamation-circle"></i>
+                            Ingrese su Nombre
+                        </small>
+    
+                    </div>
+
+                    <div class="field mb-3">
+    
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <input 
+                            [ngClass]="{'ng-invalid ng-dirty': isInvalid('APELLIDO_1')}"
+                                type="text" 
+                                pInputText 
+                                placeholder="Primer apellido" 
+                                formControlName="APELLIDO_1">
+                        </div>
+                        <small class="p-error block" *ngIf="isInvalid('APELLIDO_1')" >
+                            <i class="pi pi-exclamation-circle"></i>
+                            Ingrese su Primer Apellido
+                        </small>
+    
+                    </div>
+
+                    <div class="field mb-3">
+    
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <input 
+                            [ngClass]="{'ng-invalid ng-dirty': isInvalid('APELLIDO_2')}"
+                                type="text" 
+                                pInputText 
+                                placeholder="Segundo apellido" 
+                                formControlName="APELLIDO_2">
+                        </div>
+                        <small class="p-error block" *ngIf="isInvalid('APELLIDO_2')" >
+                            <i class="pi pi-exclamation-circle"></i>
+                            Ingrese su segundo Apellido
+                        </small>
+    
+                    </div>
+
+                    <div class="field mb-3">
+    
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+                            <input 
+                            [ngClass]="{'ng-invalid ng-dirty': isInvalid('FECHA_NAC')}"
+                                type="text" 
+                                pInputText 
+                                placeholder="DD/MM/YYYY" 
+                                formControlName="FECHA_NAC">
+                        </div>
+                        <small class="p-error block" *ngIf="isInvalid('FECHA_NAC')">
+                            <i class="pi pi-exclamation-circle"></i>
+                            Ingrese su fecha de nacimiento
+                        </small>
+    
+                    </div>
+    
+                    <p-button class="w-100" type="submit" label="Registrar"></p-button>
+    
+                    <div class="text-center mt-5">
+                        <small> ¿Tiene una cuenta? <a routerLink="../login">Click Aquí</a>  </small>
+                    </div>
+    
+                </form>
+    
+            </p-card>
+    </div>
+
+</div>
