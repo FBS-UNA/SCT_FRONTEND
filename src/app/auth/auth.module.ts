@@ -8,13 +8,15 @@ import { MainComponent } from './pages/main/main.component';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { PresentacionLoginComponent } from './components/presentacion-login/presentacion-login.component';
 import {ToastModule} from 'primeng/toast';
+import { RegisterComponent } from './pages/register/register/register.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     MainComponent,
-    PresentacionLoginComponent
+    PresentacionLoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

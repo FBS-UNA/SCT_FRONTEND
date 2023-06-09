@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { LoginForm, AuthResponse, Usuario } from '../interfaces/auth.interface';
+import { LoginForm, AuthResponse, Usuario, RegisterForm } from '../interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,21 @@ export class AuthService {
     return {...this._usuario};
   }
 
+  register(body: RegisterForm){
+    const url = `${this.baseUrl}/auth/register`;
+
+    return this.http.post<AuthResponse>(url, body)
+    .pipe(
+      tap(({OK, TOKEN, ROL})=>{
+        if(OK){
+          sessionStorage.setItem('token', TOKEN!);
+          sessionStorage.setItem('roles', ROL!)
+        }
+      }),
+      map(res => res.OK),
+      catchError(err => of(err.error.msg))
+    );
+  }
 
   login(body: LoginForm){
     const url = `${this.baseUrl}/auth/login`;
