@@ -31,7 +31,7 @@ export class EUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+   
   }
 
   cargarRoles() {
@@ -76,7 +76,6 @@ export class EUsuarioComponent implements OnInit {
         }
       });
   }
-
   cargarDataEmit() {
     this.refreshData.emit();
   }

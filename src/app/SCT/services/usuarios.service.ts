@@ -22,7 +22,7 @@ export class UsuariosService {
   constructor(
     private http: HttpClient
   ) { }
-
+  
   getUsuarios() {
     const url = `${this.baseUrl}/usuarios`;
 
