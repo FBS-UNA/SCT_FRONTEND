@@ -33,8 +33,6 @@ export class TramitesService {
           this._tramites = res.TRAMITES!;
         }
       }),
-      // Quitar este Delay, solo sirve para probar o ver la animacion de carga
-      delay(500),
       map(res => res.OK),
       catchError(err => of(err.error.msg))
     );

@@ -162,9 +162,11 @@ export class FormularioRegistroTramiteComponent implements OnInit {
   }
 
   setReTramite(){
+    let nombreTramite = this.tramites.find(tramite => tramite.ID_TRAMITE == this.controls['TRAMITE'].value)?.NOMBRE_TRAMITE; 
     this.re_tramite = {
       CEDULA_CLIENTE : this.controls['CEDULA'].value,
       CEDULA_USUARIO: this.usuario.CEDULA,
+      NOMBRE_TRAMITE: nombreTramite,
       DESCRIPCION :this.controls['DESCRIPCION'].value,
       FECHA: this.timestampService.fechaActual,
       HORA: this.timestampService.horaCompleta,

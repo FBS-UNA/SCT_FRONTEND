@@ -15,7 +15,7 @@ export interface TramitesAsociados{
 
 
 export interface Tramite{
-    ID_TRAMITE         ?: -1;
+    ID_TRAMITE         ?: -1 | number;
     NOMBRE_TRAMITE     ?: '';
     DESCRIPCION_TRAMITE?: '';
     FECHA              ?: Date | string;
