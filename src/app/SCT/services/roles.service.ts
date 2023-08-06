@@ -21,7 +21,6 @@ export class RolesService {
   get rolesU(){
     return [...this._rolesU]
   }
-
   constructor(
     private http: HttpClient
   ) { }
@@ -41,7 +40,6 @@ export class RolesService {
       catchError(err => of(err.error.msg))
     );
   }
-
 
   getRolesUsuario(cedula: string){
     const url = `${this.baseUrl}/roles/rolesusuario`;
@@ -79,5 +77,4 @@ export class RolesService {
       catchError(err => of(err.error.msg))
     );
   }
-
 }

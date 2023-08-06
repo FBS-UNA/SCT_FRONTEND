@@ -88,5 +88,4 @@ export class TablaReporteTramitesComponent implements OnInit {
     // Obtener el nuevo arreglo filtrado
    this.filteredReporte = event.filteredValue;
  }
-
 }
